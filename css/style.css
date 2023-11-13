@@ -3,15 +3,58 @@ body {
     color: #000000;
     font-family: Jost;
     margin: 0;
+    min-height: 100vh;
+}
+
+.image {
+    width: 100%;
+    height: auto;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .topnav {   /* class for navigation bar */
     overflow: hidden;
     background-color: #333;
     margin-top: 0;
+    margin-bottom: 0;
 }
 
-.topnav a { /* links in the topnav class */
+.topnav img {   /* for the logo only */
+    max-width: 95%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+#logo {
+    float: left;
+    display: flex;
+    background-color: #111;
+    width: 100px;
+    padding: 14px 16px;
+}
+
+#selected {
+    float: left;
+    display: block;
+    background-color: #666;
+    color: #F2F2F2;
+    text-align: center;
+    width: 200px;
+    padding: 14px 16px;
+    text-decoration: none;
+    transition: background-color 0.1s, color 0.1s;  /* for transition effect */ 
+}
+
+#selected:hover {
+    background-color: #DDD;
+    color: #000000;
+}
+
+.topnav a.tabs { /* links in the topnav class */
     float: left;
     display: block;
     color: #F2F2F2;
@@ -22,17 +65,64 @@ body {
     transition: background-color 0.1s, color 0.1s;  /* for transition effect */
 }
 
-.topnav a:hover {   /* attributes of .topnav a when hovered */
+.topnav a.tabs:hover {   /* attributes of .topnav a when hovered */
     background-color: #DDD;
     color: #000000;
 }
 
+#projecttable-container {
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+#projecttable {
+    font-family: "Jost";
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#projecttable th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    background-color: #99FFCC;
+    color: #000000;
+}
+
+#projecttable tr {
+    transition: background-color 0.1s, color 0.1s;
+}
+
+#projecttable tr:nth-child(odd) {
+    background-color: #DDDDDD;
+}
+
+#projecttable tr:hover {
+    background-color: #C8B4BA;
+}
+
+#challengetable {
+    line-height: 18pt;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+#challengetable select {
+    width: 10%;
+}
+
+#challengetable textarea {
+    width: 40%;
+}
+
 footer {
+    overflow: hidden;
     width: 100%;
     text-align: center;
     background-color: #333;
     color: #F2F2F2;
     margin: 0;
+    position: absolute bottom;
 }
 
 /*

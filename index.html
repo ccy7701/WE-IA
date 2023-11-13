@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+
+<html lang="en">
+
+<html>
+
+<head>
+    <title>Index</title>
+    <meta charset="utf8">
+    <meta name="viewport" content="width=device-width", initial-scale="1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Jost">
+    
+    
+    <script type="text/javascript">
+        // REMOVE THIS WHEN THE ASSIGNMENT IS OVER
+        function changeText(element) {
+            // store the original text content
+            element.setAttribute('data-original-text', element.innerText);
+            // change the text content on hover
+            element.innerText = "NOT DONE";
+        }
+        function resetText(element) {
+            // reset the text content on mouseout
+            element.innerText = element.getAttribute('data-original-text');
+        }
+    </script>
+</head>
+
+<body>
+    <header>
+
+    </header>
+    <nav class="topnav">
+        <a onmouseover="changeText(this)" onmouseout="resetText(this)" href="authentication.html">Log In/Sign Up</a>
+        <a onmouseover="changeText(this)" onmouseout="resetText(this)" href="mykpi.html">MyKPI Indicator Module</a>
+        <a onmouseover="changeText(this)" onmouseout="resetText(this)" href="activitieslist.html">Activities List</a>
+        <a onmouseover="changeText(this)" onmouseout="resetText(this)" href="challenges.html">Challenges and Future Plans</a>
+    </nav>
+    <main>
+        <h1>HELLO WORLD!</h1>
+        <h3>This is a H6 line.</h3>
+        <p>This is a paragraph.</p>
+    </main>
+    <footer>
+        <h3>Created on 12 November 2023 for KK34703 Individual Assignment</h3>
+    </footer>
+</body>
+
+</html>

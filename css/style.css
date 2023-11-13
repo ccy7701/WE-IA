@@ -1,0 +1,48 @@
+body {
+    background-color: #f0f0f0;
+    color: #000000;
+    font-family: Jost;
+    margin: 0;
+}
+
+.topnav {   /* class for navigation bar */
+    overflow: hidden;
+    background-color: #333;
+    margin-top: 0;
+}
+
+.topnav a { /* links in the topnav class */
+    float: left;
+    display: block;
+    color: #F2F2F2;
+    text-align: center;
+    width: 200px;
+    padding: 14px 16px;
+    text-decoration: none;
+    transition: background-color 0.1s, color 0.1s;  /* for transition effect */
+}
+
+.topnav a:hover {   /* attributes of .topnav a when hovered */
+    background-color: #DDD;
+    color: #000000;
+}
+
+footer {
+    width: 100%;
+    text-align: center;
+    background-color: #333;
+    color: #F2F2F2;
+    margin: 0;
+}
+
+/*
+MODULES:
+About Me (Portfolio)
+Authentication Module (login, logout, registration)
+MyKPI Indicator Module (CRUD operations), for example
+    Activities Management
+    Competition Management
+    Certification Management
+List of activities module
+Challenge and future plans module
+*/

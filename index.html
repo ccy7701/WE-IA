@@ -17,12 +17,13 @@
     <header>
         <img class="image" src="images/placeholder.png">
     </header>
-    <nav class="topnav">
-        <a id="logo" href="index.html"><image src="images/mystudykpi-topnavbtn-2-white.png"></image></a>
-        <a class="tabs" onmouseover="changeText(this)" onmouseout="resetText(this)" href="login.html">Log In/Sign Up</a>
-        <a class="tabs" onmouseover="changeText(this)" onmouseout="resetText(this)" href="kpimodule.html">MyKPI Indicator Module</a>
-        <a class="tabs" onmouseover="changeText(this)" onmouseout="resetText(this)" href="activitieslist.html">Activities List</a>
-        <a class="tabs" onmouseover="changeText(this)" onmouseout="resetText(this)" href="challenges.html">Challenges and Future Plans</a>
+    <nav class="topnav" id="myTopnav">
+        <a class="logo" href="index.html"><image src="images/mystudykpi-topnavbtn-2-white.png"></image></a>
+        <a href="login.html" class="tabs" onmouseover="changeText(this)" onmouseout="resetText(this)">Log In/Sign Up</a>
+        <a href="kpimodule.html" class="tabs" onmouseover="changeText(this)" onmouseout="resetText(this)">MyKPI Indicator Module</a>
+        <a href="activitieslist.html" class="tabs" onmouseover="changeText(this)" onmouseout="resetText(this)">Activities List</a>
+        <a href="challenges.html" class="tabs" onmouseover="changeText(this)" onmouseout="resetText(this)">Challenges and Future Plans</a>
+        <a href="javascript:void(0);" class="icon" onClick="adjustTopnav()"><i class="fa fa-bars"></i></a>
     </nav>
     <main>
         <h1>HELLO WORLD!</h1>

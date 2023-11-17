@@ -29,45 +29,42 @@ body {
     margin: 0 auto;
 }
 
-#logo {
-    float: left;
-    display: flex;
-    background-color: #111;
-    width: 100px;
-    padding: 14px 16px;
-}
-
-#selected {
-    float: left;
-    display: block;
-    background-color: #666;
-    color: #F2F2F2;
-    text-align: center;
-    width: 200px;
-    padding: 14px 16px;
-    text-decoration: none;
-    transition: background-color 0.1s, color 0.1s;  /* for transition effect */ 
-}
-
-#selected:hover {
-    background-color: #DDD;
-    color: #000000;
-}
-
-.topnav a.tabs { /* links in the topnav class */
+.topnav a.tabs, a.icon { /* links in the topnav class */
     float: left;
     display: block;
     color: #F2F2F2;
     text-align: center;
-    width: 200px;
     padding: 14px 16px;
     text-decoration: none;
     transition: background-color 0.1s, color 0.1s;  /* for transition effect */
 }
 
-.topnav a.tabs:hover {   /* attributes of .topnav a when hovered */
+.topnav a.active {  /* shows that this tab is currently active/selected */
+    float: left;
+    display: block;
+    background-color: #E5D3B3;
+    color: #000000;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    transition: background-color 0.1s, color 0.1s;
+}
+
+.topnav a.tabs:hover, a.active:hover, a.icon:hover {   /* attributes of .topnav a when hovered */
     background-color: #DDD;
     color: #000000;
+}
+
+.topnav .icon {
+    display: none;
+}
+
+.topnav .logo {
+    float: left;
+    display: flex;
+    background-color: #111;
+    width: 100px;
+    padding: 14px 16px;
 }
 
 #projecttable-container {
@@ -123,6 +120,32 @@ footer {
     color: #F2F2F2;
     margin: 0;
     position: absolute bottom;
+}
+
+@media screen and (max-width: 600px) {  /* CSS when pages are resized to smaller or for mobile screen */
+    .topnav a:not(:first-child) {
+        display: none;
+    }
+    .topnav a.icon {
+        float: right;
+        display: block;
+    }
+}
+
+@media screen and (max-width: 600px) {  /* CSS when pages are resized to smaller or for mobile screen */
+    .topnav.responsive {
+        position: relative;
+    }
+    .topnav.responsive .icon {
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+    .topnav.responsive a {
+        float: none;
+        display: block;
+        text-align: left;
+    }
 }
 
 /*

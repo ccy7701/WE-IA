@@ -15,16 +15,33 @@
 
 <body>
     <header>
-        <img class="image" src="images/placeholder.png">
+        <img class="header" src="images/placeholder.png">
     </header>
     <nav class="topnav" id="myTopnav">
         <a class="logo" href="index.html"><image src="images/mystudykpi-topnavbtn-2-white.png"></image></a>
-        <a href="login.html" class="active" onmouseover="changeText(this)" onmouseout="resetText(this)">Log In/Sign Up</a>
+        <a href="login.html" class="active" onmouseover="changeText(this)" onmouseout="resetText(this)">Login</a>
         <a href="kpimodule.html" class="tabs" onmouseover="changeText(this)" onmouseout="resetText(this)">MyKPI Indicator Module</a>
         <a href="activitieslist.html" class="tabs" onmouseover="changeText(this)" onmouseout="resetText(this)">Activities List</a>
         <a href="challenges.html" class="tabs" onmouseover="changeText(this)" onmouseout="resetText(this)">Challenges and Future Plans</a>
         <a href="javascript:void(0);" class="icon" onClick="adjustTopnav()"><i class="fa fa-bars"></i></a>
     </nav>
+    <main>
+        <center>
+            <h1><b>LOGIN</b></h1>
+            <h4>Login to view all your information</h4>
+            <form id="loginform">
+                <label for="loginmatric">Matric Number</label><br>
+                <textarea name="loginmatric" rows="1" cols="12"></textarea><br>
+                <label for="loginpassword">Password</label><br>
+                <input name="loginpassword" type="password"><br><br>
+                <input name="loginsubmit" type="submit" value="LOGIN">
+                <input name="loginreset" type="reset" value="RESET"><br>
+            </form>
+            <p>Do not have your own account yet?
+            <a href="signup.html">Sign up here.</a>
+            </p>
+        </center>
+    </main>
 </body>
 
 </html>

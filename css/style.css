@@ -6,7 +6,7 @@ body {
     min-height: 100vh;
 }
 
-.image {
+.header {
     width: 100%;
     height: auto;
     text-align: center;
@@ -122,7 +122,17 @@ footer {
     position: absolute bottom;
 }
 
-@media screen and (max-width: 600px) {  /* CSS when pages are resized to smaller or for mobile screen */
+#loginform textarea, input {
+    resize: none;
+    width: 20%;
+}
+
+#signupform textarea, input {
+    resize: none;
+    width: 20%;
+}
+
+@media screen and (max-width: 720px) {  /* CSS when pages are resized to smaller or for mobile screen */
     .topnav a:not(:first-child) {
         display: none;
     }
@@ -132,7 +142,7 @@ footer {
     }
 }
 
-@media screen and (max-width: 600px) {  /* CSS when pages are resized to smaller or for mobile screen */
+@media screen and (max-width: 720px) {  /* CSS when pages are resized to smaller or for mobile screen */
     .topnav.responsive {
         position: relative;
     }

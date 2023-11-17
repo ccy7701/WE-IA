@@ -15,11 +15,11 @@
 
 <body>
     <header>
-        <img class="image" src="images/placeholder.png">
+        <img class="header" src="images/placeholder.png">
     </header>
     <nav class="topnav" id="myTopnav">
         <a class="logo" href="index.html"><image src="images/mystudykpi-topnavbtn-2-white.png"></image></a>
-        <a href="login.html" class="tabs" onmouseover="changeText(this)" onmouseout="resetText(this)">Log In/Sign Up</a>
+        <a href="login.html" class="tabs" onmouseover="changeText(this)" onmouseout="resetText(this)">Login</a>
         <a href="kpimodule.html" class="tabs" onmouseover="changeText(this)" onmouseout="resetText(this)">MyKPI Indicator Module</a>
         <a href="activitieslist.html" class="tabs" onmouseover="changeText(this)" onmouseout="resetText(this)">Activities List</a>
         <a href="challenges.html" class="active" onmouseover="changeText(this)" onmouseout="resetText(this)">Challenges and Future Plans</a>
@@ -82,8 +82,7 @@
         <br>
         <form id="challengetable">
             <p>Facing a new challenge? Fill the form below and record it here. Required fields are marked (*)</p>
-            <label for="yearsem">Year/Sem (*): </label>
-            <br>
+            <label for="yearsem">Year/Sem (*): </label><br>
             <select id="yearsem" name="yearsem">
                 <option value="y1s1">Year 1 Sem 1</option>
                 <option value="y1s2">Year 1 Sem 2</option>
@@ -93,27 +92,17 @@
                 <option value="y3s2">Year 3 Sem 2</option>
                 <option value="y4s1">Year 4 Sem 1</option>
                 <option value="y4s2">Year 4 Sem 2</option>
-            </select>
-            <br>
-            <label for="entrydate">Date of record (*): </label>
-            <br>
-            <input name="entrydate" type="date">
-            <br>
-            <label for="challenge">Challenge (*): </label>
-            <br>
-            <textarea name="challenge" rows="5" cols="50"></textarea>
-            <br>
-            <label for="futureplan">Future plan (*): </label>
-            <br>
-            <textarea name="futureplan" rows="5" cols="50"></textarea>
-            <br>
-            <label for="remarks">Remarks: </label>
-            <br>
-            <textarea name="Remarks" rows="5" cols="50"></textarea>
-            <br><br>
+            </select><br>
+            <label for="entrydate">Date of record (*): </label><br>
+            <input name="entrydate" type="date"><br>
+            <label for="challenge">Challenge (*): </label><br>
+            <textarea name="challenge" rows="5" cols="50"></textarea><br>
+            <label for="futureplan">Future plan (*): </label><br>
+            <textarea name="futureplan" rows="5" cols="50"></textarea><br>
+            <label for="remarks">Remarks: </label><br>
+            <textarea name="Remarks" rows="5" cols="50"></textarea><br><br>
             <input name="btnsubmit" type="submit" value="Submit">
-            <input name="btnreset" type="reset" value="Reset">
-            <br><br>
+            <input name="btnreset" type="reset" value="Reset"><br><br>
         </form>
     </main>
     <footer>

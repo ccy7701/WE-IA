@@ -24,11 +24,13 @@
         <a href="kpimodule.php" class="active">MyKPI Indicator Module</a>
         <a href="activitieslist.php" class="tabs">Activities List</a>
         <a href="challenges.php" class="tabs">Challenges and Future Plans</a>
-        <a href="test.php" class="tabs">TEST PHP</a>
         <a href="javascript:void(0);" class="icon" onClick="adjustTopnav()"><i class="fa fa-bars"></i></a>
     </nav>
     <main>
-        <h1>Hello world! KPI module.</h1>
+        <center>
+            <h1>MyKPI Indicator Module</h1>
+            <h4>Manage your activities, competitions and certifications here</h4>
+        </center>
     </main>
     <footer>
         <h4>Chiew Cheng Yi | BI21110236 | Created on 12 November 2023 for KK34703 Individual Assignment</h4>

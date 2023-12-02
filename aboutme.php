@@ -1,11 +1,10 @@
 <!DOCTYPE HTML>
-
 <html lang="en">
 
 <html>
 
 <head>
-    <title>Home | MyStudyKPI </title>
+    <title>About Me | MyStudyKPI </title>
     <meta charset="utf8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
@@ -19,16 +18,18 @@
         <img class="header" src="images/placeholder.png">
     </header>
     <nav class="topnav" id="myTopnav">
-        <a class="logo" href="index.html"><image src="images/mystudykpi-topnavbtn-2-white.png"></image></a>
-        <a href="login.html" class="tabs" onmouseover="changeText(this)" onmouseout="resetText(this)">Login</a>
-        <a href="kpimodule.html" class="tabs" onmouseover="changeText(this)" onmouseout="resetText(this)">MyKPI Indicator Module</a>
-        <a href="activitieslist.html" class="tabs" onmouseover="changeText(this)" onmouseout="resetText(this)">Activities List</a>
-        <a href="challenges.html" class="tabs" onmouseover="changeText(this)" onmouseout="resetText(this)">Challenges and Future Plans</a>
+        <a class="logo" href="index.php"><image src="images/mystudykpi-topnavbtn-2-white.png"></image></a>
+        <a href="login.php" class="tabs">Login</a>
+        <a href="aboutme.php" class="active">About Me</a>
+        <a href="kpimodule.php" class="tabs">MyKPI Indicator Module</a>
+        <a href="activitieslist.php" class="tabs">Activities List</a>
+        <a href="challenges.php" class="tabs">Challenges and Future Plans</a>
+        <a href="test.php" class="tabs">TEST PHP</a>
         <a href="javascript:void(0);" class="icon" onClick="adjustTopnav()"><i class="fa fa-bars"></i></a>
     </nav>
     <main>
         <h1>HELLO WORLD!</h1>
-        <h3>This is a H6 line.</h3>
+        <h3>This is not a h6 line but a h3 line.</h3>
         <p>This is a paragraph.</p>
     </main>
     <footer>

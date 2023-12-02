@@ -4,7 +4,7 @@
 <html>
 
 <head>
-    <title>Activities List | MyStudyKPI </title>
+    <title>TEST PHP | MyStudyKPI </title>
     <meta charset="utf8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
@@ -14,19 +14,29 @@
 </head>
 
 <body>
-    <header>
+<header>
         <img class="header" src="images/placeholder.png">
     </header>
     <nav class="topnav" id="myTopnav">
-        <a class="logo" href="index.html"><image src="images/mystudykpi-topnavbtn-2-white.png"></image></a>
-        <a href="login.html" class="tabs" onmouseover="changeText(this)" onmouseout="resetText(this)">Login</a>
-        <a href="kpimodule.html" class="tabs" onmouseover="changeText(this)" onmouseout="resetText(this)">MyKPI Indicator Module</a>
-        <a href="activitieslist.html" class="active" onmouseover="changeText(this)" onmouseout="resetText(this)">Activities List</a>
-        <a href="challenges.html" class="tabs" onmouseover="changeText(this)" onmouseout="resetText(this)">Challenges and Future Plans</a>
+        <a class="logo" href="index.php"><image src="images/mystudykpi-topnavbtn-2-white.png"></image></a>
+        <a href="login.php" class="tabs">Login</a>
+        <a href="aboutme.php" class="tabs">About Me</a>
+        <a href="kpimodule.php" class="tabs">MyKPI Indicator Module</a>
+        <a href="activitieslist.php" class="tabs">Activities List</a>
+        <a href="challenges.php" class="tabs">Challenges and Future Plans</a>
+        <a href="test.php" class="active">TEST PHP</a>
         <a href="javascript:void(0);" class="icon" onClick="adjustTopnav()"><i class="fa fa-bars"></i></a>
     </nav>
     <main>
-        <h1>Hello world! Activities list.</h1>
+        <?php
+            echo "Hello world! TEST PHP.";
+        ?>
+        <?php
+            $age = 22;
+            $name = "Chiew Cheng Yi";
+            echo "<br>";
+            echo "My name is ",$name,". My current age is ",$age,".";
+        ?>
     </main>
     <footer>
         <h4>Chiew Cheng Yi | BI21110236 | Created on 12 November 2023 for KK34703 Individual Assignment</h4>

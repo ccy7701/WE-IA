@@ -30,7 +30,7 @@
         <h1>Hello world! Activities list.</h1>
     </main>
     <footer>
-        <h4>Chiew Cheng Yi | BI21110236 | Created on 12 November 2023 for KK34703 Individual Assignment</h4>
+        <h5>© Chiew Cheng Yi | BI21110236 | KK34703 Individual Project</h5>
     </footer>
 </body>
 

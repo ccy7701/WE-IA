@@ -27,9 +27,10 @@
         <a href="javascript:void(0);" class="icon" onClick="adjustTopnav()"><i class="fa fa-bars"></i></a>
     </nav>
     <main>
+        <br>
         <div id="projecttable-container">
             <table id="projecttable" border="1" width="100%">
-                <caption><h3>Challenges and Future Plans</h3></caption>
+                <!-- <caption><h3>Challenges and Future Plans</h3></caption> -->
                 <tr>
                     <th>No</th>
                     <th>Year/Sem</th>
@@ -107,7 +108,7 @@
         </form>
     </main>
     <footer>
-        <h4>Chiew Cheng Yi | BI21110236 | Created on 12 November 2023 for KK34703 Individual Assignment</h4>
+        <h5>© Chiew Cheng Yi | BI21110236 | KK34703 Individual Project</h5>
     </footer>
 </body>
 

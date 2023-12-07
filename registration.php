@@ -28,7 +28,6 @@
     </nav>
     <main>
         <center>
-            <h1><b>REGISTRATION</b></h1>
             <h4>Complete this form before accessing the MyStudyKPI system. Required fields are marked with (*)</h4>
         </center>
         <div id="regformdiv">
@@ -60,27 +59,28 @@
                 <select id="selectreg" name="student_state" required>
                     <option value="" disabled selected>Select a state...</option>
                     <optgroup label="States">
-                        <option value="jhr">Johor</option>
-                        <option value="kdh">Kedah</option>
-                        <option value="ktn">Kelantan</option>
-                        <option value="mlk">Malacca</option>
-                        <option value="nsn">Negeri Sembilan</option>
-                        <option value="phg">Pahang</option>
-                        <option value="png">Penang</option>
-                        <option value="prk">Perak</option>
-                        <option value="pls">Perlis</option>
-                        <option value="sbh">Sabah</option>
-                        <option value="swk">Sarawak</option>
-                        <option value="sgr">Selangor</option>
-                        <option value="trg">Terengganu</option>
+                        <!-- CHANGE THIS SECTION TO USE FULL STATE NAMES INSTEAD OF ABBRVS. -->
+                        <option value="Johor">Johor</option>
+                        <option value="Kedah">Kedah</option>
+                        <option value="Kelantan">Kelantan</option>
+                        <option value="Malaca">Malacca</option>
+                        <option value="Negeri Sembilan">Negeri Sembilan</option>
+                        <option value="Pahang">Pahang</option>
+                        <option value="Penang">Penang</option>
+                        <option value="Perak">Perak</option>
+                        <option value="Perlis">Perlis</option>
+                        <option value="Sabah">Sabah</option>
+                        <option value="Sarawak">Sarawak</option>
+                        <option value="Selangor">Selangor</option>
+                        <option value="Terengganu">Terengganu</option>
                     </optgroup>
                     <optgroup label="Federal Territories">
-                        <option value="kul">Kuala Lumpur</option>
-                        <option value="lbn">Labuan</option>
-                        <option value="pjy">Putrajaya</option>
+                        <option value="Kuala Lumpur">Kuala Lumpur</option>
+                        <option value="Labuan">Labuan</option>
+                        <option value="Putrajaya">Putrajaya</option>
                     </optgroup>
                     <optgroup label="Others">
-                        <option value="oth">Overseas</option>
+                        <option value="Overseas">Overseas</option>
                     </optgroup>
                 </select><br>
                 <label for="student_address">Address (*)</label>
@@ -96,7 +96,7 @@
         </div>
     </main>
     <footer>
-        <h4>Chiew Cheng Yi | BI21110236 | Created on 12 November 2023 for KK34703 Individual Assignment</h4>
+        <h5>© Chiew Cheng Yi | BI21110236 | KK34703 Individual Project</h5>
     </footer>
 </body>
 

@@ -169,16 +169,6 @@ footer {
     width: 60%;
 }
 
-#tblprofile {
-    text-align: left;
-    border: 1px solid black;
-}
-
-#tblactivities, #tblcompetitions, #tblcertifications {
-    text-align: left;
-    border: 1px solid black;
-}
-
 #btneditpersonal {
     width: 60%;
     height: 30px;

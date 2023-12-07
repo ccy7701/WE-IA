@@ -28,7 +28,6 @@
     </nav>
     <main>
         <center>
-            <h1><b>LOGIN</b></h1>
             <h4>Login to view all your information</h4>
             <div id="logindiv">
                 <form id="loginform">
@@ -44,6 +43,9 @@
             </p>
         </center>
     </main>
+    <footer>
+        <h5>© Chiew Cheng Yi | BI21110236 | KK34703 Individual Project</h5>
+    </footer>
 </body>
 
 </html>

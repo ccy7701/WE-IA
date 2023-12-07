@@ -15,15 +15,15 @@
 
 <body>
     <header>
-        <img class="header" src="images/placeholder.png">
+        <img class="header" src="images/activitieslistheader.png">
     </header>
     <nav class="topnav" id="myTopnav">
-        <a class="logo" href="index.php"><image src="images/mystudykpi-topnavbtn-2-white.png"></image></a>
-        <a href="login.php" class="tabs">Login</a>
+        <a href="index.php" class="logo"><image src="images/mystudykpi-topnavbtn-2-white.png"></image></a>
         <a href="aboutme.php" class="tabs">About Me</a>
         <a href="kpimodule.php" class="tabs">MyKPI Indicator Module</a>
         <a href="activitieslist.php" class="active">Activities List</a>
         <a href="challenges.php" class="tabs">Challenges and Future Plans</a>
+        <a href="login.php" class="tabs">Login</a>
         <a href="javascript:void(0);" class="icon" onClick="adjustTopnav()"><i class="fa fa-bars"></i></a>
     </nav>
     <main>

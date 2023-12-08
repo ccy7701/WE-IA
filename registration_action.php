@@ -67,7 +67,7 @@
                         <a href='javascript:void(0);' class='icon' onClick='adjustTopnav()'><i class='fa fa-bars'></i></a>
                     </nav>
                     <main>
-                        <p style='font-size:20px; text-align: center;'>New user record created successfully. Welcome ".$student_name."!</p>
+                        <p style='font-size:20px; text-align: center;'>New user record created successfully. Welcome, ".$student_name."!</p>
                         <p style='text-align: center'><a href='login.php'>Back to login menu</a></p>
                     </main>
                     <footer style='position: fixed; bottom: 0;'>

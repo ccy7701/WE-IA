@@ -10,6 +10,10 @@ function adjustTopnav() {
     }
 }
 
+function redirectToLogin() {
+	window.location.href = 'login.php';
+}
+
 function addToTable() {
     // Get all form values
 	var yr = document.forms["myForm"]["year"].value;

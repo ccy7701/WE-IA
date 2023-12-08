@@ -59,12 +59,25 @@
         <a href="kpimodule.php" class="tabs">MyKPI Indicator Module</a>
         <a href="activitieslist.php" class="tabs">Activities List</a>
         <a href="challenges.php" class="tabs">Challenges and Future Plans</a>
-        <a href="login.php" class="tabs">Login</a>
+        <?php
+            include("include/session_check.php");
+        ?>
         <a href="javascript:void(0);" class="icon" onClick="adjustTopnav()"><i class="fa fa-bars"></i></a>
     </nav>
     <main>
         <center>
-        <h1>Welcome to the UMS FKI MyStudyKPI website</h1>
+        <?php
+            if (isset($_SESSION["UID"])) {
+                echo "
+                    <h1>Welcome back, <u>".$_SESSION["student_name"]."</u></h1>
+                ";
+            }
+            else {
+                echo "
+                    <h1>Welcome to the UMS FKI MyStudyKPI website</h1>
+                ";
+            }
+        ?>
         <div class="block">
             <i class="fa fa-user-circle-o"></i>
             <p><b>About Me:</b> Get a concise overview of your information in a portfolio webpage.</p>

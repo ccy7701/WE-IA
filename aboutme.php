@@ -1,4 +1,5 @@
 <?php
+    session_start();
     include("include/config.php");
 ?>
 
@@ -56,7 +57,10 @@
         <a href="kpimodule.php" class="tabs">MyKPI Indicator Module</a>
         <a href="activitieslist.php" class="tabs">Activities List</a>
         <a href="challenges.php" class="tabs">Challenges and Future Plans</a>
-        <a href="login.php" class="tabs">Login</a>
+        <?php
+            include("include/session_check.php");
+            echo $_SESSION["UID"];
+        ?>
         <a href="javascript:void(0);" class="icon" onClick="adjustTopnav()"><i class="fa fa-bars"></i></a>
     </nav>
     <main>
@@ -88,7 +92,8 @@
                         default: "ERROR";
                     }
 
-                    echo "<tr><td>Name</td><td>".$row["student_name"]."</td></tr>
+                    echo "
+                    <tr><td>Name</td><td>".$row["student_name"]."</td></tr>
                     <tr><td>Matric No.</td><td>".$row["student_id"]."</td></tr>
                     <tr><td>Program</td><td>".$program_output."</td><tr>
                     <tr><td>E-mail</td><td>".$row["student_email"]."</td></tr>
@@ -98,9 +103,9 @@
                     <tr><td>State of Origin</td><td>".$row["student_state"]."</td></tr>
                     <tr><td>Address</td><td>".$row["student_address"]."</td></tr>
                     <tr><td>Motto</td><td>".$row["student_motto"]."</td></tr>
-                    <tr><td colspan='2' style='text-align: center;'>
-                    <input id='btneditpersonal' type='button' name='btneditpersonal' value='Edit Details'>
-                    </td></tr></table>";
+                    <tr><td colspan='2' style='text-align: center;'><input id='btneditpersonal' type='button' name='btneditpersonal' value='Edit Details'></td></tr>
+                    </table>
+                    ";
                 ?>
             </div>
             <div class="col-right">

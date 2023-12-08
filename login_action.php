@@ -9,7 +9,7 @@
 <html>
 
 <head>
-    <title>Login Action | MyStudyKPI </titlte>
+    <title>Login Action | MyStudyKPI </title>
     <meta charset="utf8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
@@ -20,13 +20,39 @@
 
 <body>
     <?php
-        $loginMatric = $_POST['loginmatric'];
-        $loginPassword = $_POST['loginpassword'];
+        $loginMatric = $_POST["loginmatric"];
+        $loginPassword = $_POST["loginpassword"];
 
-        $loginQuery = "SELECT * FROM student_profile WHERE student_password='.$loginPassword.' LIMIT 1";
+        $loginQuery = "SELECT * FROM student_profile WHERE student_id='$loginMatric' LIMIT 1;";
         $result = mysqli_query($conn, $loginQuery);
 
-        // if (mysqli_num_rows())
+        if (mysqli_num_rows($result) == 1) {    // a row with the same data is found
+            // check password hash
+            $row = mysqli_fetch_assoc($result);
+
+            // verify matching passwords
+            if (password_verify($_POST["loginpassword"], $row["student_password"])) {
+                echo "Login was successful.";
+                // bind the current session to student_id
+                $_SESSION["UID"] = $row["student_id"];
+                $_SESSION["student_name"] = $row["student_name"];
+                // set log-in time
+                $_SESSION["login_time"] = time();
+                
+                header("location: index.php");
+                //echo "<br><a href='index.php'>Return to main menu</a>";
+            }
+            else {
+                echo "Login error, student Matric Number and Password are incorrect.";
+                echo "<br><a href='login.php'>Login</a>";
+            }
+        }
+        else {
+            echo "Login error, user with matric number ".$loginMatric." does not exist.";
+            echo "<a href='login.php'>Login</a>";
+        }
+
+        mysqli_close($conn);
     ?>
 </body>
 

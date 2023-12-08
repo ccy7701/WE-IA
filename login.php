@@ -30,9 +30,9 @@
         <center>
             <h4>Login to view all your information</h4>
             <div id="logindiv">
-                <form id="loginform" method="post">
-                    <input id="fieldlogin" name="loginmatric" type="text" placeholder="Matric Number"></textarea><br>
-                    <input id="fieldlogin" name="loginpassword" type="password" placeholder="Password"><br>
+                <form id="loginform" action="login_action.php" method="post">
+                    <input id="fieldlogin" name="loginmatric" type="text" placeholder="Matric Number" required></textarea><br>
+                    <input id="fieldlogin" name="loginpassword" type="password" placeholder="Password" required><br>
                     <input id="btnlogin" name="loginsubmit" type="submit" value="LOGIN">
                     <input id="btnlogin" name="loginreset" type="reset" value="CLEAR"><br>
                 </form>

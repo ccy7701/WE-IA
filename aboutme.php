@@ -51,7 +51,7 @@
         <img class="header" src="images/aboutmeheader.png">
     </header>
     <nav class="topnav" id="myTopnav">
-        <a href="index.php" class="logo"><image src="images/mystudykpi-topnavbtn-2-white.png"></image></a>
+        <a href="index.php" class="logo"><img src="images/mystudykpi-topnavbtn-2-white.png"></a>
         <a href="aboutme.php" class="active">About Me</a>
         <a href="kpimodule.php" class="tabs">MyKPI Indicator Module</a>
         <a href="activitieslist.php" class="tabs">Activities List</a>
@@ -62,53 +62,53 @@
     <main>
         <div class="row">
             <div class="col-left">
-                <img src="images/chiew.png" alt="chiew" style="width:65%">
-                <table id="tblprofile" width="100%">
+                <?php
+                    $testMatric = 'BI21110236'; // change at a later date to use fetched data instead
+                    $fetchProfileQuery = "SELECT * FROM student_profile WHERE student_id='".$testMatric."'";
+                    $result = mysqli_query($conn, $fetchProfileQuery);
+                    $row = mysqli_fetch_assoc($result);
+
+                    // this block is to determine the profile image to output
+                    $image = $row["student_imgpath"];
+                    
+                    echo "<table id='tblprofile' width='100%'>
                     <caption><h3>PERSONAL INFO</h3></caption>
-                    <?php
-                        $testMatric = 'BI21110236'; // change at a later date to use fetched data instead
-                        $fetchProfileQuery = "SELECT * FROM student_profile WHERE student_id='".$testMatric."'";
-                        $result = mysqli_query($conn, $fetchProfileQuery);
-                        $row = mysqli_fetch_assoc($result);
-                        $fetched_program = $row["student_program"];
-                        $program_output = '';
+                    <tr><td colspan=2 style='text-align: center; padding-top: 10px'><img src='".$image."' style='width: 40%'></td></tr>";
+                    
+                    // this block is to determine what to output for Program
+                    $fetched_program = $row["student_program"];
+                    $program_output = '';
 
-                        // this block is to determine what to output for Program
-                        switch($fetched_program) {
-                            case "hc00": $program_output = "UH6481001 Software Engineering"; break;
-                            case "hc05": $program_output = "UH6481002 Network Engineering"; break;
-                            case "hc12": $program_output = "UH6481003 Multimedia Technology"; break;
-                            case "hc13": $program_output = "UH6481004 Business Computing"; break;
-                            case "hc14": $program_output = "UH6481005 Data Science"; break;
-                            default: "ERROR";
-                        }
+                    switch($fetched_program) {
+                        case "hc00": $program_output = "UH6481001 Software Engineering"; break;
+                        case "hc05": $program_output = "UH6481002 Network Engineering"; break;
+                        case "hc12": $program_output = "UH6481003 Multimedia Technology"; break;
+                        case "hc13": $program_output = "UH6481004 Business Computing"; break;
+                        case "hc14": $program_output = "UH6481005 Data Science"; break;
+                        default: "ERROR";
+                    }
 
-                        echo "<tr><td>Name</td><td>".$row["student_name"]."</td></tr>
-                            <tr><td>Matric No.</td><td>".$row["student_id"]."</td></tr>
-                            <tr><td>Program</td><td>".$program_output."</td><tr>
-                            <tr><td>E-mail</td><td>".$row["student_email"]."</td></tr>
-                            <tr><td>Intake Batch</td><td>".$row["student_intakebatch"]."</td></tr>
-                            <tr><td>Phone Number</td><td>".$row["student_phone"]."</td></tr>
-                            <tr><td>Mentor</td><td>".$row["student_mentor"]."</td></tr>
-                            <tr><td>State of Origin</td><td>".$row["student_state"]."</td></tr>
-                            <tr><td>Address</td><td>".$row["student_address"]."</td></tr>
-                            <tr><td>Motto</td><td>".$row["student_motto"]."</td></tr>";
-                    ?>
-                    <tr>
-                        <td colspan="2">
-                            <center>
-                                <input id="btneditpersonal" type="button" name="btneditpersonal" value="Edit Details">
-                            </center>
-                        </td>
-                    </tr>
-                </table>
+                    echo "<tr><td>Name</td><td>".$row["student_name"]."</td></tr>
+                    <tr><td>Matric No.</td><td>".$row["student_id"]."</td></tr>
+                    <tr><td>Program</td><td>".$program_output."</td><tr>
+                    <tr><td>E-mail</td><td>".$row["student_email"]."</td></tr>
+                    <tr><td>Intake Batch</td><td>".$row["student_intakebatch"]."</td></tr>
+                    <tr><td>Phone Number</td><td>".$row["student_phone"]."</td></tr>
+                    <tr><td>Mentor</td><td>".$row["student_mentor"]."</td></tr>
+                    <tr><td>State of Origin</td><td>".$row["student_state"]."</td></tr>
+                    <tr><td>Address</td><td>".$row["student_address"]."</td></tr>
+                    <tr><td>Motto</td><td>".$row["student_motto"]."</td></tr>
+                    <tr><td colspan='2' style='text-align: center;'>
+                    <input id='btneditpersonal' type='button' name='btneditpersonal' value='Edit Details'>
+                    </td></tr></table>";
+                ?>
             </div>
             <div class="col-right">
                 <table id="tblactivities" width="100%">
                     <caption><h3>ACTIVITIES</h3></caption>
                     <tr>
                         <th>No.</th>
-                        <th>Period</th>
+                        <th>Session</th>
                         <th>Name</th>
                         <th>Remarks</th>
                     </tr>

@@ -18,7 +18,7 @@
         <img class="header" src="images/activitieslistheader.png">
     </header>
     <nav class="topnav" id="myTopnav">
-        <a href="index.php" class="logo"><image src="images/mystudykpi-topnavbtn-2-white.png"></image></a>
+        <a href="index.php" class="logo"><img src="images/mystudykpi-topnavbtn-2-white.png"></a>
         <a href="aboutme.php" class="tabs">About Me</a>
         <a href="kpimodule.php" class="tabs">MyKPI Indicator Module</a>
         <a href="activitieslist.php" class="active">Activities List</a>

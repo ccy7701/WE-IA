@@ -18,7 +18,7 @@
         <img class="header" src="images/loginheader.png">
     </header>
     <nav class="topnav" id="myTopnav">
-        <a href="index.php" class="logo"><image src="images/mystudykpi-topnavbtn-2-white.png"></image></a>
+        <a href="index.php" class="logo"><img src="images/mystudykpi-topnavbtn-2-white.png"></a>
         <a href="aboutme.php" class="tabs">About Me</a>
         <a href="kpimodule.php" class="tabs">MyKPI Indicator Module</a>
         <a href="activitieslist.php" class="tabs">Activities List</a>
@@ -30,7 +30,7 @@
         <center>
             <h4>Login to view all your information</h4>
             <div id="logindiv">
-                <form id="loginform">
+                <form id="loginform" method="post">
                     <input id="fieldlogin" name="loginmatric" type="text" placeholder="Matric Number"></textarea><br>
                     <input id="fieldlogin" name="loginpassword" type="password" placeholder="Password"><br>
                     <input id="btnlogin" name="loginsubmit" type="submit" value="LOGIN">
@@ -43,7 +43,7 @@
             </p>
         </center>
     </main>
-    <footer>
+    <footer style="position: fixed; bottom: 0;">
         <h5>© Chiew Cheng Yi | BI21110236 | KK34703 Individual Project</h5>
     </footer>
 </body>

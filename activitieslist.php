@@ -1,3 +1,8 @@
+<?php
+    session_start();
+    include("include/config.php");
+?>
+
 <!DOCTYPE HTML>
 <html lang="en">
 
@@ -11,6 +16,22 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Jost">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="sitejavascript.js"></script>
+    <style>
+        #btngeneric {
+            height: 40px;
+            background-color: white;
+            border: 1px solid black;
+            width: 25%;
+            font-size: 16px;
+            font-family: Jost, monospace;
+            transition: background-color 0.1s, color 0.1s;
+        }
+        #btngeneric:hover {
+            cursor: pointer;
+            background-color: #333333;
+            color: white;
+        }
+    </style>
 </head>
 
 <body>
@@ -23,15 +44,35 @@
         <a href="kpimodule.php" class="tabs">MyKPI Indicator Module</a>
         <a href="activitieslist.php" class="active">Activities List</a>
         <a href="challenges.php" class="tabs">Challenges and Future Plans</a>
-        <a href="login.php" class="tabs">Login</a>
+        <?php
+            include("include/session_check.php");
+        ?>
         <a href="javascript:void(0);" class="icon" onClick="adjustTopnav()"><i class="fa fa-bars"></i></a>
     </nav>
     <main>
-        <h1>Hello world! Activities list.</h1>
+        <?php
+            if (isset($_SESSION["UID"])) {
+                echo "
+                    <h1>Hello world! Activities list.</h1>
+                <footer>
+                    <h5>© Chiew Cheng Yi | BI21110236 | KK34703 Individual Project</h5>
+                </footer>
+                ";
+            } 
+            else {
+                echo "
+                    <center>
+                        <h3>You must be logged in to use this feature.</h3>
+                        <input onclick='redirectToLogin();' id='btngeneric' type='button' value='Login now'>
+                        <br><br>
+                    </center>
+                <footer style='position: fixed; bottom: 0'>
+                    <h5>© Chiew Cheng Yi | BI21110236 | KK34703 Individual Project</h5>
+                </footer>
+                ";
+            }
+        ?>
     </main>
-    <footer>
-        <h5>© Chiew Cheng Yi | BI21110236 | KK34703 Individual Project</h5>
-    </footer>
 </body>
 
 </html>

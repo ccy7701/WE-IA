@@ -16,11 +16,6 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Jost">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="sitejavascript.js"></script>
-    <script type="text/javascript">
-        function redirectToLogin() {
-	        window.location.href = 'login.php';
-        }
-    </script> 
     <style>
         #tblprofile {
             text-align: left;
@@ -47,6 +42,11 @@
         #tblcompetitions th {
             text-align: center;
             background-color: #BAFFC9;
+            color: black;
+        }
+        #tblcertifications th {
+            text-align: center;
+            background-color: #FFFFBA;
             color: black;
         }
         #btngeneric {
@@ -165,11 +165,11 @@
                         <table id='tblactivities' width='100%'>
                             <caption><h3>ACTIVITIES</h3></caption>
                             <tr>
-                            <th>No.</th>
-                            <th>Session</th>
-                            <th>Name</th>
-                            <th>Level</th>
-                            <th>Remarks</th>
+                                <th>No.</th>
+                                <th>Session</th>
+                                <th>Name</th>
+                                <th>Level</th>
+                                <th>Remarks</th>
                             </tr>
                 ";
 
@@ -188,12 +188,13 @@
                                 <td>LEVEL, UPDATE PHP LATER</td>
                                 <td>".$row["activity_remarks"]."</td>
                             </tr>
-                            </table>  
                         ";
                         $row_index++;
                     }
+                    echo "</table>";
                 }
                 else {
+                    // if the query returns no rows
                     echo "
                         <tr>
                             <td colspan='5'>No activites have been added yet.</td>
@@ -203,36 +204,104 @@
                 }
 
                 // COMPETITIONS table
+                echo "
+                    <table id='tblcompetitions' width='100%'>
+                        <caption><h3>COMPETITIONS</h3></caption>
+                        <tr>
+                            <th>No.</th>
+                            <th>Session</th>
+                            <th>Name</th>
+                            <th>Level</th>
+                            <th>Remarks</th>
+                        </tr>
+                ";
 
+                $fetchCompetitionsQuery = "SELECT * FROM competition WHERE student_id='".$matric."'";
+                $competitionsResult = mysqli_query($conn, $fetchCompetitionsQuery);
+                if (mysqli_num_rows($competitionsResult) > 0) {
+                    // output the data of each row
+                    $row_index = 1;
+
+                    while ($row = mysqli_fetch_assoc($activitiesResult)) {
+                        echo "
+                            <tr>
+                                <td>".$row_index."</td>
+                                <td>Sem ".$row["comp_sem"].", ".$row["comp_year"]."</td>
+                                <td>".$row["comp_name"]."</td>
+                                <td>LEVEL, UPDATE PHP LATER</td>
+                                <td>".$row["comp_remarks"]."</td>
+                            </tr>
+                        ";
+                        echo "</table>";
+                        $row_index++;
+                    }
+                    echo "</table>";
+                }
+                else {
+                    // if the query returns no rows
+                    echo "
+                        <tr>
+                            <td colspan='5'>No competitions have been added yet.</td>
+                        </tr>
+                        </table>
+                    ";
+                }
 
                 // CERTIFICATIONS table
 
                 echo "
-                    <table id='tblcompetitions' width='100%'>
-                        <caption><h3>COMPETITIONS (php not done)</h3></caption>
-                        <tr>
-                            <td>Cell 0:0</td>
-                            <td>Cell 0:1</td>
-                        </tr>
-                    </table>
                     <table id='tblcertifications' width='100%'>
-                        <caption><h3>CERTIFICATIONS (php not done)</h3></caption>
+                        <caption><h3>CERTIFICATIONS</h3></caption>
                         <tr>
-                            <td>Cell 0:0</td>
-                            <td>Cell 0:1</td>
+                            <th>No.</th>
+                            <th>Name</th>
+                            <th>Issuer</th>
+                            <th>Description</th>
+                            <th>Award Date</th>
                         </tr>
-                    </table>
-                    </div>
-                </div>
-                <footer>
-                    <h5>© Chiew Cheng Yi | BI21110236 | KK34703 Individual Project</h5>
-                </footer>
                 ";
+
+                $fetchCertificationsQuery = "SELECT * FROM certification WHERE student_id='".$matric."'";
+                $certificationsResult = mysqli_query($conn, $fetchCertificationsQuery);
+                if (mysqli_num_rows($certificationsResult) > 0) {
+                    // output the data of each row
+                    $row_index = 1;
+
+                    while ($row = mysqli_fetch_assoc($certificationsResult)) {
+                        echo "
+                            <tr>
+                                <td>".$row_index."</td>
+                                <td>".$row["cert_name"]."</td>
+                                <td>".$row["cert_issuer"]."</td>
+                                <td>".$row["cert_description"]."</td>
+                                <td>".$row["cert_awarddate"]."</td>
+                            </tr>
+                        ";
+                        $row_index++;
+                    }
+                    echo "</table>";
+                }
+                else {
+                    echo "
+                        <tr>
+                            <td colspan='5'>No certifications have been added yet.</td>
+                        </tr>
+                        </table>
+                    ";
+                }
+
+                echo "
+                    </div>
+                    </div>
+                    <footer>
+                        <h5>© Chiew Cheng Yi | BI21110236 | KK34703 Individual Project</h5>
+                    </footer>
+                ";
+
 
                 // COL-RIGHT ENDS HERE
             }
             else {
-                $location = "login.php";
                 echo "
                     <center>
                         <h3>You must be logged in to use this feature.</h3>

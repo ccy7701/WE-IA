@@ -99,8 +99,18 @@
                     <div class='col-left'>
                         <table id='tblprofile' width='100%'>
                         <caption><h3>PERSONAL INFO</h3></caption>
-                        <tr><td colspan=2 style='text-align: center; padding-top: 10px'><img src='".$image."' style='width: 40%'></td></tr>
                 ";
+
+                if ($row["student_imgpath"] != '') {
+                    echo "
+                        <tr><td colspan=2 style='text-align: center; padding-top: 10px'><img src='".$image."' style='width: 40%'></td></tr>
+                    ";
+                }
+                else {
+                    echo "
+                        <tr><td colspan=2 style='text-align: center; padding-top: 10px; color: #7f7f7f'><i>No profile image has been added yet.</i></td></tr>
+                    ";
+                }
 
                 // this block is to determine what to output for Program
                 $fetched_program = $row["student_program"];

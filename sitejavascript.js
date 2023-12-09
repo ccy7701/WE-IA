@@ -14,7 +14,7 @@ function redirect(target) {
 	window.location.href = target;
 }
 
-function confirmationPopup(message, target) {
+function popup(message, target) {
 	let text = message;
 	alert(text);
 	redirect(target);

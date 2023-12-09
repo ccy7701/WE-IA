@@ -43,13 +43,19 @@
                 //echo "<br><a href='index.php'>Return to main menu</a>";
             }
             else {
-                echo "Login error, student Matric Number and Password are incorrect.";
-                echo "<br><a href='login.php'>Login</a>";
+                echo "
+                    <script>
+                        popup('Login error: The student Matric Number and Password are incorrect. Please try again.', 'login.php');
+                    </script>
+                ";
             }
         }
         else {
-            echo "Login error, user with matric number ".$loginMatric." does not exist.";
-            echo "<a href='login.php'>Login</a>";
+            echo "
+                <script>
+                    popup('Login error: User with Matric Number ".$loginMatric." does not exist. Please try again.', 'login.php');
+                </script>
+            ";
         }
 
         mysqli_close($conn);

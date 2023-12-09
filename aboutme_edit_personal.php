@@ -26,6 +26,10 @@
             width: 100%;
             border-collapse: collapse;
         }
+        #pfpToUpload {
+            width: 100%;
+            display: block;
+        }
         @media screen and (max-width: 600px) {
             #editPersonalInfo-container {
                 padding-left: 50px;
@@ -78,7 +82,7 @@
             }
             ?>
         <div id="editPersonalInfo-container">
-            <form id="editPersonalInfo" action="aboutme_edit_personal_action.php" method="POST">
+            <form id="editPersonalInfo" action="aboutme_edit_personal_action.php" method="POST" enctype="multipart/form-data">
                 <?php
                     // for the Program field
                     $program_display = '';
@@ -146,6 +150,9 @@
 
                         <label for='student_motto'>Your Motto</label>
                         <input id='editfield' name='student_motto' type='text' value='$student_motto'><br>
+
+                        <p>Upload new profile image here:<p>
+                        <input id='pfpToUpload' type='file' name='pfpToUpload' accept='.jpg, .jpeg, .png'><br>
                     ";
                 ?>
                 <center>

@@ -70,11 +70,10 @@
                 <select id="selectreg" name="student_state" required>
                     <option value="" disabled selected>Select a state...</option>
                     <optgroup label="States">
-                        <!-- CHANGE THIS SECTION TO USE FULL STATE NAMES INSTEAD OF ABBRVS. -->
                         <option value="Johor">Johor</option>
                         <option value="Kedah">Kedah</option>
                         <option value="Kelantan">Kelantan</option>
-                        <option value="Malaca">Malacca</option>
+                        <option value="Malacca">Malacca</option>
                         <option value="Negeri Sembilan">Negeri Sembilan</option>
                         <option value="Pahang">Pahang</option>
                         <option value="Penang">Penang</option>

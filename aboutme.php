@@ -33,6 +33,7 @@
         }
         #tblactivities tr:hover, #tblcompetitions tr:hover, #tblcertifications tr:hover {
             background-color: #C8B4BA;
+            font-weight: bold;
         }
         #tblactivities th {
             text-align: center;
@@ -151,7 +152,7 @@
                 }
 
                 echo "
-                    <tr><td colspan='2' style='text-align: center;'><input id='btneditpersonal' type='button' name='btneditpersonal' value='Edit Details'></td></tr>
+                    <tr><td colspan='2' style='text-align: center;'><input onclick='redirect(\"aboutme_edit_personal.php\")' id='btneditpersonal' type='button' name='btneditpersonal' value='Edit Details'></td></tr>
                     </table>
                     </div>
                 ";
@@ -305,7 +306,7 @@
                 echo "
                     <center>
                         <h3>You must be logged in to use this feature.</h3>
-                        <input onclick='redirectToLogin();' id='btngeneric' type='button' value='Login now'>
+                        <input onclick='redirect(\"login.php\");' id='btngeneric' type='button' value='Login now'>
                         <br><br>
                     </center>
                 <footer style='position: fixed; bottom: 0;'>

@@ -63,7 +63,7 @@
                 echo "
                     <center>
                         <h3>You must be logged in to use this feature.</h3>
-                        <input onclick='redirectToLogin();' id='btngeneric' type='button' value='Login now'>
+                        <input onclick='redirect(\"login.php\");' id='btngeneric' type='button' value='Login now'>
                         <br><br>
                     </center>
                 <footer style='position: fixed; bottom: 0'>

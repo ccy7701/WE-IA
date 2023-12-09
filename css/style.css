@@ -122,7 +122,7 @@ footer {
     position: absolute bottom;
 }
 
-#loginform #btnlogin, #regform #btnreg {
+#loginform #btnlogin, #regform #btnreg, #editPersonalInfo #btnedit {
     height: 40px;
     background-color: white;
     border: 1px solid black;
@@ -132,13 +132,15 @@ footer {
     transition: background-color 0.1s, color 0.1s;
 }
 
-#loginform #btnlogin:hover, #regform #btnreg:hover {
+#loginform #btnlogin:hover, #regform #btnreg:hover, #editPersonalInfo #btnedit:hover {
     cursor: pointer;
     background-color: #333333;
     color: white;
 }
 
-#loginform #fieldlogin, #regform #fieldreg, #regform #selectreg {
+#loginform #fieldlogin, #regform #fieldreg, 
+#regform #selectreg, #editPersonalInfo #editfield,
+#editPersonalInfo #select {
     height: 30px;
     width: 100%;
     display: block;
@@ -184,7 +186,7 @@ footer {
     color: white;
 }
 
-@media screen and (max-width: 720px) {  /* CSS when pages are resized to smaller or for mobile screen */
+@media screen and (max-width: 600px) {  /* CSS when pages are resized to smaller or for mobile screen */
     .topnav a:not(:first-child) {
         display: none;
     }

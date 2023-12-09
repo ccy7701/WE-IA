@@ -10,8 +10,14 @@ function adjustTopnav() {
     }
 }
 
-function redirectToLogin() {
-	window.location.href = 'login.php';
+function redirect(target) {
+	window.location.href = target;
+}
+
+function confirmationPopup(message, target) {
+	let text = message;
+	alert(text);
+	redirect(target);
 }
 
 function addToTable() {

@@ -1,6 +1,6 @@
 # WE-IA
 Web Engineering (WE) course individual assignment (IA).
-![banner](![image](https://github.com/ccy7701/WE-IA/assets/150312205/338b98bb-d75c-47df-80e5-c59dbd42e8c3))
+![banner](https://github.com/ccy7701/WE-IA/blob/main/images/indexheader2.png)
 
 This is my first attempt at building a website from scratch (with supplementary help from lecture notes).  
 This website, named MyStudyKPI, is designed to be a website allowing students of the UMS Faculty of Computing and Informatics to record their key performance indicators (KPIs).

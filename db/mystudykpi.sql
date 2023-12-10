@@ -41,6 +41,7 @@ CREATE TABLE IF NOT EXISTS activity (
 	activity_name varchar(256),
 	activity_level varchar(4),
 	activity_remarks varchar(256),
+    activity_imgpath varchar(256),
 	student_id varchar(12),
 	FOREIGN KEY (student_id) REFERENCES student_profile(student_id)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8mb4;
@@ -64,6 +65,7 @@ CREATE TABLE IF NOT EXISTS competition (
 	comp_name varchar(256),
 	comp_level varchar(4),
 	comp_remarks varchar(256),
+	comp_imgpath varchar(256),
 	student_id varchar(12),
 	FOREIGN KEY (student_id) REFERENCES student_profile(student_id)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8mb4;
@@ -91,3 +93,21 @@ CREATE TABLE IF NOT EXISTS certification (
 INSERT INTO certification (cert_id, cert_name, cert_issuer, cert_description, cert_awarddate, student_id) VALUES
 ('CT001', 'CompTIA A+', 'CompTIA', 'IT foundational certificate', '2022-10-05', 'BI21110236'),
 ('CT002', 'Microsoft Technology Profession (MTA)', 'Microsoft Corporation', 'IT infrastructure, database, development', '2023-12-09', 'BI21110236');
+
+-- Table structure for challenge_and_plan
+DROP TABLE IF EXISTS challenge_and_plan;
+CREATE TABLE IF NOT EXISTS challenge_and_plan (
+	challenge_index int PRIMARY KEY AUTO_INCREMENT,
+	challenge_year_sem varchar(16),
+	challenge_details varchar(256),
+	challenge_futureplan varchar(256),
+	challenge_remark varchar(256),
+	challenge_dateofrecord date,
+	student_id varchar(12),
+	FOREIGN KEY (student_id) REFERENCES student_profile(student_id)
+) ENGINE=INNODB DEFAULT CHARSET=utf8mb4;
+
+-- Data dump for challenge_and_plan
+
+INSERT INTO challenge_and_plan (challenge_year_sem, challenge_details, challenge_futureplan, challenge_remark, challenge_dateofrecord, student_id)
+VALUES ('Year 1 Sem 1', 'First challenge', 'First future plan', 'No remark', '2023-09-12', 'BI21110236');

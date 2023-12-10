@@ -82,7 +82,7 @@
             }
             ?>
         <div id="editPersonalInfo-container">
-            <form id="editPersonalInfo" action="aboutme_edit_personal_action.php" method="POST" enctype="multipart/form-data">
+            <form id="editPersonalInfo" action="action_scripts/aboutme_edit_personal_action.php" method="POST" enctype="multipart/form-data">
                 <?php
                     // for the Program field
                     $program_display = '';

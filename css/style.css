@@ -67,51 +67,6 @@ body {
     padding: 14px 16px;
 }
 
-#projecttable-container {
-    padding-left: 30px;
-    padding-right: 30px;
-}
-
-#projecttable {
-    font-family: "Jost";
-    border-collapse: collapse;
-    width: 100%;
-}
-
-#projecttable th {
-    padding-top: 12px;
-    padding-bottom: 12px;
-    text-align: center;
-    background-color: #99FFCC;
-    color: #000000;
-}
-
-#projecttable tr {
-    transition: background-color 0.1s, color 0.1s;
-}
-
-#projecttable tr:nth-child(odd) {
-    background-color: #DDDDDD;
-}
-
-#projecttable tr:hover {
-    background-color: #C8B4BA;
-}
-
-#challengetable {
-    line-height: 18pt;
-    padding-left: 20px;
-    padding-right: 20px;
-}
-
-#challengetable select {
-    width: 10%;
-}
-
-#challengetable textarea {
-    width: 40%;
-}
-
 footer {
     overflow: hidden;
     width: 100%;

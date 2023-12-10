@@ -31,7 +31,7 @@
             <h4>Complete this form before accessing the MyStudyKPI system. Required fields are marked with (*)</h4>
         </center>
         <div id="regformdiv">
-            <form id="regform" action="registration_action.php" method="post">
+            <form id="regform" action="action_scripts/registration_action.php" method="post">
                 <label for="student_id">Matric Number (*)</label><br>
                 <input id="fieldreg" name="student_id" type="text" required><br>
 

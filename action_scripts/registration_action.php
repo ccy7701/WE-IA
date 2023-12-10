@@ -1,5 +1,5 @@
 <?php
-    include("include/config.php");
+    include("../include/config.php");
 ?>
 
 <!DOCTYPE HTML>
@@ -9,10 +9,10 @@
 <head>
     <title>Registration Action | MyStudyKPI </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Jost">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="sitejavascript.js"></script>
+    <script src="../sitejavascript.js"></script>
 </head>
 
 <body>
@@ -43,7 +43,11 @@
             $result = mysqli_query($conn, $idQuery);
 
             if (mysqli_num_rows($result) == 1) {    // a row is returned, so a row with this ID already exists
-                echo "<p><b>ERROR:</b> A user with this Matric No. already exists. Please register using a new Matric No.";
+                echo "
+                    <script>
+                        popup('ERROR: A user with this Matric Number already exists. Please register using a new Matric Number.', '../login.php');
+                    </script>
+                ";
             }
             else {  // no row was returned, so this ID does not exist in the database yet
                 $pwdHash = trim(password_hash($_POST["student_password"], PASSWORD_DEFAULT));
@@ -55,20 +59,20 @@
                     // echo "<p>New user record created successfully. Welcome '$student_name' ('$student_id')!";
                     echo "
                     <header>
-                        <img class='header' src='images/registrationheader.png'>
+                        <img class='header' src='../images/registrationheader.png'>
                     </header>
                     <nav class='topnav' id='myTopnav'>
-                        <a href='index.php' class='logo'><img src='images/mystudykpi-topnavbtn-2-white.png'></a>
-                        <a href='aboutme.php' class='tabs'>About Me</a>
-                        <a href='kpimodule.php' class='tabs'>MyKPI Indicator Module</a>
-                        <a href='activitieslist.php' class='tabs'>Activities List</a>
-                        <a href='challenges.php' class='tabs'>Challenges and Future Plans</a>
-                        <a href='login.php' class='tabs'>Login</a>
+                        <a href='../index.php' class='logo'><img src='../images/mystudykpi-topnavbtn-2-white.png'></a>
+                        <a href='../aboutme.php' class='tabs'>About Me</a>
+                        <a href='../kpimodule.php' class='tabs'>MyKPI Indicator Module</a>
+                        <a href='../activitieslist.php' class='tabs'>Activities List</a>
+                        <a href='../challenges.php' class='tabs'>Challenges and Future Plans</a>
+                        <a href='../login.php' class='tabs'>Login</a>
                         <a href='javascript:void(0);' class='icon' onClick='adjustTopnav()'><i class='fa fa-bars'></i></a>
                     </nav>
                     <main>
                         <p style='font-size:20px; text-align: center;'>New user record created successfully. Welcome, ".$student_name."!</p>
-                        <p style='text-align: center'><a href='login.php'>Back to login menu</a></p>
+                        <p style='text-align: center'><a href='../login.php'>Back to login menu</a></p>
                     </main>
                     <footer style='position: fixed; bottom: 0;'>
                         <h5>© Chiew Cheng Yi | BI21110236 | KK34703 Individual Project</h5>

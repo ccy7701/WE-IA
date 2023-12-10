@@ -293,6 +293,7 @@
                     echo "</table>";
                 }
                 else {
+                    // if the query returns no rows
                     echo "
                         <tr>
                             <td colspan='5'>No certifications have been added yet.</td>
@@ -300,6 +301,8 @@
                         </table>
                     ";
                 }
+
+                mysqli_close($conn);
 
                 echo "
                     </div>

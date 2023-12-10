@@ -1,6 +1,6 @@
 <?php
     session_start();
-    include("include/config.php");
+    include("../include/config.php");
 ?>
 
 <!DOCTYPE HTML>
@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Jost">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="sitejavascript.js"></script>
+    <script src="../sitejavascript.js"></script>
 </head>
 
 <body>
@@ -39,13 +39,12 @@
                 // set log-in time
                 $_SESSION["login_time"] = time();
                 
-                header("location: index.php");
-                //echo "<br><a href='index.php'>Return to main menu</a>";
+                header("location: ../index.php");
             }
             else {
                 echo "
                     <script>
-                        popup('Login error: The student Matric Number and Password are incorrect. Please try again.', 'login.php');
+                        popup('Login error: The student Matric Number and Password are incorrect. Please try again.', '../login.php');
                     </script>
                 ";
             }
@@ -53,7 +52,7 @@
         else {
             echo "
                 <script>
-                    popup('Login error: User with Matric Number ".$loginMatric." does not exist. Please try again.', 'login.php');
+                    popup('Login error: User with Matric Number ".$loginMatric." does not exist. Please try again.', '../login.php');
                 </script>
             ";
         }

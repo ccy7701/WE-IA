@@ -151,10 +151,12 @@
                     </tr>
                     ";
 
+                    $row_index = 1;
+
                     while ($row = mysqli_fetch_assoc($challengesResult)) {
                         echo "
                         <tr>
-                            <td>".$row["challenge_index"]."</td>
+                            <td>".$row_index."</td>
                             <td>".$row["challenge_year_sem"]."</td>
                             <td>".$row["challenge_details"]."</td>
                             <td>".$row["challenge_futureplan"]."</td>
@@ -163,6 +165,7 @@
                             <td>Edit | Remove</td>
                         </tr>
                         ";
+                        $row_index++;
                     }
                 }
                 else {  // if the query returns no rows
@@ -178,14 +181,6 @@
                         <tr>   
                             <td colspan='6'>No challenges have been added yet.</td>
                         </tr>
-                        <tr>
-                            <td>A</td>
-                            <td>B</td>
-                            <td>C</td>
-                            <td>D</td>
-                            <td>E</td>
-                            <td>F</td>
-                        </tr>
                     ";
                 }
 
@@ -195,7 +190,7 @@
                 echo "
                     <br>
                     <div id='challengeForm-container'>
-                        <form id='challengeForm' action='' method='POST'>
+                        <form id='challengeForm' action='action_scripts/challenges_submit_action.php' method='POST'>
                             <p style='text-align: center'>Facing a new challenge? Fill the form below and record it here. <br> Required fields are marked (*)</p>
                             <label for='yearsem'>Year/Sem (*): </label><br>
                             <select id='yearsem' name='yearsem' required>
@@ -210,11 +205,11 @@
                                 <option value='Year 4 Sem 2'>Year 4 Sem 2</option>
                             </select><br>
                             <label for='recorddate'>Date of record (*): </label><br>
-                            <input id='recorddate' name='recorddate' type='date'><br>
+                            <input id='recorddate' name='recorddate' type='date' required><br>
                             <label for='challengedetails'>Challenge (*): </label><br>
-                            <textarea name='challengedetails' rows='5' cols='50'></textarea><br>
+                            <textarea name='challengedetails' rows='5' cols='50' required></textarea><br>
                             <label for='futureplan'>Future plan (*): </label><br>
-                            <textarea name='futureplan' rows='5' cols='50'></textarea><br>
+                            <textarea name='futureplan' rows='5' cols='50' required></textarea><br>
                             <label for='remarks'>Remarks: </label><br>
                             <textarea name='remarks' rows='5' cols='50'></textarea><br><br>
                             <center>

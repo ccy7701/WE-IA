@@ -32,8 +32,8 @@
         }
         @media screen and (max-width: 600px) {
             #editPersonalInfo-container {
-                padding-left: 50px;
-                padding-right: 50px;
+                padding-left: 10%;
+                padding-right: 10%;
             }
         }
     </style>

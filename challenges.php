@@ -16,6 +16,23 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Jost">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="sitejavascript.js"></script>
+    <script>
+        function createPath(target) {
+            let scriptPath = "action_scripts/challenge_remove_action.php?id=";
+            let overallPath = scriptPath.concat(target);
+            return overallPath;
+        }
+        function confirmRemoval(target_id) {
+            var promptConfirm = confirm("Are you sure you want to remove this record?");
+
+            if (promptConfirm) {
+                // if OK is clicked, redirect to challenge_remove_action with the target id
+                var path = createPath(target_id)
+                window.location.href = path;
+            }
+            // do nothing otherwise
+        }
+    </script>
     <style>
     #challengesTable-container {
         padding-left: 30px;
@@ -64,6 +81,7 @@
     #challengeForm textarea {
         height: 100px;
         width: 100%;
+        font-family: Jost, monospace;
         resize: none;
         display: block;
     }
@@ -80,6 +98,18 @@
         cursor: pointer;
         background-color: #333333;
         color: white;
+    }
+    #challengesTable #edit, #remove {
+        text-decoration: none;
+        color: black;
+    }
+    #challengesTable #edit:hover {
+        cursor: pointer;
+        color: green;
+    }
+    #challengesTable #remove:hover {
+        cursor: pointer;
+        color: red;
     }
     #btngeneric {
         height: 40px;
@@ -154,6 +184,8 @@
                     $row_index = 1;
 
                     while ($row = mysqli_fetch_assoc($challengesResult)) {
+                        $edit_id = $row["challenge_index"];
+                        $remove_id = $row["challenge_index"];
                         echo "
                         <tr>
                             <td>".$row_index."</td>
@@ -162,7 +194,10 @@
                             <td>".$row["challenge_futureplan"]."</td>
                             <td>".$row["challenge_remark"]."</td>
                             <td>".$row["challenge_dateofrecord"]."</td>
-                            <td>Edit | Remove</td>
+                            <td style='text-align: center'>
+                                <a id='edit' title='Edit' href='challenges_edit.php?id=".$remove_id."'><i class='fa fa-pencil-square-o'></i></a>
+                                <a id='remove' title='Remove' onclick='confirmRemoval($remove_id)'><i class='fa fa-trash-o'></i></a>
+                            </td>
                         </tr>
                         ";
                         $row_index++;
@@ -190,7 +225,7 @@
                 echo "
                     <br>
                     <div id='challengeForm-container'>
-                        <form id='challengeForm' action='action_scripts/challenges_submit_action.php' method='POST'>
+                        <form id='challengeForm' action='action_scripts/challenge_submit_action.php' method='POST'>
                             <p style='text-align: center'>Facing a new challenge? Fill the form below and record it here. <br> Required fields are marked (*)</p>
                             <label for='yearsem'>Year/Sem (*): </label><br>
                             <select id='yearsem' name='yearsem' required>

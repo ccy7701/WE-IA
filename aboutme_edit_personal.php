@@ -49,74 +49,100 @@
         <a href="kpimodule.php" class="tabs">MyKPI Indicator Module</a>
         <a href="activitieslist.php" class="tabs">Activities List</a>
         <a href="challenges.php" class="tabs">Challenges and Future Plans</a>
-        <?php
-            include("include/session_check.php");
-        ?>
+        <a href="logout.php" class="tabs">Logout</a>
         <a href="javascript:void(0);" class="icon" onClick="adjustTopnav()"><i class="fa fa-bars"></i></a>
     </nav>
     <main>
         <h3 style="text-align: center">Edit Personal Info</h3>
         <?php
-            // populate the editPersonalInfo form with data fetched from the DB
+            // fetch the existing row data from the database
             if (isset($_SESSION["UID"])) {
-                $matric = $_SESSION["UID"];
-                $fetchProfileQuery = "SELECT * FROM student_profile WHERE student_id='".$matric."'";
+                // do something
+                $accountID = $_SESSION["UID"];
+                $fetchAccountQuery = "SELECT * FROM account WHERE accountID='".$accountID."' LIMIT 1";
+                $fetchProfileQuery = "SELECT * FROM profile WHERE accountID='".$accountID."' LIMIT 1";
+
+                $result = mysqli_query($conn, $fetchAccountQuery);
+                $row = mysqli_fetch_assoc($result);
+
+                // variables for the fetched ACCOUNT data
+                $matricNumber = $row["matricNumber"];
+                $accountEmail = $row["accountEmail"];
+
                 $result = mysqli_query($conn, $fetchProfileQuery);
                 $row = mysqli_fetch_assoc($result);
-    
-                // fetch the data to populate the form
-                $student_id = $row["student_id"];
-                $student_name = $row["student_name"];
-                // password value is not used
-                $student_program = $row["student_program"];
-                $student_email = $row["student_email"];
-                $student_intakebatch = $row["student_intakebatch"];
-                $student_phone = $row["student_phone"];
-                $student_mentor = $row["student_mentor"];
-                $student_state = $row["student_state"];
-                $student_address = $row["student_address"];
-                $student_motto = $row["student_motto"];
-                $student_image = $row["student_imgpath"];
+
+                // variables for the fetched PROFILE data
+                $username = $row["username"];
+                $program = $row["program"];
+                $intakeBatch = $row["intakeBatch"];
+                $phoneNumber = $row["phoneNumber"];
+                $mentor = $row["mentor"];
+                $profileState = $row["profileState"];
+                $profileAddress = $row["profileAddress"];
+                $motto = $row["motto"];
+                $profileImagePath = $row["profileImagePath"];
 
                 mysqli_close($conn);
             }
-            ?>
+            else {
+                echo "ERROR: ".mysqli_error($conn);
+            }
+        ?>
         <div id="editPersonalInfo-container">
             <form id="editPersonalInfo" action="action_scripts/aboutme_edit_personal_action.php" method="POST" enctype="multipart/form-data">
                 <?php
-                    // for the Program field
-                    $program_display = '';
-                    switch ($student_program) {
-                        case 'hc00': $program_display = 'UH6481001 Software Engineering'; break;
-                        case 'hc05': $program_display = 'UH6481001 Network Engineering'; break;
-                        case 'hc12': $program_display = 'UH6481003 Multimedia Technology'; break;
-                        case 'hc13': $program_display = 'UH6481004 Business Computing'; break;
-                        case 'hc14': $program_display = 'UH6481005 Data Science'; break;
-                        default: 'ERROR: Could not fetch student_program';
+                    // this block is to determine what to output for Program
+                    $programOutput = '';
+                    switch ($program) {
+                        case "hc00": $programOutput = "UH6481001 Software Engineering"; break;
+                        case "hc05": $programOutput = "UH6481002 Network Engineering"; break;
+                        case "hc12": $programOutput = "UH6481003 Multimedia Technology"; break;
+                        case "hc13": $programOutput = "UH6481004 Business Computing"; break;
+                        case "hc14": $programOutput = "UH6481005 Data Science"; break;
+                        default: $programOutput = "";
                     }
+                ?>
 
+                <label for="matricNumber">Matric Number</label><br>
+                <input id="editfield" name="matricNumber" type="text" value=<?=$matricNumber;?> disabled><br>
+
+                <label for="accountEmail">Email</label><br>
+                <input id="editfield" name="accountEmail" type="text" value=<?=$accountEmail;?> disabled><br>
+
+                <label for="username">Username</label><br>
+                <input id="editfield" name="username" type="text" value=<?=$username;?>><br>
+
+                <label for="program">Program</label><br>
+                <select id="select" name="program">
+                    <option value="<?=$program;?>" selected>Current: <?php echo ($program != '') ? $programOutput : "Not filled yet" ?></option>
+                    <option value="hc00">UH6481001 Software Engineering</option>
+                    <option value="hc05">UH6481002 Network Engineering</option>
+                    <option value="hc12">UH6481003 Multimedia Technology</option>
+                    <option value="hc13">UH6481004 Business Computing</option>
+                    <option value="hc14">UH6481005 Data Science</option>
+                </select><br>
+
+                <label for="intakeBatch">Intake Batch</label><br>
+                <input id="editfield" name="intakeBatch" type="text" value=<?php echo ($intakeBatch != 0) ? $intakeBatch : ""; ?>><br>
+
+                <label for="phoneNumber">Phone Number</label><br>
+                <input id="editfield" name="phoneNumber" type="text" value=<?=$phoneNumber;?>><br>
+
+                <label for="mentor">Mentor</label><br>
+                <input id="editfield" name="mentor" type="text" value=<?=$mentor;?>><br>
+
+                <label for="profileState">State</label><br>
+                <select id="select" name="profileState">
+                    <option value="<?=$profileState;?>" selected>Current: <?php echo ($profileState != '') ? $profileState : "Not filled yet"; ?></option>
+                    <? // LAST STOP HERE!!!! 15/12/2023 6:00PM on the clock! ?>
+                </select>
+            </form>
+        </div>
+        <div id="editPersonalInfo-container">
+            <form id="editPersonalInfo" action="action_scripts/aboutme_edit_personal_action.php" method="POST" enctype="multipart/form-data">
+                <?php
                     echo "
-                        <label for='student_id'>Matric Number</label><br>
-                        <input id='editfield' name='student_id' type='text' value='$student_id' disabled><br>
-
-                        <label for='student_name'>Name</label><br>
-                        <input id='editfield' name='student_name' type='text' value='$student_name' disabled><br>
-                        
-                        <label for='student_program'>Program</label><br>
-                        <input id='editfield' name='student_program' type='text' value='$program_display' disabled><br>
-
-                        <label for='student_email'>E-mail (*)</label>
-                        <input id='editfield' name='student_email' type='text' value='$student_email' required><br>
-
-                        <label for='student_intakebatch'>Intake Batch</label>
-                        <input id='editfield' name='student_intakebatch' type='text' value='$student_intakebatch' disabled><br>
-
-                        <label for='student_phone'>Phone Number (*)</label>
-                        <input id='editfield' name='student_phone' type='text' value='$student_phone' required><br>
-
-                        <label for='student_mentor'>Mentor</label>
-                        <input id='editfield' name='student_mentor' type='text' value='$student_mentor'><br>
-
                         <label for='student_state'>State (*)</label>
                         <select id='select' name='student_state' required>
                             <option value='$student_state'>Currently selected: ".$student_state."</option>

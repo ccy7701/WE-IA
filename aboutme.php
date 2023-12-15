@@ -84,19 +84,20 @@
         <?php
             if (isset($_SESSION["UID"])) {
                 $accountID = $_SESSION["UID"];
-                $fetchAccountQuery = "SELECT * FROM account WHERE accountID='".$accountID."'";
-                $fetchProfileQuery = "SELECT * FROM profile WHERE accountID='".$accountID."'";
+                $fetchAccountQuery = "SELECT * FROM account WHERE accountID='".$accountID."' LIMIT 1";
+                $fetchProfileQuery = "SELECT * FROM profile WHERE accountID='".$accountID."' LIMIT 1";
 
                 $result = mysqli_query($conn, $fetchAccountQuery);
                 $row = mysqli_fetch_assoc($result);
 
+                // variables for the fetched ACCOUNT data
                 $matricNumber = $row["matricNumber"];
                 $accountEmail = $row["accountEmail"];
 
                 $result = mysqli_query($conn, $fetchProfileQuery);
                 $row = mysqli_fetch_assoc($result);
 
-                // variables for the fetch data
+                // variables for the fetched PROFILE data
                 $username = $row["username"];
                 $program = $row["program"];
                 $intakeBatch = $row["intakeBatch"];
@@ -125,7 +126,7 @@
                 <?php  
                     // this block is to determine what to output for Program
                     $programOutput = '';
-                    switch($program) {
+                    switch ($program) {
                         case "hc00": $programOutput = "UH6481001 Software Engineering"; break;
                         case "hc05": $programOutput = "UH6481002 Network Engineering"; break;
                         case "hc12": $programOutput = "UH6481003 Multimedia Technology"; break;

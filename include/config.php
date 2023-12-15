@@ -3,7 +3,7 @@
     $databaseHost = 'localhost';
     $databaseUsername = 'root';
     $databasePassword = '';
-    $databaseName = 'mystudykpidb';
+    $databaseName = 'mystudykpi';
 
     $conn = mysqli_connect($databaseHost, $databaseUsername, $databasePassword, $databaseName);
 

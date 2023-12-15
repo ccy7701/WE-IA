@@ -54,13 +54,8 @@
         <img class="header" src="images/indexheader2.png">
     </header>
     <nav class="topnav" id="myTopnav">
-        <a href="index.php" class="logo"><img src="images/mystudykpi-topnavbtn-2-white.png"></a>
-        <a href="aboutme.php" class="tabs">About Me</a>
-        <a href="kpimodule.php" class="tabs">MyKPI Indicator Module</a>
-        <a href="activitieslist.php" class="tabs">Activities List</a>
-        <a href="challenges.php" class="tabs">Challenges and Future Plans</a>
         <?php
-            include("include/session_check.php");
+            include("include/login_session_check.php");
         ?>
         <a href="javascript:void(0);" class="icon" onClick="adjustTopnav()"><i class="fa fa-bars"></i></a>
     </nav>
@@ -69,7 +64,7 @@
         <?php
             if (isset($_SESSION["UID"])) {
                 echo "
-                    <h1>Welcome back, <u>".$_SESSION["student_name"]."</u></h1>
+                    <h1>Welcome back</h1>
                 ";
             }
             else {

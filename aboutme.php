@@ -77,257 +77,114 @@
         <a href="kpimodule.php" class="tabs">MyKPI Indicator Module</a>
         <a href="activitieslist.php" class="tabs">Activities List</a>
         <a href="challenges.php" class="tabs">Challenges and Future Plans</a>
-        <?php
-            include("include/session_check.php");
-        ?>
+        <a href="logout.php" class="tabs">Logout</a>
         <a href="javascript:void(0);" class="icon" onClick="adjustTopnav()"><i class="fa fa-bars"></i></a>
     </nav>
     <main>
         <?php
             if (isset($_SESSION["UID"])) {
-                $matric = $_SESSION["UID"];
-                $fetchProfileQuery = "SELECT * FROM student_profile WHERE student_id='".$matric."'";
+                $accountID = $_SESSION["UID"];
+                $fetchAccountQuery = "SELECT * FROM account WHERE accountID='".$accountID."'";
+                $fetchProfileQuery = "SELECT * FROM profile WHERE accountID='".$accountID."'";
+
+                $result = mysqli_query($conn, $fetchAccountQuery);
+                $row = mysqli_fetch_assoc($result);
+
+                $matricNumber = $row["matricNumber"];
+                $accountEmail = $row["accountEmail"];
+
                 $result = mysqli_query($conn, $fetchProfileQuery);
                 $row = mysqli_fetch_assoc($result);
 
-                // this block is to determine the profile image to output
-                $image = $row["student_imgpath"];
-
-                // COL-LEFT STARTS HERE
-                echo "
-                <div class='row'>
-                    <div class='col-left'>
-                        <table id='tblprofile' width='100%'>
-                        <caption><h3>PERSONAL INFO</h3></caption>
-                ";
-
-                if ($row["student_imgpath"] != '') {
-                    echo "
-                        <tr><td colspan=2 style='text-align: center; padding-top: 10px'><img src='".$image."' style='width: 40%'></td></tr>
-                    ";
-                }
-                else {
-                    echo "
-                        <tr><td colspan=2 style='text-align: center; padding-top: 10px; color: #7f7f7f'><i>No profile image has been added yet.</i></td></tr>
-                    ";
-                }
-
-                // this block is to determine what to output for Program
-                $fetched_program = $row["student_program"];
-                $program_output = '';
-
-                switch($fetched_program) {
-                    case "hc00": $program_output = "UH6481001 Software Engineering"; break;
-                    case "hc05": $program_output = "UH6481002 Network Engineering"; break;
-                    case "hc12": $program_output = "UH6481003 Multimedia Technology"; break;
-                    case "hc13": $program_output = "UH6481004 Business Computing"; break;
-                    case "hc14": $program_output = "UH6481005 Data Science"; break;
-                    default: "ERROR";
-                }
-
-                echo "
-                <tr><td>Name</td><td>".$row["student_name"]."</td></tr>
-                <tr><td>Matric No.</td><td>".$row["student_id"]."</td></tr>
-                <tr><td>Program</td><td>".$program_output."</td><tr>
-                <tr><td>E-mail</td><td>".$row["student_email"]."</td></tr>
-                <tr><td>Intake Batch</td><td>".$row["student_intakebatch"]."</td></tr>
-                <tr><td>Phone Number</td><td>".$row["student_phone"]."</td></tr>
-                ";
-
-                if ($row["student_mentor"] != '') {
-                    echo "
-                    <tr><td>Mentor</td><td>".$row["student_mentor"]."</td></tr>
-                    ";
-                }
-                else {
-                    echo "
-                        <tr><td>Mentor</td><td style='color: #7f7f7f'><i>not filled yet</i></td></tr>
-                    ";
-                }
-
-                echo "
-                    <tr><td>State of Origin</td><td>".$row["student_state"]."</td></tr>
-                    <tr><td>Address</td><td>".$row["student_address"]."</td></tr>
-                ";
-
-                if ($row["student_motto"] != '') {
-                    echo "
-                        <tr><td>Motto</td><td>".$row["student_motto"]."</td></tr>
-                    ";
-                }
-                else {
-                    echo "
-                        <tr><td>Motto</td><td style='color: #7f7f7f'><i>not filled yet</i></td><tr>
-                    ";
-                }
-
-                echo "
-                    <tr><td colspan='2' style='text-align: center;'><input onclick='redirect(\"aboutme_edit_personal.php\")' id='btneditpersonal' type='button' name='btneditpersonal' value='Edit Details'></td></tr>
-                    </table>
-                    </div>
-                ";
-                // COL-LEFT ENDS HERE
-
-                // COL-RIGHT STARTS HERE
-
-                // ACTIVITIES table
-                echo "
-                    <div class='col-right'>
-                        <table id='tblactivities' width='100%'>
-                            <caption><h3>ACTIVITIES</h3></caption>
-                            <tr>
-                                <th>No.</th>
-                                <th>Session</th>
-                                <th>Name</th>
-                                <th>Level</th>
-                                <th>Remarks</th>
-                            </tr>
-                ";
-
-                $fetchActivitiesQuery = "SELECT * FROM activity WHERE student_id='".$matric."'";
-                $activitiesResult = mysqli_query($conn, $fetchActivitiesQuery);
-                if (mysqli_num_rows($activitiesResult) > 0) {
-                    // output the data of each row
-                    $row_index = 1;
-                    
-                    while($row = mysqli_fetch_assoc($activitiesResult)) {
-                        echo "
-                            <tr>
-                                <td>".$row_index."</td>
-                                <td>Sem ".$row["activity_sem"].", ".$row["activity_year"]."</td>
-                                <td>".$row["activity_name"]."</td>
-                                <td>LEVEL, UPDATE PHP LATER</td>
-                                <td>".$row["activity_remarks"]."</td>
-                            </tr>
-                        ";
-                        $row_index++;
-                    }
-                    echo "</table>";
-                }
-                else {
-                    // if the query returns no rows
-                    echo "
-                        <tr>
-                            <td colspan='5'>No activites have been added yet.</td>
-                        </tr>
-                        </table>
-                    ";
-                }
-
-                // COMPETITIONS table
-                echo "
-                    <table id='tblcompetitions' width='100%'>
-                        <caption><h3>COMPETITIONS</h3></caption>
-                        <tr>
-                            <th>No.</th>
-                            <th>Session</th>
-                            <th>Name</th>
-                            <th>Level</th>
-                            <th>Remarks</th>
-                        </tr>
-                ";
-
-                $fetchCompetitionsQuery = "SELECT * FROM competition WHERE student_id='".$matric."'";
-                $competitionsResult = mysqli_query($conn, $fetchCompetitionsQuery);
-                if (mysqli_num_rows($competitionsResult) > 0) {
-                    // output the data of each row
-                    $row_index = 1;
-
-                    while ($row = mysqli_fetch_assoc($activitiesResult)) {
-                        echo "
-                            <tr>
-                                <td>".$row_index."</td>
-                                <td>Sem ".$row["comp_sem"].", ".$row["comp_year"]."</td>
-                                <td>".$row["comp_name"]."</td>
-                                <td>LEVEL, UPDATE PHP LATER</td>
-                                <td>".$row["comp_remarks"]."</td>
-                            </tr>
-                        ";
-                        echo "</table>";
-                        $row_index++;
-                    }
-                    echo "</table>";
-                }
-                else {
-                    // if the query returns no rows
-                    echo "
-                        <tr>
-                            <td colspan='5'>No competitions have been added yet.</td>
-                        </tr>
-                        </table>
-                    ";
-                }
-
-                // CERTIFICATIONS table
-
-                echo "
-                    <table id='tblcertifications' width='100%'>
-                        <caption><h3>CERTIFICATIONS</h3></caption>
-                        <tr>
-                            <th>No.</th>
-                            <th>Name</th>
-                            <th>Issuer</th>
-                            <th>Description</th>
-                            <th>Award Date</th>
-                        </tr>
-                ";
-
-                $fetchCertificationsQuery = "SELECT * FROM certification WHERE student_id='".$matric."'";
-                $certificationsResult = mysqli_query($conn, $fetchCertificationsQuery);
-                if (mysqli_num_rows($certificationsResult) > 0) {
-                    // output the data of each row
-                    $row_index = 1;
-
-                    while ($row = mysqli_fetch_assoc($certificationsResult)) {
-                        echo "
-                            <tr>
-                                <td>".$row_index."</td>
-                                <td>".$row["cert_name"]."</td>
-                                <td>".$row["cert_issuer"]."</td>
-                                <td>".$row["cert_description"]."</td>
-                                <td>".$row["cert_awarddate"]."</td>
-                            </tr>
-                        ";
-                        $row_index++;
-                    }
-                    echo "</table>";
-                }
-                else {
-                    // if the query returns no rows
-                    echo "
-                        <tr>
-                            <td colspan='5'>No certifications have been added yet.</td>
-                        </tr>
-                        </table>
-                    ";
-                }
+                // variables for the fetch data
+                $username = $row["username"];
+                $program = $row["program"];
+                $intakeBatch = $row["intakeBatch"];
+                $phoneNumber = $row["phoneNumber"];
+                $mentor = $row["mentor"];
+                $profileState = $row["profileState"];
+                $profileAddress = $row["profileAddress"];
+                $motto = $row["motto"];
+                $profileImagePath = $row["profileImagePath"];
 
                 mysqli_close($conn);
-
-                echo "
-                    </div>
-                    </div>
-                    <footer>
-                        <h5>© Chiew Cheng Yi | BI21110236 | KK34703 Individual Project</h5>
-                    </footer>
-                ";
-
-
-                // COL-RIGHT ENDS HERE
             }
             else {
-                echo "
-                    <center>
-                        <h3>You must be logged in to use this feature.</h3>
-                        <input onclick='redirect(\"login.php\");' id='btngeneric' type='button' value='Login now'>
-                        <br><br>
-                    </center>
-                <footer style='position: fixed; bottom: 0;'>
-                    <h5>© Chiew Cheng Yi | BI21110236 | KK34703 Individual Project</h5>
-                </footer>
-                ";
+                echo "ERROR: ".mysqli_error($conn);
             }
         ?>
+        <div class="row">
+            <div class="col-left">
+                <table id="tblprofile" width="100%">
+                    <tr>
+                        <td colspan=2 style="text-align: center; padding-top: 10px"><img src=<?=$profileImagePath;?> style="width: 40%"></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-right">
+                <?php  
+                    // this block is to determine what to output for Program
+                    $programOutput = '';
+                    switch($program) {
+                        case "hc00": $programOutput = "UH6481001 Software Engineering"; break;
+                        case "hc05": $programOutput = "UH6481002 Network Engineering"; break;
+                        case "hc12": $programOutput = "UH6481003 Multimedia Technology"; break;
+                        case "hc13": $programOutput = "UH6481004 Business Computing"; break;
+                        case "hc14": $programOutput = "UH6481005 Data Science"; break;
+                        default: $programOutput = "";
+                    }
+                ?>
+                <table id='tblprofile' width="100%">
+                        <tr>
+                            <td>Name</td>
+                            <td><?php echo ($username != '') ? $username : "Not filled yet"; ?></td>
+                            <?php // NOTE THAT I STOPPED HERE!!! (15/12/2023, 2:05pm) ?>
+                        </tr>
+                        <tr>
+                            <td>Matric Number</td>
+                            <td><?=$matricNumber;?></td>
+                        </tr>
+                        <tr>
+                            <td>Program</td>
+                            <td><?=$programOutput;?></td>
+                        </tr>
+                        <tr>
+                            <td>Email</td>
+                            <td><?=$accountEmail;?></td>
+                        </tr>
+                        <tr>
+                            <td>Intake Batch</td>
+                            <td><?=$intakeBatch;?></td>
+                        </tr>
+                        <tr>
+                            <td>Phone Number</td>
+                            <td><?=$phoneNumber;?></td>
+                        </tr>
+                        <tr>
+                            <td>Mentor</td>
+                            <td><?=$mentor;?></td>
+                        </tr>
+                        <tr>
+                            <td>State of Origin</td>
+                            <td><?=$profileState;?></td>
+                        </tr>
+                        <tr>
+                            <td>Address</td>
+                            <td><?=$profileAddress;?></td>
+                        </tr>
+                        <tr>
+                            <td>Motto</td>
+                            <td><?=$motto;?></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="text-align: center;"><input onClick="redirect('aboutme_edit_personal.php')" id="btneditpersonal" type="button" name="btneditpersonal" value="Edit Details"></td>
+                        </tr>
+                </table>
+            </div>
+        </div>
+        <footer>
+            <h5>© Chiew Cheng Yi | BI21110236 | KK34703 Individual Project</h5>
+        </footer>
     </main>
 </body>
 

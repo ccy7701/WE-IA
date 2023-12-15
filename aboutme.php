@@ -138,7 +138,6 @@
                         <tr>
                             <td>Name</td>
                             <td><?php echo ($username != '') ? $username : "Not filled yet"; ?></td>
-                            <?php // NOTE THAT I STOPPED HERE!!! (15/12/2023, 2:05pm) ?>
                         </tr>
                         <tr>
                             <td>Matric Number</td>
@@ -146,7 +145,7 @@
                         </tr>
                         <tr>
                             <td>Program</td>
-                            <td><?=$programOutput;?></td>
+                            <td><?php echo ($programOutput != '') ? $programOutput : "Not filled yet"; ?></td>
                         </tr>
                         <tr>
                             <td>Email</td>
@@ -154,27 +153,27 @@
                         </tr>
                         <tr>
                             <td>Intake Batch</td>
-                            <td><?=$intakeBatch;?></td>
+                            <td><?php echo ($intakeBatch != 0) ? $intakeBatch : "Not filled yet"; ?></td>
                         </tr>
                         <tr>
                             <td>Phone Number</td>
-                            <td><?=$phoneNumber;?></td>
+                            <td><?php echo ($phoneNumber != '') ? $phoneNumber : "Not filled yet"; ?></td>
                         </tr>
                         <tr>
                             <td>Mentor</td>
-                            <td><?=$mentor;?></td>
+                            <td><?php echo ($mentor != '') ? $mentor : "Not filled yet"; ?></td>
                         </tr>
                         <tr>
                             <td>State of Origin</td>
-                            <td><?=$profileState;?></td>
+                            <td><?php echo ($profileState != '') ? $profileState : "Not filled yet"; ?></td>
                         </tr>
                         <tr>
                             <td>Address</td>
-                            <td><?=$profileAddress;?></td>
+                            <td><?php echo ($profileAddress != '') ? $profileAddress : "Not filled yet"; ?></td>
                         </tr>
                         <tr>
                             <td>Motto</td>
-                            <td><?=$motto;?></td>
+                            <td><?php echo ($motto != '') ? $motto : "Not filled yet"; ?></td>
                         </tr>
                         <tr>
                             <td colspan="2" style="text-align: center;"><input onClick="redirect('aboutme_edit_personal.php')" id="btneditpersonal" type="button" name="btneditpersonal" value="Edit Details"></td>
@@ -182,7 +181,7 @@
                 </table>
             </div>
         </div>
-        <footer>
+        <footer style="position: fixed; bottom: 0;">
             <h5>© Chiew Cheng Yi | BI21110236 | KK34703 Individual Project</h5>
         </footer>
     </main>

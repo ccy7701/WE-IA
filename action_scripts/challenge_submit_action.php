@@ -21,25 +21,105 @@
     <?php
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $target = $_SESSION["UID"];
-            $challenge_year_sem = mysqli_real_escape_string($conn, $_POST["yearsem"]);
-            $challenge_dateofrecord = mysqli_real_escape_string($conn, $_POST["recorddate"]);
-            $challenge_details = mysqli_real_escape_string($conn, $_POST["challengedetails"]);
-            $challenge_futureplan = mysqli_real_escape_string($conn, $_POST["futureplan"]);
-            $challenge_remark = mysqli_real_escape_string($conn, $_POST["remarks"]);
+            $challengeSem = mysqli_real_escape_string($conn, $_POST["challengeSem"]);
+            $challengeYear = mysqli_real_escape_string($conn, $_POST["challengeYear"]);
+            $challengeDetails = mysqli_real_escape_string($conn, $_POST["challengeDetails"]);
+            $challengeFuturePlan = mysqli_real_escape_string($conn, $_POST["challengeFuturePlan"]);
+            $challengeRemark = mysqli_real_escape_string($conn, $_POST["challengeRemark"]);
+        }
 
-            $pushToDBQuery = "INSERT INTO challenge_and_plan (challenge_year_sem, challenge_details, challenge_futureplan,
-            challenge_remark, challenge_dateofrecord, student_id) VALUES
-            ('$challenge_year_sem', '$challenge_details', '$challenge_futureplan', '$challenge_remark', '$challenge_dateofrecord', '$target');";
+        // for image upload
+        $challengeImageUploadFlag = 0;
 
-            if (mysqli_query($conn, $pushToDBQuery)) {  // if the connection to the DB is successful
+        // IF THERE IS NO ATTACHED IMAGE
+        if (isset($_FILES["challengeImageToUpload"]) && $_FILES["challengeImageToUpload"]["name"] == "") {
+            $pushToDBuery = "INSERT INTO challenge (challengeSem, challengeYear, challengeDetails, challengeFuturePlan, challengeRemark, accountID)
+            VALUES ('$challengeSem', '$challengeYear', '$challengeDetails', '$challengeFuturePlan', '$challengeRemark', '$target');
+            ";
+
+            if (mysqli_query($conn, $pushToDBQuery)) { // if the connection to the DB and the query is successful
                 echo "
                     <script>
                         popup(\"New challenge record added successfully.\", \"../challenges.php\");
                     </script>
                 ";
             }
+            else {
+                echo "
+                    <script>
+                        popup(\"Oops. Something went wrong.\", \"../challenges.php\");
+                    </script>
+                ";
+            }
 
             mysqli_close($conn);
+        }
+        else if (isset($_FILES["challengeImageToUpload"]) && $_FILES["challengeImageToUpload"]["error"] == UPLOAD_ERROR_OK) {
+            // rationale: it may be possible that a user has several challenges that share a common image file
+            // in that case fetching the challengeID would help differentiate between the images
+            // the flow would go: (1) push the text data (2) fetch the row for this text data (3) upload the image
+            $pushToDBQuery = "INSERT INTO challenge (challengeSem, challengeYear, challengeDetails, challengeFuturePlan, challengeRemark, accountID)
+            VALUES('$challengeSem', '$challengeYear', '$challengeDetails', '$challengeFuturePlan', '$challengeRemark', '$target');
+            ";
+
+            // MORE MODIFICATION IS NEEDED HERE
+            if (mysqli_query($conn, $pushToDBQuery)) {  // if the connection to the DB and the query is successful
+                $challengeImageUploadFlag = 1;
+                $targetDirectory = "uploads/challenges/";
+                $targetFile = '';
+                $filetmp = $_FILES["challengeImageToUpload"];
+                $challengeImageFileName = $filetmp["name"];
+    
+                $targetFile = "../".$targetDirectory.$target."_".basename($_FILES["challengeImageToUpload"]["name"]);
+                $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+
+                // check: if file already exists
+                if (file_exists($targetFile)) {
+                    echo "
+                        <script>
+                            popup(\"ERROR-1: File already exists.\", \"..\challenges.php\");
+                        </script>
+                    ";
+                    $challengeImageUploadFlag = 0;
+                }
+                // check: if file size <= 2MiB or 2097152 bytes
+                if ($_FILES["challengeImageToUpload"]["size"] > 2097152) {
+                    echo "
+                        <script>
+                            popup(\"ERROR-2: File size exceeds allowed limit.\", \"../challenges.php\");
+                        </script>
+                    ";
+                    $challengeImageUploadFlag = 0;
+                }
+                // check: if file follows file format constraints
+                if ($imageFileType != "jpg" && $imageFileType != "jpeg" && $imageFileType != "png") {
+                    echo "
+                        <script>
+                            popup(\"ERROR-3: File does not follow file type constraints.\", \"../challenges.php\");
+                        </script>
+                    ";
+                    $challengeImageUploadFlag = 0;
+                }
+
+                if ($challengeImageUploadFlag) {
+                    // push the image path to the DB
+                    $imgName = $target."_".$challengeImageFileName;
+                    $fullPath = $targetDirectory.$imgName;
+                    $pushToDBQuery = "
+                        UPDATE challenge
+                        SET challengeImagePath = '$fullPath'
+                        WHERE accountID = '$target';
+                    ";
+                    // LAST STOP HERE: 16/12/2023, 1:58PM!!!!!
+                }
+            }
+            else {
+                echo "
+                    <script>
+                        popup(\"Oops. Something went wrong.\", \"../challenges.php\");
+                    </script>
+                ";
+            }
         }
     ?>
 </body>

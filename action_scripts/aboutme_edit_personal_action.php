@@ -26,7 +26,6 @@
             $newProfileState = mysqli_real_escape_string($conn, $_POST["profileState"]);
             $newProfileAddress = mysqli_real_escape_string($conn, $_POST["profileAddress"]);
             $newMotto = mysqli_real_escape_string($conn, $_POST["motto"]);
-            // $newPfpToUpload = mysqli_real_escape_string.....
 
             // for image upload
             $pfpUploadFlag = 0;
@@ -69,7 +68,7 @@
                 $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
 
                 // check: if file already exists
-                if (file_exists($target_file)) {
+                if (file_exists($targetFile)) {
                     echo "
                         <script>
                             popup(\"ERROR-1: File already exists.\", \"..\aboutme_edit_personal.php\");

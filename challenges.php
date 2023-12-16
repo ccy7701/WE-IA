@@ -255,7 +255,7 @@
                 <textarea name="challengeRemark" row="5" columns="50" required></textarea><br>
 
                 <p>Upload challenge image here:</p>
-                <input type="file" name="challengeImgToUpload" accept=".jpg, .jpeg, .png" style="width: 100%; display: block;"><br><br>
+                <input type="file" name="challengeImageToUpload" accept=".jpg, .jpeg, .png" style="width: 100%; display: block;"><br><br>
 
                 <center>
                     <input id="btnchallenge" name="btnsubmit" type="submit" value="Submit">

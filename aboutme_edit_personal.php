@@ -172,6 +172,7 @@
                 <center>
                     <input id="btnedit" name="editsubmit" type="submit" value="EDIT">
                     <input id="btnedit" name="editreset" type="reset" value="RESET">
+                    <input id="btnedit" name="editcancel" type="button" onClick="redirect('aboutme.php')" value="CANCEL">
                 </center>
             </form>
         </div>

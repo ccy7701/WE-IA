@@ -46,6 +46,14 @@
             background-color: #333333;
             color: white;
         }
+        #editChallengeRecord textarea {
+            height: 100px;
+            width: 100%;
+            font-family: Jost, monospace;
+            resize: none;
+            display: block;
+            font-size: 18px;
+        }
         @media screen and (max-width: 600px) {
             #editChallengeRecord-container {
                 padding-left: 10%;
@@ -65,9 +73,7 @@
         <a href="kpimodule.php" class="tabs">MyKPI Indicator Module</a>
         <a href="activitieslist.php" class="tabs">Activities List</a>
         <a href="challenges.php" class="active">Challenges and Future Plans</a>
-        <?php
-            include("include/session_check.php");
-        ?>
+        <a href="logout.php" class="tabs">Logout</a>
         <a href="javascript:void(0);" class="icon" onClick="adjustTopnav()"><i class="fa fa-bars"></i></a>
     </nav>
     <main>
@@ -75,62 +81,63 @@
         <?php
             if (isset($_GET["id"]) && $_GET["id"] != "") {
                 $id = $_GET["id"];
-                $fetchRecordQuery = "SELECT * FROM challenge_and_plan WHERE challenge_index=".$id;
+                $fetchRecordQuery = "SELECT * FROM challenge WHERE challengeID=".$id;
                 $result = mysqli_query($conn, $fetchRecordQuery);
                 $row = mysqli_fetch_assoc($result);
 
                 // fetch the data to populate the form
-                $challenge_index = $row["challenge_index"];
-                $challenge_year_sem = $row["challenge_year_sem"];
-                $challenge_details = $row["challenge_details"];
-                $challenge_futureplan = $row["challenge_futureplan"];
-                $challenge_remark = $row["challenge_remark"];
-                $challenge_dateofrecord = $row["challenge_dateofrecord"];
+                $challengeID = $row["challengeID"];
+                $challengeSem = $row["challengeSem"];
+                $challengeYear = $row["challengeYear"];
+                $challengeDetails = $row["challengeDetails"];
+                $challengeFuturePlan = $row["challengeFuturePlan"];
+                $challengeRemark = $row["challengeRemark"];
 
                 mysqli_close($conn);
             }
         ?>
         <div id="editChallengeRecord-container">
             <form id="editChallengeRecord" action="action_scripts/challenge_edit_action.php" method="POST" enctype="multipart/form-data">
-                <?php
-                    echo "
-                        <input name='challenge_index' type='text' value='challenge_index' hidden>
+                <input name="challengeID" type="text" value="challengeID" hidden>
 
-                        <label for='challenge_sem_year'>Session (*)</label>
-                        <select id='select' name='challenge_year_sem' required>
-                            <option value='$challenge_year_sem'>Currently selected: ".$challenge_year_sem."</option>
-                            <option value='Year 1 Sem 1'>Year 1 Sem 1</option>
-                            <option value='Year 1 Sem 2'>Year 1 Sem 2</option>
-                            <option value='Year 2 Sem 1'>Year 2 Sem 1</option>
-                            <option value='Year 2 Sem 2'>Year 2 Sem 2</option>
-                            <option value='Year 3 Sem 1'>Year 3 Sem 1</option>
-                            <option value='Year 3 Sem 2'>Year 3 Sem 2</option>
-                            <option value='Year 4 Sem 1'>Year 4 Sem 1</option>
-                            <option value='Year 4 Sem 2'>Year 4 Sem 2</option>
-                        </select><br>
+                <label for="challengeSem">Semester</label>
+                <select id="select" name="challengeSemester">
+                    <option value="<?=$challengeSem;?>">Currently selected: <?=$challengeSem;?></option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                </select><br>
 
-                        <label for='challenge_details'>Challenge Details (*)</label>
-                        <input id='editfield' name='challenge_details' type='text' value='$challenge_details' required><br>
+                <label for="challengeYear">Year</label>
+                <select id="select" name="challengeYear">
+                    <option value="<?=$challengeYear;?>">Currently selected: <?=$challengeYear;?></option>
+                    <option value="2021/2022">2021/2022</option>
+                    <option value="2022/2023">2022/2023</option>
+                    <option value="2023/2024">2023/2024</option>
+                    <option value="2024/2025">2024/2025</option>
+                </select><br>
 
-                        <label for='challenge_futureplan'>Future Plan (*)</label>
-                        <input id='editfield' name='challenge_futureplan' type='text' value='$challenge_futureplan' required><br>
+                <label for="challengeDetails">Challenge Details</label>
+                <textarea name="challengeDetails" rows="5" columns="50"><?=$challengeDetails;?></textarea><br>
 
-                        <label for='challenge_remark'>Remarks</label>
-                        <input id='editfield' name='challenge_remark' type='text' value='$challenge_remark'><br>
+                <label for="challengeFuturePlan">Future Plan</label>
+                <textarea name="challengeFuturePlan" rows="5" columns="50"><?=$challengeFuturePlan;?></textarea><br>
 
-                        <label for='challenge_dateofrecord'>Date of Record (*)</label>
-                        <input id='recorddate' name='challenge_dateofrecord' type='date' value='$challenge_dateofrecord' required><br>
+                <label for="challengeRemark">Remarks</label>
+                <textarea name="challengeRemark" rows="5" columns="50"><?=$challengeRemark;?></textarea><br>
+            
+                <p>Upload new challenge image here:</p>
+                <input id="challengeImageToUpload" type="file" name="challengeImageToUpload" accept=".jpg, .jpeg, .png"><br><br>
 
-                        <center>
-                            <input id='btneditchallenge' name='btnsubmit' type='submit' value='Edit'>
-                            <input id='btneditchallenge' name='btnreset' type='reset'value='Reset'><br><br>
-                        </center>
-                    ";
-                ?>
+                <center>
+                    <input id="btneditchallenge" name="btnsubmit" type="submit" value="EDIT">
+                    <input id="btneditchallenge" name="btnreset" type="reset" value="RESET">
+                    <input id="btneditchallenge" name="btncancel" type="button" onClick="redirect('challenges.php');" value="CANCEL">
+                    <br><br>
+                </center>
             </form>
         </div>
     </main>
-    <footer style="position: fixed; bottom: 0">
+    <footer>
         <h5>© Chiew Cheng Yi | BI21110236 | KK34703 Individual Project</h5>
     </footer>
 </body>

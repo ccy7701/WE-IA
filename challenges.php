@@ -136,6 +136,10 @@
         background-color: #333333;
         color: white;
     }
+    #searchBar {
+        text-align: right;
+        font-family: Jost, monospace;
+    }
     @media screen and (max-width: 600px) {
         #challengeForm-container {
             padding-left: 10%;
@@ -165,6 +169,7 @@
         <a href="javascript:void(0);" class="icon" onClick="adjustTopnav()"><i class="fa fa-bars"></i></a>
     </nav>
     <main>
+        <br>
         <?php
             if (isset($_SESSION["UID"])) {
                 $accountID = $_SESSION["UID"];
@@ -174,6 +179,11 @@
         ?>
         <br>
         <div id="challengesTable-container">
+            <form id="searchBar" action="challenges_search.php" method="POST">
+                <input type="text" placeholder="Search..." name="search" style="font-family: Jost, monospace;">
+                <input type="submit" value="Search" style="font-family: Jost, monospace;">
+            </form>
+            <br>
             <table id="challengesTable" width="100%">
                 <?php
                     if (mysqli_num_rows($challengesResult) > 0) {

@@ -116,11 +116,7 @@
         ?>
         <div class="row">
             <div class="col-left">
-                <table id="tblprofile" width="100%">
-                    <tr>
-                        <td colspan=2 style="text-align: center; padding-top: 10px"><img src=<?=$profileImagePath;?> style="width: 40%"></td>
-                    </tr>
-                </table>
+                <img src="<?=$profileImagePath;?>" style="width: 50%;"></image>
             </div>
             <div class="col-right">
                 <?php  

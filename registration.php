@@ -32,7 +32,7 @@
                 <input id="fieldreg" name="matricNumber" type="text" required><br>
 
                 <label for="accountEmail">E-mail Address(*)</label><br>
-                <input id="fieldreg" name="accountEmail" type="text" required><br>
+                <input id="fieldreg" name="accountEmail" type="email" required><br>
 
                 <label for="accountPassword">Password (*)</label><br>
                 <input id="fieldreg" name="accountPassword" type="password" required><br>

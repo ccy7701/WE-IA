@@ -118,13 +118,13 @@ footer {
 .col-left {
     text-align: center; /* center the image horizontally */
     padding: 15px;
-    width: 40%;
+    width: 30%;
 }
 
 .col-right {
     flex: 2;
     padding: 15px;
-    width: 60%;
+    width: 70%;
 }
 
 #btneditpersonal {

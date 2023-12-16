@@ -105,13 +105,13 @@
                 ?>
 
                 <label for="matricNumber">Matric Number</label><br>
-                <input id="editfield" name="matricNumber" type="text" value=<?=$matricNumber;?> disabled><br>
+                <input id="editfield" name="matricNumber" type="text" value="<?=$matricNumber;?>" disabled><br>
 
                 <label for="accountEmail">Email</label><br>
-                <input id="editfield" name="accountEmail" type="text" value=<?=$accountEmail;?> disabled><br>
+                <input id="editfield" name="accountEmail" type="text" value="<?=$accountEmail;?>" disabled><br>
 
                 <label for="username">Username</label><br>
-                <input id="editfield" name="username" type="text" value=<?=$username;?>><br>
+                <input id="editfield" name="username" type="text" value="<?=$username;?>"><br>
 
                 <label for="program">Program</label><br>
                 <select id="select" name="program">
@@ -127,10 +127,10 @@
                 <input id="editfield" name="intakeBatch" type="text" value=<?php echo ($intakeBatch != 0) ? $intakeBatch : ""; ?>><br>
 
                 <label for="phoneNumber">Phone Number</label><br>
-                <input id="editfield" name="phoneNumber" type="text" value=<?=$phoneNumber;?>><br>
+                <input id="editfield" name="phoneNumber" type="text" value="<?=$phoneNumber;?>"><br>
 
                 <label for="mentor">Mentor</label><br>
-                <input id="editfield" name="mentor" type="text" value=<?=$mentor;?>><br>
+                <input id="editfield" name="mentor" type="text" value="<?=$mentor;?>"><br>
 
                 <label for="profileState">State</label><br>
                 <select id="select" name="profileState">
@@ -161,10 +161,10 @@
                 </select><br>
 
                 <label for="profileAddress">Address</label>
-                <input id="editfield" name="profileAddress" type="text" value=<?=$profileAddress?>><br>
+                <input id="editfield" name="profileAddress" type="text" value="<?=$profileAddress?>"><br>
 
                 <label for="motto">Motto</label>
-                <input id="editfield" name="motto" type="text" value=<?=$motto?>><br>
+                <input id="editfield" name="motto" type="text" value="<?=$motto?>"><br>
 
                 <p>Upload new profile image here:</p>
                 <input id="pfptoupload" type="file" name="pfpToUpload" accept=".jpg, .jpeg, .png"><br><br>

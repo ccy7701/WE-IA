@@ -23,7 +23,7 @@
         $loginMatric = $_POST["loginmatric"];
         $loginPassword = $_POST["loginpassword"];
 
-        $loginQuery = "SELECT * FROM student_profile WHERE student_id='$loginMatric' LIMIT 1;";
+        $loginQuery = "SELECT * FROM account WHERE matricNumber='$loginMatric' LIMIT 1;";
         $result = mysqli_query($conn, $loginQuery);
 
         if (mysqli_num_rows($result) == 1) {    // a row with the same data is found
@@ -31,15 +31,15 @@
             $row = mysqli_fetch_assoc($result);
 
             // verify matching passwords
-            if (password_verify($_POST["loginpassword"], $row["student_password"])) {
+            // why not (password_verify($loginPassword, $row["accountPwd"])) {}?
+            if (password_verify($_POST["loginpassword"], $row["accountPwd"])) {
                 echo "Login was successful.";
-                // bind the current session to student_id
-                $_SESSION["UID"] = $row["student_id"];
-                $_SESSION["student_name"] = $row["student_name"];
+                // bind the current session to 
+                $_SESSION["UID"] = $row["accountID"];
+                $_SESSION["userName"] = $row["matricNumber"];
                 // set log-in time
-                $_SESSION["login_time"] = time();
-                
-                header("location: ../index.php");
+                $_SESSION["loginTime"] = time();
+                header("location: ../aboutme.php");
             }
             else {
                 echo "
@@ -56,7 +56,6 @@
                 </script>
             ";
         }
-
         mysqli_close($conn);
     ?>
 </body>

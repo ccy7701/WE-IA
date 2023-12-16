@@ -61,7 +61,6 @@
                 VALUES('$challengeSem', '$challengeYear', '$challengeDetails', '$challengeFuturePlan', '$challengeRemark', '$target');
                 ";
 
-                // MORE MODIFICATION IS NEEDED HERE
                 if (mysqli_query($conn, $pushToDBQuery)) {  // if the connection to the DB and the query is successful
                     // retrieve the last automatically generated challengeID
                     $lastInsertedID = mysqli_insert_id($conn);

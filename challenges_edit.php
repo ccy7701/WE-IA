@@ -98,10 +98,10 @@
         ?>
         <div id="editChallengeRecord-container">
             <form id="editChallengeRecord" action="action_scripts/challenge_edit_action.php" method="POST" enctype="multipart/form-data">
-                <input name="challengeID" type="text" value="challengeID" hidden>
+                <input name="challengeID" type="text" value="<?=$challengeID;?>" hidden>
 
                 <label for="challengeSem">Semester</label>
-                <select id="select" name="challengeSemester">
+                <select id="select" name="challengeSem">
                     <option value="<?=$challengeSem;?>">Currently selected: <?=$challengeSem;?></option>
                     <option value="1">1</option>
                     <option value="2">2</option>

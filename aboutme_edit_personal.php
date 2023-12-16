@@ -135,59 +135,47 @@
                 <label for="profileState">State</label><br>
                 <select id="select" name="profileState">
                     <option value="<?=$profileState;?>" selected>Current: <?php echo ($profileState != '') ? $profileState : "Not filled yet"; ?></option>
-                    <? // LAST STOP HERE!!!! 15/12/2023 6:00PM on the clock! ?>
-                </select>
-            </form>
-        </div>
-        <div id="editPersonalInfo-container">
-            <form id="editPersonalInfo" action="action_scripts/aboutme_edit_personal_action.php" method="POST" enctype="multipart/form-data">
-                <?php
-                    echo "
-                        <label for='student_state'>State (*)</label>
-                        <select id='select' name='student_state' required>
-                            <option value='$student_state'>Currently selected: ".$student_state."</option>
-                            <optgroup label='States'>
-                                <option value='Johor'>Johor</option>
-                                <option value='Kedah'>Kedah</option>
-                                <option value='Kelantan'>Kelantan</option>
-                                <option value='Malacca'>Malacca</option>
-                                <option value='Negeri Sembilan'>Negeri Sembilan</option>
-                                <option value='Pahang'>Pahang</option>
-                                <option value='Penang'>Penang</option>
-                                <option value='Perak'>Perak</option>
-                                <option value='Perlis'>Perlis</option>
-                                <option value='Sabah'>Sabah</option>
-                                <option value='Sarawak'>Sarawak</option>
-                                <option value='Selangor'>Selangor</option>
-                                <option value='Terengganu'>Terengganu</option>
-                            </optgroup>
-                            <optgroup label='Federal Territories'>
-                                <option value='Kuala Lumpur'>Kuala Lumpur</option>
-                                <option value='Labuan'>Labuan</option>
-                                <option value='Putrajaya'>Putrajaya</option>
-                            </optgroup>
-                            <optgroup label='Others'>
-                                <option value='Overseas'>Overseas</option>
-                            </optgroup>
-                        </select><br>
+                    <optgroup label="States">
+                        <option value="Johor">Johor</option>
+                        <option value="Kedah">Kedah</option>
+                        <option value="Kelantan">Kelantan</option>
+                        <option value="Malacca">Malacca</option>
+                        <option value="Negeri Sembilan">Negeri Sembilan</option>
+                        <option value="Pahang">Pahang</option>
+                        <option value="Penang">Penang</option>
+                        <option value="Perak">Perak</option>
+                        <option value="Perlis">Perlis</option>
+                        <option value="Sabah">Sabah</option>
+                        <option value="Sarawak">Sarawak</option>
+                        <option value="Selangor">Selangor</option>
+                        <option value="Terengganu">Terengganu</option>
+                    </optgroup>
+                    <optgroup label="Federal Territories">
+                        <option value="Kuala Lumpur">Kuala Lumpur</option>
+                        <option value="Labuan">Labuan</option>
+                        <option value="Putrajaya">Putrajaya</option>
+                    </optgroup>
+                    <optgroup label="Others">
+                        <option value="Overseas">Overseas</option>
+                    </optgroup>
+                </select><br>
 
-                        <label for='student_address'>Address (*)</label>
-                        <input id='editfield' name='student_address' type='text' value='$student_address' required><br>
+                <label for="profileAddress">Address</label>
+                <input id="editfield" name="profileAddress" type="text" value=<?=$profileAddress?>><br>
 
-                        <label for='student_motto'>Your Motto</label>
-                        <input id='editfield' name='student_motto' type='text' value='$student_motto'><br>
+                <label for="motto">Motto</label>
+                <input id="editfield" name="motto" type="text" value=<?=$motto?>><br>
 
-                        <p>Upload new profile image here:<p>
-                        <input id='pfpToUpload' type='file' name='pfpToUpload' accept='.jpg, .jpeg, .png'><br>
-                    ";
-                ?>
+                <p>Upload new profile image here:</p>
+                <input id="pfptoupload" type="file" name="pfpToUpload" accept=".jpg, .jpeg, .png"><br><br>
+
                 <center>
                     <input id="btnedit" name="editsubmit" type="submit" value="EDIT">
                     <input id="btnedit" name="editreset" type="reset" value="RESET">
                 </center>
             </form>
-            <br>
         </div>
+        <br>
     </main>
     <footer>
         <h5>© Chiew Cheng Yi | BI21110236 | KK34703 Individual Project</h5>

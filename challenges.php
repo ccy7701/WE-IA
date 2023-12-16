@@ -1,4 +1,10 @@
 <?php
+    // NEW ADDITIONS TO CHALLENGES:
+    // 1. Search function
+    // 2. Photos column
+?>
+
+<?php
     session_start();
     include("include/config.php");
 ?>
@@ -150,131 +156,117 @@
         <a href="kpimodule.php" class="tabs">MyKPI Indicator Module</a>
         <a href="activitieslist.php" class="tabs">Activities List</a>
         <a href="challenges.php" class="active">Challenges and Future Plans</a>
-        <?php
-            include("include/session_check.php");
-        ?>
+        <a href="logout.php" class="tabs">Logout</a>
         <a href="javascript:void(0);" class="icon" onClick="adjustTopnav()"><i class="fa fa-bars"></i></a>
     </nav>
     <main>
         <?php
-            if(isset($_SESSION["UID"])) {
-                $matric = $_SESSION["UID"];
-                $fetchChallengesQuery = "SELECT * FROM challenge_and_plan WHERE student_id='".$matric."'";
+            if (isset($_SESSION["UID"])) {
+                $accountID = $_SESSION["UID"];
+                $fetchChallengesQuery = "SELECT * FROM challenge WHERE accountID='".$accountID."'";
                 $challengesResult = mysqli_query($conn, $fetchChallengesQuery);
-
-                echo "
-                <br>
-                <div id='challengesTable-container'>
-                    <table id='challengesTable' width='100%'>
-                ";
-
-                if (mysqli_num_rows($challengesResult) > 0) {
-                    echo "
-                    <tr>
-                        <th>No.</th>
-                        <th>Session</th>
-                        <th>Challenge Details</th>
-                        <th>Future Plan</th>
-                        <th>Remarks</th>
-                        <th>Date of Record</th>
-                        <th>&nbsp;</th>
-                    </tr>
-                    ";
-
-                    $row_index = 1;
-
-                    while ($row = mysqli_fetch_assoc($challengesResult)) {
-                        $edit_id = $row["challenge_index"];
-                        $remove_id = $row["challenge_index"];
-                        echo "
-                        <tr>
-                            <td>".$row_index."</td>
-                            <td>".$row["challenge_year_sem"]."</td>
-                            <td>".$row["challenge_details"]."</td>
-                            <td>".$row["challenge_futureplan"]."</td>
-                            <td>".$row["challenge_remark"]."</td>
-                            <td>".$row["challenge_dateofrecord"]."</td>
-                            <td style='text-align: center'>
-                                <a id='edit' title='Edit' href='challenges_edit.php?id=".$remove_id."'><i class='fa fa-pencil-square-o'></i></a>
-                                <a id='remove' title='Remove' onclick='confirmRemoval($remove_id)'><i class='fa fa-trash-o'></i></a>
-                            </td>
-                        </tr>
-                        ";
-                        $row_index++;
-                    }
-                }
-                else {  // if the query returns no rows
-                    echo "
-                        <tr>
-                            <th>No.</th>
-                            <th>Session</th>
-                            <th>Challenge Details</th>
-                            <th>Future Plan</th>
-                            <th>Remarks</th>
-                            <th>Date of Record</th>
-                        </tr>
-                        <tr>   
-                            <td colspan='6'>No challenges have been added yet.</td>
-                        </tr>
-                    ";
-                }
-
-                echo "</table>";
-                echo "</div>";
-
-                echo "
-                    <br>
-                    <div id='challengeForm-container'>
-                        <form id='challengeForm' action='action_scripts/challenge_submit_action.php' method='POST'>
-                            <p style='text-align: center'>Facing a new challenge? Fill the form below and record it here. <br> Required fields are marked (*)</p>
-                            <label for='yearsem'>Year/Sem (*): </label><br>
-                            <select id='yearsem' name='yearsem' required>
-                                <option value='' disabled selected>Select a Year/Sem...</option>
-                                <option value='Year 1 Sem 1'>Year 1 Sem 1</option>
-                                <option value='Year 1 Sem 2'>Year 1 Sem 2</option>
-                                <option value='Year 2 Sem 1'>Year 2 Sem 1</option>
-                                <option value='Year 2 Sem 2'>Year 2 Sem 2</option>
-                                <option value='Year 3 Sem 1'>Year 3 Sem 1</option>
-                                <option value='Year 3 Sem 2'>Year 3 Sem 2</option>
-                                <option value='Year 4 Sem 1'>Year 4 Sem 1</option>
-                                <option value='Year 4 Sem 2'>Year 4 Sem 2</option>
-                            </select><br>
-                            <label for='recorddate'>Date of record (*): </label><br>
-                            <input id='recorddate' name='recorddate' type='date' required><br>
-                            <label for='challengedetails'>Challenge (*): </label><br>
-                            <textarea name='challengedetails' rows='5' cols='50' required></textarea><br>
-                            <label for='futureplan'>Future plan (*): </label><br>
-                            <textarea name='futureplan' rows='5' cols='50' required></textarea><br>
-                            <label for='remarks'>Remarks: </label><br>
-                            <textarea name='remarks' rows='5' cols='50'></textarea><br><br>
-                            <center>
-                                <input id='btnchallenge' name='btnsubmit' type='submit' value='Submit'>
-                                <input id='btnchallenge' name='btnreset' type='reset' value='Reset'><br><br>
-                            </center>
-                        </form>
-                    </div>
-                ";
-
-                echo "
-                    <footer>
-                        <h5>© Chiew Cheng Yi | BI21110236 | KK34703 Individual Project</h5>
-                    </footer>
-                ";
-            }
-            else {
-                echo "
-                    <center>
-                        <h3>You must be logged in to use this feature.</h3>
-                        <input onclick='redirect(\"login.php\");' id='btngeneric' type='button' value='Login now'>
-                        <br><br>
-                    </center>
-                <footer style='position: fixed; bottom: 0;'>
-                    <h5>© Chiew Cheng Yi | BI21110236 | KK34703 Individual Project</h5>
-                </footer>
-                ";
             }
         ?>
+        <br>
+        <div id="challengesTable-container">
+            <table id="challengesTable" width="100%">
+                <?php
+                    if (mysqli_num_rows($challengesResult) > 0) {
+                        echo "
+                            <tr>
+                                <th>No.</th>
+                                <th>Session</th>
+                                <th>Challenge Details</th>
+                                <th>Future Plan</th>
+                                <th>Remarks</th>
+                                <th>Image<th>
+                                <th>&nbsp;</th>
+                            </tr>
+                        ";
+
+                        $rowIndex = 1;
+
+                        while ($row = mysqli_fetch_assoc($challengesResult)) {
+                            $editID = $row["challengeID"];
+                            $removeID = $row["challengeID"];
+
+                            echo "
+                                <tr>
+                                    <td>".$row_index."</td>
+                                    <td>".$row["challengeSem"]."."-".".$row["challengeYear"]."</td>
+                                    <td>".$row["challengeDetails"]."</td>
+                                    <td>".$row["challengeFuturePlan"]."</td>
+                                    <td>".$row["challengeRemark"]."</td>
+                                    <td>".$row["challengeImagePath"]."</td>
+                                    <td style='text-align: center'>
+                                        <a id='edit' title='Edit' href='challenges_edit.php?id=".$editID."'><i class='fa fa-pencil-square-o'></i></a>
+                                        <a id='remove' title='Remove' onclick='confirmRemoval($removeID)'><i class='fa fa-trash-o'></i></a>
+                                    </td>
+                                </tr>
+                            ";
+                            $rowIndex++;
+                        }
+                    }
+                    else {  // if the query returns no rows
+                        echo "
+                            <tr>
+                                <th>No.</th>
+                                <th>Session</th>
+                                <th>Challenge Details</th>
+                                <th>Future Plan</th>
+                                <th>Remarks</th>
+                                <th>Image</th>
+                            </tr>
+                            <tr>
+                                <td colspan='6'>No challenges have been added yet.</td>
+                            </tr>
+                        ";
+                    }
+                ?>
+            </table>
+        </div>
+        <br>
+        <div id="challengeForm-container">
+            <form id="challengeForm" action="action_scripts/challenge_submit_action.php" method="POST">
+                <p style="text-align: center">Facing a new challenge? Fill the form below and record it here. <br> Required fields are marked (*)</p>
+                
+                <label for="challengeSem">Semester (*)</label><br>
+                <select id="yearsem" name="challengeSem" required>
+                    <option value="" disabled selected>Select a Semester...</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                </select><br>
+
+                <label for="challengeYear">Year (*)</label><br>
+                <select id="yearsem" name="challengeYear" required>
+                    <option value="2021/2022">2021/2022</option>
+                    <option value="2022/2023">2022/2023</option>
+                    <option value="2023/2024">2023/2024</option>
+                    <option value="2024/2025">2024/2025</option>
+                </select><br>
+
+                <label for="challengeDetails">Challenge Details (*)</label><br>
+                <textarea name="challengeDetails" rows="5" columns="50" required></textarea><br>
+
+                <label for="challengeFuturePlan">Future Plan (*)</label><br>
+                <textarea name="challengeFuturePlan" row="5" columns="50" required></textarea><br>
+
+                <label for="challengeRemark">Remarks</label><br>
+                <textarea name="challengeRemark" row="5" columns="50" required></textarea><br>
+
+                <p>Upload challenge image here:</p>
+                <input type="file" name="challengeImgToUpload" accept=".jpg, .jpeg, .png" style="width: 100%; display: block;"><br><br>
+
+                <center>
+                    <input id="btnchallenge" name="btnsubmit" type="submit" value="Submit">
+                    <input id="btnchallenge" name="btnreset" type="reset" value="Reset"><br><br>
+                </center>
+            </form>
+        </div>
     </main>
+    <footer>
+        <h5>© Chiew Cheng Yi | BI21110236 | KK34703 Individual Project</h5>
+    </footer>
 </body>
 
 </html>

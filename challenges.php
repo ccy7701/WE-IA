@@ -192,8 +192,8 @@
 
                             echo "
                                 <tr>
-                                    <td>".$row_index."</td>
-                                    <td>".$row["challengeSem"]."."-".".$row["challengeYear"]."</td>
+                                    <td>".$rowIndex."</td>
+                                    <td>".$row["challengeSem"]." - ".$row["challengeYear"]."</td>
                                     <td>".$row["challengeDetails"]."</td>
                                     <td>".$row["challengeFuturePlan"]."</td>
                                     <td>".$row["challengeRemark"]."</td>
@@ -227,7 +227,7 @@
         </div>
         <br>
         <div id="challengeForm-container">
-            <form id="challengeForm" action="action_scripts/challenge_submit_action.php" method="POST">
+            <form id="challengeForm" action="action_scripts/challenge_submit_action.php" method="POST" enctype="multipart/form-data">
                 <p style="text-align: center">Facing a new challenge? Fill the form below and record it here. <br> Required fields are marked (*)</p>
                 
                 <label for="challengeSem">Semester (*)</label><br>
@@ -239,6 +239,7 @@
 
                 <label for="challengeYear">Year (*)</label><br>
                 <select id="yearsem" name="challengeYear" required>
+                    <option value="" disabled selected>Select a Year...</option>
                     <option value="2021/2022">2021/2022</option>
                     <option value="2022/2023">2022/2023</option>
                     <option value="2023/2024">2023/2024</option>
@@ -249,16 +250,16 @@
                 <textarea name="challengeDetails" rows="5" columns="50" required></textarea><br>
 
                 <label for="challengeFuturePlan">Future Plan (*)</label><br>
-                <textarea name="challengeFuturePlan" row="5" columns="50" required></textarea><br>
+                <textarea name="challengeFuturePlan" rows="5" columns="50" required></textarea><br>
 
                 <label for="challengeRemark">Remarks</label><br>
-                <textarea name="challengeRemark" row="5" columns="50" required></textarea><br>
+                <textarea name="challengeRemark" rows="5" columns="50" required></textarea><br>
 
                 <p>Upload challenge image here:</p>
                 <input type="file" name="challengeImageToUpload" accept=".jpg, .jpeg, .png" style="width: 100%; display: block;"><br><br>
 
                 <center>
-                    <input id="btnchallenge" name="btnsubmit" type="submit" value="Submit">
+                    <input id="btnchallenge" name="btnsubmit" type="submit" value="Add">
                     <input id="btnchallenge" name="btnreset" type="reset" value="Reset"><br><br>
                 </center>
             </form>

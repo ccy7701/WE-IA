@@ -26,101 +26,116 @@
             $challengeDetails = mysqli_real_escape_string($conn, $_POST["challengeDetails"]);
             $challengeFuturePlan = mysqli_real_escape_string($conn, $_POST["challengeFuturePlan"]);
             $challengeRemark = mysqli_real_escape_string($conn, $_POST["challengeRemark"]);
-        }
+        
+            // for image upload
+            $challengeImageUploadFlag = 0;
 
-        // for image upload
-        $challengeImageUploadFlag = 0;
+            // IF THERE IS NO ATTACHED IMAGE
+            if (isset($_FILES["challengeImageToUpload"]) && $_FILES["challengeImageToUpload"]["name"] == "") {
+                echo "Say something";
 
-        // IF THERE IS NO ATTACHED IMAGE
-        if (isset($_FILES["challengeImageToUpload"]) && $_FILES["challengeImageToUpload"]["name"] == "") {
-            $pushToDBuery = "INSERT INTO challenge (challengeSem, challengeYear, challengeDetails, challengeFuturePlan, challengeRemark, accountID)
-            VALUES ('$challengeSem', '$challengeYear', '$challengeDetails', '$challengeFuturePlan', '$challengeRemark', '$target');
-            ";
-
-            if (mysqli_query($conn, $pushToDBQuery)) { // if the connection to the DB and the query is successful
-                echo "
-                    <script>
-                        popup(\"New challenge record added successfully.\", \"../challenges.php\");
-                    </script>
+                $pushToDBQuery = "INSERT INTO challenge (challengeSem, challengeYear, challengeDetails, challengeFuturePlan, challengeRemark, challengeImagePath, accountID)
+                VALUES ('$challengeSem', '$challengeYear', '$challengeDetails', '$challengeFuturePlan', '$challengeRemark', '', '$target');
                 ";
-            }
-            else {
-                echo "
-                    <script>
-                        popup(\"Oops. Something went wrong.\", \"../challenges.php\");
-                    </script>
-                ";
-            }
 
-            mysqli_close($conn);
-        }
-        else if (isset($_FILES["challengeImageToUpload"]) && $_FILES["challengeImageToUpload"]["error"] == UPLOAD_ERROR_OK) {
-            // rationale: it may be possible that a user has several challenges that share a common image file
-            // in that case fetching the challengeID would help differentiate between the images
-            // the flow would go: (1) push the text data (2) fetch the row for this text data (3) upload the image
-            $pushToDBQuery = "INSERT INTO challenge (challengeSem, challengeYear, challengeDetails, challengeFuturePlan, challengeRemark, accountID)
-            VALUES('$challengeSem', '$challengeYear', '$challengeDetails', '$challengeFuturePlan', '$challengeRemark', '$target');
-            ";
-
-            // MORE MODIFICATION IS NEEDED HERE
-            if (mysqli_query($conn, $pushToDBQuery)) {  // if the connection to the DB and the query is successful
-                $challengeImageUploadFlag = 1;
-                $targetDirectory = "uploads/challenges/";
-                $targetFile = '';
-                $filetmp = $_FILES["challengeImageToUpload"];
-                $challengeImageFileName = $filetmp["name"];
-    
-                $targetFile = "../".$targetDirectory.$target."_".basename($_FILES["challengeImageToUpload"]["name"]);
-                $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
-
-                // check: if file already exists
-                if (file_exists($targetFile)) {
+                if (mysqli_query($conn, $pushToDBQuery)) { // if the connection to the DB and the query is successful
                     echo "
                         <script>
-                            popup(\"ERROR-1: File already exists.\", \"..\challenges.php\");
+                            popup(\"New challenge record added successfully.\", \"../challenges.php\");
                         </script>
                     ";
-                    $challengeImageUploadFlag = 0;
                 }
-                // check: if file size <= 2MiB or 2097152 bytes
-                if ($_FILES["challengeImageToUpload"]["size"] > 2097152) {
+                else {
                     echo "
                         <script>
-                            popup(\"ERROR-2: File size exceeds allowed limit.\", \"../challenges.php\");
+                            popup(\"Oops. Something went wrong.\", \"../challenges.php\");
                         </script>
                     ";
-                    $challengeImageUploadFlag = 0;
-                }
-                // check: if file follows file format constraints
-                if ($imageFileType != "jpg" && $imageFileType != "jpeg" && $imageFileType != "png") {
-                    echo "
-                        <script>
-                            popup(\"ERROR-3: File does not follow file type constraints.\", \"../challenges.php\");
-                        </script>
-                    ";
-                    $challengeImageUploadFlag = 0;
-                }
-
-                if ($challengeImageUploadFlag) {
-                    // push the image path to the DB
-                    $imgName = $target."_".$challengeImageFileName;
-                    $fullPath = $targetDirectory.$imgName;
-                    $pushToDBQuery = "
-                        UPDATE challenge
-                        SET challengeImagePath = '$fullPath'
-                        WHERE accountID = '$target';
-                    ";
-                    // LAST STOP HERE: 16/12/2023, 1:58PM!!!!!
                 }
             }
-            else {
-                echo "
-                    <script>
-                        popup(\"Oops. Something went wrong.\", \"../challenges.php\");
-                    </script>
+            else if (isset($_FILES["challengeImageToUpload"]) && $_FILES["challengeImageToUpload"]["error"] == UPLOAD_ERROR_OK) {
+                // rationale: it may be possible that a user has several challenges that share a common image file name
+                // in that case fetching the challengeID would help differentiate between the images
+                // the flow would go: (1) push the text data (2) fetch the row for this text data (3) upload the image
+                $pushToDBQuery = "INSERT INTO challenge (challengeSem, challengeYear, challengeDetails, challengeFuturePlan, challengeRemark, accountID)
+                VALUES('$challengeSem', '$challengeYear', '$challengeDetails', '$challengeFuturePlan', '$challengeRemark', '$target');
                 ";
+
+                // MORE MODIFICATION IS NEEDED HERE
+                if (mysqli_query($conn, $pushToDBQuery)) {  // if the connection to the DB and the query is successful
+                    // retrieve the last automatically generated challengeID
+                    $lastInsertedID = mysqli_insert_id($conn);
+                    
+                    $challengeImageUploadFlag = 1;
+                    $targetDirectory = "uploads/challenges/";
+                    $targetFile = '';
+                    $filetmp = $_FILES["challengeImageToUpload"];
+                    $challengeImageFileName = $filetmp["name"];
+        
+                    $targetFile = "../".$targetDirectory.$target."_".basename($_FILES["challengeImageToUpload"]["name"]);
+                    $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+
+                    // check: if file already exists
+                    if (file_exists($targetFile)) {
+                        echo "
+                            <script>
+                                popup(\"ERROR-1: File already exists.\", \"..\challenges.php\");
+                            </script>
+                        ";
+                        $challengeImageUploadFlag = 0;
+                    }
+                    // check: if file size <= 2MiB or 2097152 bytes
+                    if ($_FILES["challengeImageToUpload"]["size"] > 2097152) {
+                        echo "
+                            <script>
+                                popup(\"ERROR-2: File size exceeds allowed limit.\", \"../challenges.php\");
+                            </script>
+                        ";
+                        $challengeImageUploadFlag = 0;
+                    }
+                    // check: if file follows file format constraints
+                    if ($imageFileType != "jpg" && $imageFileType != "jpeg" && $imageFileType != "png") {
+                        echo "
+                            <script>
+                                popup(\"ERROR-3: File does not follow file type constraints.\", \"../challenges.php\");
+                            </script>
+                        ";
+                        $challengeImageUploadFlag = 0;
+                    }
+
+                    if ($challengeImageUploadFlag) {
+                        // push the image path to the DB
+                        $imgName = $target."_".$challengeImageFileName;
+                        $fullPath = $targetDirectory.$imgName;
+                        $pushToDBQuery = "
+                            UPDATE challenge
+                            SET challengeImagePath = '$fullPath'
+                            WHERE challengeID = '$lastInsertedID';
+                        ";
+
+                        if (mysqli_query($conn, $pushToDBQuery)) {
+                            // then, move a copy of the image to uploads/challenges
+                            if (move_uploaded_file($_FILES["challengeImageToUpload"]["tmp_name"], $targetFile)) {
+                                echo "
+                                    <script>
+                                        popup(\"New challenge record added successfuly.\", \"../challenges.php\");
+                                    </script>
+                                ";
+                            }
+                        }
+                    }
+                }
+                else {
+                    echo "
+                        <script>
+                            popup(\"Oops. Something went wrong.\", \"../challenges.php\");
+                        </script>
+                    ";
+                }
             }
         }
+
+        mysqli_close($conn);
     ?>
 </body>
 

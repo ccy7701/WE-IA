@@ -59,7 +59,7 @@
             }
             else if (isset($_FILES["pfpToUpload"]) && $_FILES["pfpToUpload"]["error"] == UPLOAD_ERR_OK) {
                 $pfpUploadFlag = 1;
-                $targetDirectory = "uploads/student_profile_imgs/";
+                $targetDirectory = "uploads/profile_images/";
                 $targetFile = '';
                 $filetmp = $_FILES["pfpToUpload"];
                 $pfpFileName = $filetmp["name"];
@@ -118,7 +118,7 @@
                     ";
 
                     if (mysqli_query($conn, $pushToDBQuery)) {
-                        // then, move a copy of the image to uploads/student_profile_imgs
+                        // then, move a copy of the image to uploads/profile_images
                         if (move_uploaded_file($_FILES["pfpToUpload"]["tmp_name"], $targetFile)) {
                             echo "
                                 <script>

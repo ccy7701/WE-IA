@@ -23,7 +23,18 @@
     // this action_script is executed when the Remove link (icon?) is clicked
     if (isset($_GET["id"]) && $_GET["id"] != "") {
         $id = $_GET["id"];
-        $deleteQuery = "DELETE FROM challenge_and_plan WHERE challenge_index=".$id;
+
+        // first, unlink the image
+        $imgPathSeekQuery = "SELECT * FROM challenge WHERE challengeID='$id'";
+        $return = mysqli_query($conn, $imgPathSeekQuery);
+        $row = mysqli_fetch_assoc($return);
+        $imgToDelete = "../".$row["challengeImagePath"];
+        if ($imgToDelete != "") {
+            unlink($imgToDelete);
+        }
+
+        // then, delete the row
+        $deleteQuery = "DELETE FROM challenge WHERE challengeID=".$id;
 
         if (mysqli_query($conn, $deleteQuery)) {
             echo "

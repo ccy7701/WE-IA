@@ -53,7 +53,7 @@
                     ";
                 }
             }
-            else if (isset($_FILES["challengeImageToUpload"]) && $_FILES["challengeImageToUpload"]["error"] == UPLOAD_ERROR_OK) {
+            else if (isset($_FILES["challengeImageToUpload"]) && $_FILES["challengeImageToUpload"]["error"] == UPLOAD_ERR_OK) {
                 // rationale: it may be possible that a user has several challenges that share a common image file name
                 // in that case fetching the challengeID would help differentiate between the images
                 // the flow would go: (1) push the text data (2) fetch the row for this text data (3) upload the image
@@ -72,14 +72,14 @@
                     $filetmp = $_FILES["challengeImageToUpload"];
                     $challengeImageFileName = $filetmp["name"];
         
-                    $targetFile = "../".$targetDirectory.$target."_".basename($_FILES["challengeImageToUpload"]["name"]);
+                    $targetFile = "../".$targetDirectory.$lastInsertedID."_".basename($_FILES["challengeImageToUpload"]["name"]);
                     $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
 
                     // check: if file already exists
                     if (file_exists($targetFile)) {
                         echo "
                             <script>
-                                popup(\"ERROR-1: File already exists.\", \"..\challenges.php\");
+                                popup(\"ERROR-1: File already exists.\", \"../challenges.php\");
                             </script>
                         ";
                         $challengeImageUploadFlag = 0;
@@ -105,7 +105,7 @@
 
                     if ($challengeImageUploadFlag) {
                         // push the image path to the DB
-                        $imgName = $target."_".$challengeImageFileName;
+                        $imgName = $lastInsertedID."_".$challengeImageFileName;
                         $fullPath = $targetDirectory.$imgName;
                         $pushToDBQuery = "
                             UPDATE challenge

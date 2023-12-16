@@ -105,17 +105,22 @@
         background-color: #333333;
         color: white;
     }
-    #challengesTable #edit, #remove {
+    #challengesTable #edit, #remove, #image {
         text-decoration: none;
         color: black;
+        transition: color 0.1s;
     }
     #challengesTable #edit:hover {
         cursor: pointer;
-        color: green;
+        color: #3BB143;
     }
     #challengesTable #remove:hover {
         cursor: pointer;
-        color: red;
+        color: #FF0000;
+    }
+    #challengesTable #image:hover {
+        cursor: pointer;
+        color: #1E90FF;
     }
     #btngeneric {
         height: 40px;
@@ -179,7 +184,7 @@
                                 <th>Challenge Details</th>
                                 <th>Future Plan</th>
                                 <th>Remarks</th>
-                                <th>Image<th>
+                                <th>Image</th>
                                 <th>&nbsp;</th>
                             </tr>
                         ";
@@ -187,23 +192,36 @@
                         $rowIndex = 1;
 
                         while ($row = mysqli_fetch_assoc($challengesResult)) {
-                            $editID = $row["challengeID"];
-                            $removeID = $row["challengeID"];
+                            $editID = $removeID = $imageID = $row["challengeID"];
 
                             echo "
                                 <tr>
                                     <td>".$rowIndex."</td>
-                                    <td>".$row["challengeSem"]." - ".$row["challengeYear"]."</td>
+                                    <td>Sem ".$row["challengeSem"]." - ".$row["challengeYear"]."</td>
                                     <td>".$row["challengeDetails"]."</td>
                                     <td>".$row["challengeFuturePlan"]."</td>
                                     <td>".$row["challengeRemark"]."</td>
-                                    <td>".$row["challengeImagePath"]."</td>
-                                    <td style='text-align: center'>
-                                        <a id='edit' title='Edit' href='challenges_edit.php?id=".$editID."'><i class='fa fa-pencil-square-o'></i></a>
-                                        <a id='remove' title='Remove' onclick='confirmRemoval($removeID)'><i class='fa fa-trash-o'></i></a>
-                                    </td>
-                                </tr>
                             ";
+
+                            if ($row["challengeImagePath"] != '') {
+                                echo "
+                                    <td style='text-align: center'>
+                                        <a id='image' title='Open image' href='show_challenge_image.php?id=".$imageID."' target='blank'><i class='fa fa-image'></i></a>
+                                    </td>
+                                ";
+                            }
+                            else {
+                                echo "<td>&nbsp;</td>";
+                            }
+
+                            echo "
+                                <td style='text-align: center'>
+                                    <a id='edit' title='Edit challenge' href='challenges_edit.php?id=".$editID."'><i class='fa fa-pencil-square-o'></i></a>
+                                    <a id='remove' title='Remove challenge' onclick='confirmRemoval($removeID)'><i class='fa fa-trash-o'></i></a>
+                                </td>
+                            </tr>
+                            ";
+
                             $rowIndex++;
                         }
                     }

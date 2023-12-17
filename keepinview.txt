@@ -145,3 +145,79 @@
                 echo "ERROR: ".mysqli_error($conn);
             }
         ?>
+
+                    <?php
+                        $fetchActivitiesQuery = "SELECT * FROM activity WHERE accountID='".$accountID."' AND activityType='1'";
+                        $activitiesResult = mysqli_query($conn, $fetchActivitiesQuery);
+                        if (mysqli_num_rows($activitiesResult) > 0) {
+                            echo "
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Session</th>
+                                    <th>Activity Level</th>
+                                    <th>Activity Details</th>
+                                    <th>Remarks</th>
+                                    <th>Image</th>
+                                    <th>&nbsp;</th>
+                                </tr>
+                            ";
+
+                            $rowIndex = 1;
+
+                            while ($row = mysqli_fetch_assoc($activitiesResult)) {
+                                $editID = $removeID = $imageID = $row["activityID"];
+
+                                // this block is to determine the output for activityLevel
+                                $levelOutput = '';
+                                switch($row["activityLevel"]) {
+                                    case "1": $levelOutput = "Faculty"; break;
+                                    case "2": $levelOutput = "University"; break;
+                                    case "3": $levelOutput = "National"; break;
+                                    case "4": $levelOutput = "International"; break;
+                                    default: $levelOutput = "";
+                                }
+
+                                echo "
+                                    <tr>
+                                        <td>".$rowIndex."</td>
+                                        <td>Sem ".$row["activitySem"]." Year ".$row["activityYear"]."</td>
+                                        <td>".$levelOutput."</td>
+                                        <td>".$row["activityDetails"]."</td>
+                                        <td>".$row["activityRemarks"]."</td>
+                                ";
+
+                                if ($row["activityImagePath"] != '') {
+                                    echo "
+                                        <td style='text-align: center'>
+                                            <a id='image' title='Open image' href='show_activity_image.php?id=".$imageID."' target='blank'><i class='fa fa-image'></i></a>
+                                        </td>
+                                    ";
+                                }
+                                else {
+                                    echo "<td>&nbsp;</td>";
+                                }
+
+                                echo "
+                                    <td style='text-align: center'>
+                                        <a id='edit' title='Edit' href='activitieslist_edit.php?id=".$editID."'><i class='fa fa-pencil-square-o'></i></a>
+                                        <a id='remove' title='Remove' onclick='confirmRemoval($removeID)'><i class='fa fa-trash-o'></i></a>
+                                    </td>
+                                ";
+                            }
+                        }
+                        else {  // if the query returns no rows
+                            echo "
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Session</th>
+                                    <th>Activity Level</th>
+                                    <th>Activity Details</th>
+                                    <th>Remarks</th>
+                                    <th>Image</th>
+                                </tr>
+                                <tr>
+                                    <td colspan='6'>No activities have been added yet.</td>
+                                </tr>
+                            ";
+                        }
+                    ?>

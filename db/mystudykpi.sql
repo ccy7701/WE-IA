@@ -48,3 +48,27 @@ CREATE TABLE IF NOT EXISTS challenge (
 	accountID int,
 	FOREIGN KEY (accountID) REFERENCES account(accountID) ON DELETE CASCADE
 ) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Table structure for activity
+
+DROP TABLE IF EXISTS activity;
+CREATE TABLE IF NOT EXISTS activity (
+	activityID int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	activitySem int,
+	activityYear int,
+	activityType varchar(4) COMMENT '1 - Activity, 2 - Club, 3 - Association, 4 - Competition',
+	activityLevel varchar(4) COMMENT '1 - Faculty, 2 - University, 3 - National, 4 - International',
+	activityDetails varchar(255),
+	activityRemarks varchar(255),
+    activityImagePath varchar(255),
+	accountID int,
+	FOREIGN KEY (accountID) REFERENCES account(accountID) ON DELETE CASCADE
+) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Data dump for activity
+
+INSERT INTO activity (activitySem, activityYear, activityType, activityLevel, activityDetails, activityRemarks, activityImagePath, accountID) VALUES 
+(1, 2, 1, 1, "TEST_ACTIVITY_DETAILS", "TEST_ACTIVITY_REMARKS", "", 11),
+(1, 2, 2, 1, "TEST_CLUB_DETAILS", "TEST_CLUB_REMARKS", "", 11),
+(1, 2, 3, 1, "TEST_ASSOCIATION_DETAILS", "TEST_ASSOCIATION_REMARKS", "", 11),
+(1, 2, 4, 1, "TEST_COMPETITION_DETAILS", "TEST_COMPETITION_REMARKS", "", 11);

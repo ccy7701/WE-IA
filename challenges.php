@@ -33,7 +33,7 @@
 
             if (promptConfirm) {
                 // if OK is clicked, redirect to challenge_remove_action with the target id
-                var path = createPath(target_id)
+                var path = createPath(target_id);
                 window.location.href = path;
             }
             // do nothing otherwise
@@ -184,7 +184,7 @@
                 <input type="submit" value="Search" style="font-family: Jost, monospace;">
             </form>
             <br>
-            <table id="challengesTable" width="100%">
+            <table id="challengesTable">
                 <?php
                     if (mysqli_num_rows($challengesResult) > 0) {
                         echo "

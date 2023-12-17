@@ -1,10 +1,4 @@
 <?php
-    // NEW ADDITIONS TO CHALLENGES:
-    // 1. Search function
-    // 2. Photos column
-?>
-
-<?php
     session_start();
     include("include/config.php");
 ?>
@@ -22,23 +16,6 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Jost">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="sitejavascript.js"></script>
-    <script>
-        function createPath(target) {
-            let scriptPath = "action_scripts/challenge_remove_action.php?id=";
-            let overallPath = scriptPath.concat(target);
-            return overallPath;
-        }
-        function confirmRemoval(target_id) {
-            var promptConfirm = confirm("Are you sure you want to remove this record?");
-
-            if (promptConfirm) {
-                // if OK is clicked, redirect to challenge_remove_action with the target id
-                var path = createPath(target_id)
-                window.location.href = path;
-            }
-            // do nothing otherwise
-        }
-    </script>
     <style>
     #challengesTable-container {
         padding-left: 30px;
@@ -105,14 +82,10 @@
         background-color: #333333;
         color: white;
     }
-    #challengesTable #edit, #remove, #image {
+    #challengesTable #edit, #remove, #image, #close {
         text-decoration: none;
         color: black;
-        transition: color 0.1s;
-    }
-    #challengesTable #edit:hover {
-        cursor: pointer;
-        color: #3BB143;
+        transition: color 0.08s;
     }
     #challengesTable #remove:hover {
         cursor: pointer;
@@ -169,86 +142,107 @@
         <a href="javascript:void(0);" class="icon" onClick="adjustTopnav()"><i class="fa fa-bars"></i></a>
     </nav>
     <main>
-        <br>
         <?php
-            if (isset($_SESSION["UID"])) {
-                $accountID = $_SESSION["UID"];
-                $fetchChallengesQuery = "SELECT * FROM challenge WHERE accountID='".$accountID."'";
-                $challengesResult = mysqli_query($conn, $fetchChallengesQuery);
+            // save the search string into a variable
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                $search = $_POST["search"];
             }
         ?>
         <br>
         <div id="challengesTable-container">
             <form id="searchBar" action="challenges_search.php" method="POST">
-                <input type="text" placeholder="Search..." name="search" style="font-family: Jost, monospace; width: 30%">
+                <input type="text" placeholder="Search..." name="search" style="font-family: Jost, monospace; width: 30%" value="<?=$search;?>">
                 <input type="submit" value="Search" style="font-family: Jost, monospace;">
             </form>
             <br>
             <table id="challengesTable" width="100%">
+                <p>Showing all search results for: "<?=$search;?>" <a id="close" title="Close" href="challenges.php"><i class="fa fa-times"></i></a></p>
                 <?php
-                    if (mysqli_num_rows($challengesResult) > 0) {
-                        echo "
-                            <tr>
-                                <th>No.</th>
-                                <th>Session</th>
-                                <th>Challenge Details</th>
-                                <th>Future Plan</th>
-                                <th>Remarks</th>
-                                <th>Image</th>
-                                <th>&nbsp;</th>
-                            </tr>
-                        ";
+                    if ($search != "") {
+                        // split the search string into individual words
+                        $keywords = explode(" ", $search);
+                        
+                        // prepare the SQL query with multiple LIKE conditions
+                        $searchQuery = "SELECT * FROM challenge WHERE (";
+                        
+                        // build the conditions dynamically for single keyword
+                        $conditions = [];
+                        foreach ($keywords as $index => $keyword) {
+                            $conditions[] = "challengeDetails LIKE '%$keyword%'";
+                        }
+                        
+                        // combine
+                        $searchQuery .= implode(" OR ", $conditions);
 
-                        $rowIndex = 1;
+                        // select only with this userID
+                        $searchQuery .= " OR challengeDetails LIKE '%$search%') AND accountID=".$_SESSION["UID"];
 
-                        while ($row = mysqli_fetch_assoc($challengesResult)) {
-                            $editID = $removeID = $imageID = $row["challengeID"];
+                        $result = mysqli_query($conn, $searchQuery);
 
+                        if (mysqli_num_rows($result) > 0) {
                             echo "
                                 <tr>
-                                    <td>".$rowIndex."</td>
-                                    <td>Sem ".$row["challengeSem"]." - ".$row["challengeYear"]."</td>
-                                    <td>".$row["challengeDetails"]."</td>
-                                    <td>".$row["challengeFuturePlan"]."</td>
-                                    <td>".$row["challengeRemark"]."</td>
+                                    <th>No.</th>
+                                    <th>Session</th>
+                                    <th>Challenge Details</th>
+                                    <th>Future Plan</th>
+                                    <th>Remarks</th>
+                                    <th>Image</th>
+                                    <th>&nbsp;</th>
+                                </tr>
                             ";
 
-                            if ($row["challengeImagePath"] != '') {
+                            $rowIndex = 1;
+
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                $editID = $removeID = $imageID = $row["challengeID"];
+
+                                echo "
+                                    <tr>
+                                        <td>".$rowIndex."</td>
+                                        <td>Sem ".$row["challengeSem"]." - ".$row["challengeYear"]."</td>
+                                        <td>".$row["challengeDetails"]."</td>
+                                        <td>".$row["challengeFuturePlan"]."</td>
+                                        <td>".$row["challengeRemark"]."</td>
+                                ";
+    
+                                if ($row["challengeImagePath"] != '') {
+                                    echo "
+                                        <td style='text-align: center'>
+                                            <a id='image' title='Open image' href='show_challenge_image.php?id=".$imageID."' target='blank'><i class='fa fa-image'></i></a>
+                                        </td>
+                                    ";
+                                }
+                                else {
+                                    echo "<td>&nbsp;</td>";
+                                }
+    
                                 echo "
                                     <td style='text-align: center'>
-                                        <a id='image' title='Open image' href='show_challenge_image.php?id=".$imageID."' target='blank'><i class='fa fa-image'></i></a>
+                                        <a id='edit' title='Edit challenge' href='challenges_edit.php?id=".$editID."'><i class='fa fa-pencil-square-o'></i></a>
+                                        <a id='remove' title='Remove challenge' onclick='confirmRemoval($removeID)'><i class='fa fa-trash-o'></i></a>
                                     </td>
+                                </tr>
                                 ";
+    
+                                $rowIndex++;
                             }
-                            else {
-                                echo "<td>&nbsp;</td>";
-                            }
-
-                            echo "
-                                <td style='text-align: center'>
-                                    <a id='edit' title='Edit challenge' href='challenges_edit.php?id=".$editID."'><i class='fa fa-pencil-square-o'></i></a>
-                                    <a id='remove' title='Remove challenge' onclick='confirmRemoval($removeID)'><i class='fa fa-trash-o'></i></a>
-                                </td>
-                            </tr>
-                            ";
-
-                            $rowIndex++;
                         }
-                    }
-                    else {  // if the query returns no rows
-                        echo "
-                            <tr>
-                                <th>No.</th>
-                                <th>Session</th>
-                                <th>Challenge Details</th>
-                                <th>Future Plan</th>
-                                <th>Remarks</th>
-                                <th>Image</th>
-                            </tr>
-                            <tr>
-                                <td colspan='6'>No challenges have been added yet.</td>
-                            </tr>
-                        ";
+                        else {  // if the query returns no rows
+                            echo "
+                                <tr>
+                                    <th>No</th>
+                                    <th>Session</th>
+                                    <th>Challenge Details</th>
+                                    <th>Future Plan</th>
+                                    <th>Remarks</th>
+                                    <th>Image</th>
+                                </tr>
+                                <tr>
+                                    <td colspan='6'>No challenges match your search.</td>
+                                <tr>
+                            ";
+                        }
                     }
                 ?>
             </table>

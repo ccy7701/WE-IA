@@ -77,6 +77,11 @@ footer {
     position: absolute bottom;
 }
 
+#center-content {
+    display: inline-block;
+    width: 100%;
+}
+
 #loginform #btnlogin, #regform #btnreg, #editPersonalInfo #btnedit {
     height: 40px;
     background-color: white;
@@ -118,13 +123,13 @@ footer {
 .col-left {
     text-align: center; /* center the image horizontally */
     padding: 15px;
-    width: 30%;
+    width: 35%;
 }
 
 .col-right {
     flex: 2;
     padding: 15px;
-    width: 70%;
+    width: 65%;
 }
 
 #btneditpersonal {

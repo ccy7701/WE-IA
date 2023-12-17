@@ -116,7 +116,12 @@
         ?>
         <div class="row">
             <div class="col-left">
-                <img src="<?=$profileImagePath;?>" style="width: 50%;"></image>
+                <h4>Profile Picture</h4>
+                <form id="image-container" style="max-width: 100%; margin; 0 auto; border: 1px solid black; padding-top: 5px;">
+                    <tr>
+                        <img src="<?=$profileImagePath;?>" style="width: 50%;"></image>
+                    </tr>
+                </form>
             </div>
             <div class="col-right">
                 <?php  
@@ -132,6 +137,7 @@
                     }
                 ?>
                 <table id='tblprofile' width="100%">
+                    <caption><h4>Personal Info</h4></caption>
                         <tr>
                             <td>Name</td>
                             <td><?php echo ($username != '') ? $username : "Not filled yet"; ?></td>
@@ -168,14 +174,20 @@
                             <td>Address</td>
                             <td><?php echo ($profileAddress != '') ? $profileAddress : "Not filled yet"; ?></td>
                         </tr>
-                        <tr>
-                            <td>Motto</td>
-                            <td><?php echo ($motto != '') ? $motto : "Not filled yet"; ?></td>
-                        </tr>
-                        <tr>
-                            <td colspan="2" style="text-align: center;"><input onClick="redirect('aboutme_edit_personal.php')" id="btneditpersonal" type="button" name="btneditpersonal" value="Edit Details"></td>
-                        </tr>
                 </table>
+                <br>
+                <table id='tblprofile' width='100%'>
+                    <caption><h4>Study Motto</h4></caption>
+                    <tr>
+                        <td style="text-align: center"><?php echo ($motto != '') ? $motto : "Not filled yet"; ?></td>
+                    </tr>
+                </table>
+                <br>
+                <div id="center-container" style="text-align: center; width: 100%;">
+                    <div id="center-content">
+                        <input onclick="redirect('aboutme_edit_personal.php')" id="btneditpersonal" type="button" name="btneditpersonal" value="Edit Details">
+                    </div>
+                </div>
             </div>
         </div>
         <footer style="position: fixed; bottom: 0;">

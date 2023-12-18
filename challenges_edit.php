@@ -128,12 +128,12 @@
                 <p>Upload new challenge image here:</p>
                 <input id="challengeImageToUpload" type="file" name="challengeImageToUpload" accept=".jpg, .jpeg, .png"><br><br>
 
-                <center>
+                <div id="center-content" style="text-align: center">
                     <input id="btneditchallenge" name="btnsubmit" type="submit" value="EDIT">
                     <input id="btneditchallenge" name="btnreset" type="reset" value="RESET">
                     <input id="btneditchallenge" name="btncancel" type="button" onClick="redirect('challenges.php');" value="CANCEL">
                     <br><br>
-                </center>
+                </div>
             </form>
         </div>
     </main>

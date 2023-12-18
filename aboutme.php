@@ -184,7 +184,7 @@
                 </table>
                 <br>
                 <div id="center-container" style="text-align: center; width: 100%;">
-                    <div id="center-content">
+                    <div id="center-content" style="">
                         <input onclick="redirect('aboutme_edit_personal.php')" id="btneditpersonal" type="button" name="btneditpersonal" value="Edit Details">
                     </div>
                 </div>

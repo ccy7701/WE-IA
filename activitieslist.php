@@ -58,7 +58,6 @@
             padding-left: 5%;
             padding-right: 5%;
             box-sizing: border-box;
-            min-height: 100vh;
         }
         .tab {
             overflow: hidden;
@@ -142,6 +141,36 @@
             cursor: pointer;
             color: #1E90FF;
         }
+        #activitiesForm-container {
+            padding-top: 10px;
+            padding-left: 20%;
+            padding-right: 20%;
+            background-color: #D3D3D3;
+        }
+        #activitiesForm select {
+            height: 30px;
+            width: 40%;
+            display: block;
+        }
+        #activitiesForm textarea {
+            height: 100px;
+            width: 100%;
+            resize: none;
+            display: block;
+        }
+        #btnactivity {
+            width: 30%;
+            height: 30px;
+            font-size: 18px;
+            background-color: white;
+            border: 1px solid grey;
+            transition: background-color 0.1s, color 0.1s;
+        }
+        #btnactivity:hover {
+            cursor: pointer;
+            background-color: #333333;
+            color: white;
+        }
         @media screen and (max-width: 600px) {
             .tab button {
                 width: 25%;
@@ -150,6 +179,13 @@
                 padding-left: 2%;
                 padding-right: 2%;
                 overflow-x: auto;
+            }
+            #activitiesForm-container {
+                padding-left: 10%;
+                padding-right: 10%;
+            }
+            #activitiesForm select {
+                width: 50%;
             }
         }
     </style>
@@ -519,13 +555,71 @@
                                     </tr>
                                 ";
                             }
+
+                            mysqli_close($conn);
                         ?>
                     </table>
                 </div>
                 <br>
             </div>
+            <br>
         </div>
-        <br>
+        <div id="activitiesForm-container">
+            <form id="activitiesForm" action="action_scripts/activitieslist_submit_action.php" method="POST" enctype="multipart/form-data">
+                <p style="text-align: center">Have a new activity to add? Fill the form below and record it here. <br> Required fields are marked (*)</p>
+        
+                <label for="activitySem">Semester (*)</label><br>
+                <select id="activitySem" name="activitySem" required>
+                    <option value="" disabled selected>Select a Semester...</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                </select><br>
+
+                <label for="activityYear">Year (*)</label><br>
+                <select id="activityYear" name="activityYear" required>
+                    <option value="" disabled selected>Select a Year...</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </select><br>
+
+                <label for="activityType">Activity Type (*)</label><br>
+                <select id="activityType" name="activityType" required>
+                    <option value="" disabled selected>Select an Activity Type...</option>
+                    <option value="1">Activity</option>
+                    <option value="2">Club</option>
+                    <option value="3">Association</option>
+                    <option value="4">Competition</option>
+                </select><br>
+
+                <label for="activityLevel">Activity Level (*)</label><br>
+                <select id="activityLevel" name="activityLevel" required>
+                    <option value="" disabled selected>Select an Activity Level...</option>
+                    <option value="1">Faculty</option>
+                    <option value="2">University</option>
+                    <option value="3">National</option>
+                    <option value="4">International</option>
+                </select><br>
+
+                <label for="activityDetails">Details (*)</label><br>
+                <textarea name="activityDetails" rows="5" columns="50" required></textarea><br>
+
+                <label for="activityRemarks">Remarks</label><br>
+                <textarea name="activityRemarks" rows="5" columns="50"></textarea><br>
+
+                <p>Upload activity image here (max. 2MB):</p>
+                <input type="file" name="activityImageToUpload" accept=".jpg, .jpeg, .png"><br>
+
+                <div id="center-content" style="text-align: center">
+                    <br>
+                    <input id="btnactivity" name="btnsubmit" type="submit" value="Add">
+                    <input id="btnactivity" name="btnreset" type="reset" value="Reset">
+                    <br><br>
+                </div>
+
+            </form>
+        </div>
     </main>
     <footer>
         <h5>© Chiew Cheng Yi | BI21110236 | KK34703 Individual Project</h5>

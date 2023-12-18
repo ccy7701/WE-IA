@@ -39,7 +39,7 @@
                 if (mysqli_query($conn, $pushToDBQuery)) {
                     echo "
                         <script>
-                            popup(\"Personal info updated successfully.\", \"../challenges.php\");
+                            popup(\"Challenge info updated successfully.\", \"../challenges.php\");
                         </script>
                     ";
                 }

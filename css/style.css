@@ -78,11 +78,6 @@ footer {
     padding: 14px 16px;
 }
 
-#center-content {
-    display: inline-block;
-    width: 100%;
-}
-
 #loginform #btnlogin, #regform #btnreg, #editPersonalInfo #btnedit {
     height: 40px;
     background-color: white;

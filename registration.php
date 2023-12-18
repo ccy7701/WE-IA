@@ -23,9 +23,7 @@
         <a href="javascript:void(0);" class="icon" onClick="adjustTopnav()"><i class="fa fa-bars"></i></a>
     </nav>
     <main>
-        <center>
-            <h4>Complete this form before accessing the MyStudyKPI system. Required fields are marked with (*)</h4>
-        </center>
+        <h4 style="text-align: center;">Complete this form before accessing the MyStudyKPI system. Required fields are marked with (*)</h4>
         <div id="regformdiv">
             <form id="regform" action="action_scripts/registration_action.php" method="post">
                 <label for="matricNumber">Matric Number(*)</label><br>
@@ -40,10 +38,10 @@
                 <label for="reenterPassword">Reenter Password (*)</label><br>
                 <input id="fieldreg" name="reenterPassword" type="password" required><br> 
 
-                <center>
+                <div id="center-content" style="text-align: center">
                     <input id="btnreg" name="signupsubmit" type="submit" value="SUBMIT">
                     <input id="btnreg" name="signupreset" type="reset" value="CLEAR">
-                </center>
+                </div>
                 <br><br>
             </form>
         </div>

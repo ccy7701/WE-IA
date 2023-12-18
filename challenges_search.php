@@ -252,7 +252,7 @@
                         else {  // if the query returns no rows
                             echo "
                                 <tr>
-                                    <th>No</th>
+                                    <th>No.</th>
                                     <th>Session</th>
                                     <th>Challenge Details</th>
                                     <th>Future Plan</th>
@@ -301,10 +301,10 @@
                 <p>Upload challenge image here:</p>
                 <input type="file" name="challengeImageToUpload" accept=".jpg, .jpeg, .png" style="width: 100%; display: block;"><br><br>
 
-                <center>
+                <div id="center-content" style="text-align: center">
                     <input id="btnchallenge" name="btnsubmit" type="submit" value="Add">
                     <input id="btnchallenge" name="btnreset" type="reset" value="Reset"><br><br>
-                </center>
+                </div>
             </form>
         </div>
     </main>

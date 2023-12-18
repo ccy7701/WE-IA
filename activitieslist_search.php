@@ -217,6 +217,22 @@
                                 ";
                             }
                         }
+                        else {  // if the query returns no rows
+                            echo "
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Session</th>
+                                    <th>Type</th>
+                                    <th>Level</th>
+                                    <th>Details</th>
+                                    <th>Remarks</th>
+                                    <th>Image</th>
+                                </tr>
+                                <tr>
+                                    <td colspan='6'>No activities match your search.</td>
+                                </tr>
+                            ";
+                        }
                     }
                 ?>
             </table>

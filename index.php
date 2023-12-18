@@ -39,7 +39,6 @@
             margin-left: 20px;
             margin-right: 20px;
             font-size: 18px;
-            padding-bottom: 10px;
         }
         @media screen and (max-width: 720px) {  /* CSS when pages are resized to smaller or for mobile screen */
             .block {
@@ -60,37 +59,40 @@
         <a href="javascript:void(0);" class="icon" onClick="adjustTopnav()"><i class="fa fa-bars"></i></a>
     </nav>
     <main>
-        <center>
-        <?php
-            if (isset($_SESSION["UID"])) {
-                echo "
-                    <h1>Welcome back</h1>
-                ";
-            }
-            else {
-                echo "
-                    <h1>Welcome to the UMS FKI MyStudyKPI website</h1>
-                ";
-            }
-        ?>
-        <div class="block">
-            <i class="fa fa-user-circle-o"></i>
-            <p><b>About Me:</b> Get a concise overview of your information in a portfolio webpage.</p>
+        <div id="center-content" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+            <?php
+                if (isset($_SESSION["UID"])) {
+                    echo "
+                        <h1>Welcome back</h1>
+                    ";
+                }
+                else {
+                    echo "
+                        <h1>Welcome to the UMS FKI MyStudyKPI website</h1>
+                    ";
+                }
+            ?>
+            <div class="block">
+                <i class="fa fa-user-circle-o"></i>
+                <p><b>About Me:</b> Get a concise overview of your information in a portfolio webpage.</p>
+            </div>
+            <br>
+            <div class="block">
+                <i class="fa fa-line-chart"></i>
+                <p><b>MyKPI Indicator Module:</b> A tool to manage your KPIs, including activities, certifications and competitions.</p>
+            </div>
+            <br>
+            <div class="block">
+                <i class="fa fa-calendar-check-o"></i>
+                <p><b>Activities List:</b> View a compiled list of faculty-recognised activities, and stay informed about past, ongoing and upcoming activities.</p>
+            </div>
+            <br>
+            <div class="block">
+                <i class="fa fa-meh-o"></i>
+                <p><b>Challenges and Future Plans:</b> Facing challenges in your studies? Put what's on your mind into words to help you plan accordingly.</p>
+            </div>
+            <br>
         </div>
-        <div class="block">
-            <i class="fa fa-line-chart"></i>
-            <p><b>MyKPI Indicator Module:</b> A tool to manage your KPIs, including activities, certifications and competitions.</p>
-        </div>
-        <div class="block">
-            <i class="fa fa-calendar-check-o"></i>
-            <p><b>Activities List:</b> View a compiled list of faculty-recognised activities, and stay informed about past, ongoing and upcoming activities.</p>
-        </div>
-        <div class="block">
-            <i class="fa fa-meh-o"></i>
-            <p><b>Challenges and Future Plans:</b> Facing challenges in your studies? Put what's on your mind into words to help you plan accordingly.</p>
-        </div>
-        <br>
-        </center>
     </main>
     <footer>
         <h5>© Chiew Cheng Yi | BI21110236 | KK34703 Individual Project</h5>

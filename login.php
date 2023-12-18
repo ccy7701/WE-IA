@@ -23,7 +23,7 @@
         <a href="javascript:void(0);" class="icon" onClick="adjustTopnav()"><i class="fa fa-bars"></i></a>
     </nav>
     <main>
-        <center>
+        <div id="center-content" style="text-align: center;">
             <h4>Login to view all your information</h4>
             <div id="logindiv">
                 <form id="loginform" action="action_scripts/login_action.php" method="post">
@@ -37,7 +37,7 @@
             <p>Do not have your own account yet?
             <a href="registration.php">Register here.</a>
             </p>
-        </center>
+        </div>
     </main>
     <footer style="position: fixed; bottom: 0;">
         <h5>© Chiew Cheng Yi | BI21110236 | KK34703 Individual Project</h5>

@@ -40,118 +40,107 @@
         }
     </script>
     <style>
-    #challengesTable-container {
-        padding-left: 30px;
-        padding-right: 30px;
-    }
-    #challengesTable {
-        font-family: "Jost";
-        border: 1px solid black;
-        width: 100%;
-    }
-    #challengesTable th {
-        padding-top: 12px;
-        padding-bottom: 12px;
-        text-align: center;
-        background-color: #F7D8BA;
-        color: #000000;
-    }
-    #challengesTable tr {
-        transition: background-color 0.1s, color 0.1s;
-    }
-    #challengesTable tr:nth-child(odd) {
-        background-color: #DDDDDD;
-    }
-    #challengesTable tr:hover {
-        background-color: #C8B4BA;
-        font-weight: bold;
-    }
-    #challengeForm-container {
-        padding-top: 10px;
-        padding-left: 20%;
-        padding-right: 20%;
-        background-color: #D3D3D3;
-    }
-    #challengeForm #yearsem {
-        height: 30px;
-        width: 40%;
-        display: block;
-        font-family: Jost, monospace;
-    }
-    #challengeForm #recorddate {
-        height: 30px;
-        width: 30%;
-        display: block;
-        font-family: Jost, monospace;
-    }
-    #challengeForm textarea {
-        height: 100px;
-        width: 100%;
-        font-family: Jost, monospace;
-        resize: none;
-        display: block;
-    }
-    #btnchallenge {
-        width: 30%;
-        height: 30px;
-        font-family: Jost, monospace;
-        font-size: 18px;
-        background-color: white;
-        border: 1px solid grey;
-        transition: background-color 0.1s, color 0.1s;
-    }
-    #btnchallenge:hover {
-        cursor: pointer;
-        background-color: #333333;
-        color: white;
-    }
-    #challengesTable #edit, #remove, #image {
-        text-decoration: none;
-        color: black;
-        transition: color 0.1s;
-    }
-    #challengesTable #edit:hover {
-        cursor: pointer;
-        color: #3BB143;
-    }
-    #challengesTable #remove:hover {
-        cursor: pointer;
-        color: #FF0000;
-    }
-    #challengesTable #image:hover {
-        cursor: pointer;
-        color: #1E90FF;
-    }
-    #btngeneric {
-        height: 40px;
-        background-color: white;
-        border: 1px solid black;
-        width: 25%;
-        font-size: 16px;
-        font-family: Jost, monospace;
-        transition: background-color 0.1s, color 0.1s;
-    }
-    #btngeneric:hover {
-        cursor: pointer;
-        background-color: #333333;
-        color: white;
-    }
-    #searchBar {
-        text-align: right;
-        font-family: Jost, monospace;
-    }
-    @media screen and (max-width: 600px) {
+        * {
+            font-family: Jost, monospace;
+        }
+        #challengesTable-container {
+            padding-left: 30px;
+            padding-right: 30px;
+        }
+        #challengesTable {
+            font-family: "Jost";
+            border: 1px solid black;
+            width: 100%;
+        }
+        #challengesTable th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: center;
+            background-color: #F7D8BA;
+            color: #000000;
+        }
+        #challengesTable tr {
+            transition: background-color 0.1s, color 0.1s;
+        }
+        #challengesTable tr:nth-child(odd) {
+            background-color: #DDDDDD;
+        }
+        #challengesTable tr:hover {
+            background-color: #C8B4BA;
+            font-weight: bold;
+        }
         #challengeForm-container {
-            padding-left: 10%;
-            padding-right: 10%;
+            padding-top: 10px;
+            padding-left: 20%;
+            padding-right: 20%;
+            background-color: #D3D3D3;
         }
         #challengeForm #yearsem {
-            width: 50%;
-        }
-        #challengeForm #recorddate {
+            height: 30px;
             width: 40%;
+            display: block;
         }
-    }
+        #challengeForm textarea {
+            height: 100px;
+            width: 100%;
+            resize: none;
+            display: block;
+        }
+        #btnchallenge {
+            width: 30%;
+            height: 30px;
+            font-size: 18px;
+            background-color: white;
+            border: 1px solid grey;
+            transition: background-color 0.1s, color 0.1s;
+        }
+        #btnchallenge:hover {
+            cursor: pointer;
+            background-color: #333333;
+            color: white;
+        }
+        #challengesTable #edit, #remove, #image {
+            text-decoration: none;
+            color: black;
+            transition: color 0.1s;
+        }
+        #challengesTable #edit:hover {
+            cursor: pointer;
+            color: #3BB143;
+        }
+        #challengesTable #remove:hover {
+            cursor: pointer;
+            color: #FF0000;
+        }
+        #challengesTable #image:hover {
+            cursor: pointer;
+            color: #1E90FF;
+        }
+        #btngeneric {
+            height: 40px;
+            background-color: white;
+            border: 1px solid black;
+            width: 25%;
+            font-size: 16px;
+            transition: background-color 0.1s, color 0.1s;
+        }
+        #btngeneric:hover {
+            cursor: pointer;
+            background-color: #333333;
+            color: white;
+        }
+        #searchBar {
+            text-align: right;
+        }
+        @media screen and (max-width: 600px) {
+            #challengeForm-container {
+                padding-left: 10%;
+                padding-right: 10%;
+            }
+            #challengeForm #yearsem {
+                width: 50%;
+            }
+        }
     </style>
 </head>
 
@@ -283,13 +272,13 @@
                 <label for="challengeRemark">Remarks</label><br>
                 <textarea name="challengeRemark" rows="5" columns="50" required></textarea><br>
 
-                <p>Upload challenge image here:</p>
+                <p>Upload challenge image here (max. 2MB):</p>
                 <input type="file" name="challengeImageToUpload" accept=".jpg, .jpeg, .png" style="width: 100%; display: block;"><br><br>
 
-                <center>
+                <div id="center-content" style="text-align: center">
                     <input id="btnchallenge" name="btnsubmit" type="submit" value="Add">
                     <input id="btnchallenge" name="btnreset" type="reset" value="Reset"><br><br>
-                </center>
+                </div>
             </form>
         </div>
     </main>

@@ -33,9 +33,107 @@
 
             // IF THERE IS NO ATTACHED IMAGE
             if (isset($_FILES["activityImageToUpload"]) && $_FILES["activityImageToUpload"]["name"] == "") {
-                // <! LAST STOP HERE, 18/12/2023 1:56PM!!!! !>
+                $pushToDBQuery = "INSERT INTO activity (activitySem, activityYear, activityType, activityLevel, activityDetails, activityRemarks, activityImagePath, accountID)
+                VALUES ('$activitySem', '$activityYear', '$activityType', '$activityLevel', '$activityDetails', '$activityRemarks', '', '$target');
+                ";
+
+                if (mysqli_query($conn, $pushToDBQuery)) {  // if the connection to the DB and the query is successful
+                    echo "
+                        <script>
+                            popup(\"New activity record added successfully.\", \"../activitieslist.php\");
+                        </script>
+                    ";
+                }
+                else {
+                    echo "
+                        <script>
+                            popup(\"Oops. Something went wrong.\", \"../activitieslist.php\");
+                        </script>
+                    ";
+                }
+            }
+            else if (isset($_FILES["activityImageToUpload"]) && $_FILES["activityImageToUpload"]["error"] == UPLOAD_ERR_OK) {
+                // rationale: it may be possible that a user has several challenges that share a common image file name
+                // in that case fetching the activityID would help differentiate between the images
+                // the flow would go: (1) push the text data (2) fetch the row for this text data (3) upload the image
+                $pushToDBQuery = "INSERT INTO activity (activitySem, activityYear, activityType, activityLevel, activityDetails, activityRemarks, accountID)
+                VALUES('$activitySem', '$activityYear', '$activityType', '$activityLevel', '$activityDetails', '$activityRemarks', '$target');
+                ";
+
+                if (mysqli_query($conn, $pushToDBQuery)) {  // if the connection to the DB and the query is successful
+                    // retrieve the last automatically generated challengeID
+                    $lastInsertedID = mysqli_insert_id($conn);
+
+                    $activityImageUploadFlag = 1;
+                    $targetDirectory = "uploads/activities/";
+                    $targetFile = '';
+                    $filetmp = $_FILES["activityImageToUpload"];
+                    $activityImageFileName = $filetmp["name"];
+
+                    $targetFile = "../".$targetDirectory.$lastInsertedID."_".basename($_FILES["activityImageToUpload"]["name"]);
+                    $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+
+                    // check: if file already exists
+                    if (file_exists($targetFile)) {
+                        echo "
+                            <script>
+                                popup(\"ERROR-1: File already exists.\", \"../activitieslist.php\");
+                            </script>
+                        ";
+                        $activityImageUploadFlag = 0;
+                    }
+                    // check: if file size <= 2MiB or 2097152 bytes
+                    if ($_FILES["activityImageToUpload"]["size"] > 2097152) {
+                        echo "
+                            <script>
+                                popup(\"ERROR-2: File size exceeds allowed limit.\", \"../activitieslist.php\");
+                            </script>
+                        ";
+                        $activityImageUploadFlag = 0;
+                    }
+                    // check: if file follows file format constraints
+                    if ($imageFileType != "jpg" && $imageFileType != "jpeg" && $imageFileType != "png") {
+                        echo "
+                            <script>
+                                popup(\"ERROR-3: File does not follow file type constraints.\", \"../activitieslist.php\");
+                            </script>
+                        ";
+                        $activityImageUploadFlag = 0;
+                    }
+
+                    if ($activityImageUploadFlag) {
+                        // push the image path to the DB
+                        $imgName = $lastInsertedID."_".$activityImageFileName;
+                        $fullPath = $targetDirectory.$imgName;
+                        $pushToDBQuery= "
+                            UPDATE activity
+                            SET activityImagePath = '$fullPath'
+                            WHERE activityID =  '$lastInsertedID';
+                        ";
+
+                        if (mysqli_query($conn, $pushToDBQuery)) {
+                            // then, move a copy of the image to uploads/challenges
+                            if (move_uploaded_file($_FILES["activityImageToUpload"]["tmp_name"], $targetFile)) {
+                                echo "
+                                    <script>
+                                        popup(\"New activity record added successfully.\", \"../activitieslist.php\");
+                                    </script>
+                                ";
+                            }
+                        }
+                    }
+                }
+                else {
+                    echo "
+                        <script>
+                            popup(\"Oops. Something went wrong.\", \"../activitieslist.php\");
+                        </script>
+                    ";
+                }
             }
         }
+
+        mysqli_close($conn);
     ?>
 </body>
 

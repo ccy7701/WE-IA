@@ -63,12 +63,12 @@
             <?php
                 if (isset($_SESSION["UID"])) {
                     echo "
-                        <h1>Welcome back</h1>
+                        <h1 style='text-align: center'>Welcome back</h1>
                     ";
                 }
                 else {
                     echo "
-                        <h1>Welcome to the UMS FKI MyStudyKPI website</h1>
+                        <h1 style='text-align: center'>Welcome to the UMS FKI MyStudyKPI website</h1>
                     ";
                 }
             ?>

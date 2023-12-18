@@ -16,6 +16,23 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Jost">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="sitejavascript.js"></script>
+    <script type="text/javascript">
+        function createPath(target) {
+            let scriptPath = "action_scripts/challenge_remove_action.php?id=";
+            let overallPath = scriptPath.concat(target);
+            return overallPath;
+        }
+        function confirmRemoval(target_id) {
+            var promptConfirm = confirm("Are you sure you want to remove this record?");
+
+            if (promptConfirm) {
+                // if OK is clicked, redirect to challenge_remove_action with the target id
+                var path = createPath(target_id);
+                window.location.href = path;
+            }
+            // do nothing otherwise
+        }
+    </script>
     <style>
     #challengesTable-container {
         padding-left: 30px;
@@ -87,6 +104,10 @@
         color: black;
         transition: color 0.08s;
     }
+    #challengesTable #edit:hover {
+        cursor: pointer;
+        color: #3BB143;
+    }
     #challengesTable #remove:hover {
         cursor: pointer;
         color: #FF0000;
@@ -155,7 +176,7 @@
                 <input type="submit" value="Search" style="font-family: Jost, monospace;">
             </form>
             <br>
-            <table id="challengesTable" width="100%">
+            <table id="challengesTable">
                 <p>Showing all search results for: "<?=$search;?>" <a id="close" title="Close" href="challenges.php"><i class="fa fa-times"></i></a></p>
                 <?php
                     if ($search != "") {
@@ -174,7 +195,7 @@
                         // combine
                         $searchQuery .= implode(" OR ", $conditions);
 
-                        // select only with this userID
+                        // select only with this accountID
                         $searchQuery .= " OR challengeDetails LIKE '%$search%') AND accountID=".$_SESSION["UID"];
 
                         $result = mysqli_query($conn, $searchQuery);

@@ -7,14 +7,14 @@
 <html lang="en">
 
 <html>
-    <title>About Me | MyStudyKPI </title>
+    <title>Activities List | MyStudyKPI </title>
     <meta charset="utf8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Jost">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="sitejavascript.js"></script>
-    <script>
+    <script type="text/javascript">
         function createPath(target) {
             let scriptPath = "action_scripts/activitieslist_remove_action.php?id=";
             let overallPath = scriptPath.concat(target);
@@ -28,6 +28,26 @@
                 var path = createPath(target_id);
                 window.location.href = path;
             }
+        }
+    </script>
+        <script type="text/javascript">
+        function openTab(evt, activityType) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+                tabcontent[i].style.opacity = 0;    // set opacity to 0 when hiding
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            var selectedTab = document.getElementById(activityType);
+            selectedTab.style.display = "block";
+            // Trigger a reflow before changing the opacity to ensure the transition is applied
+            selectedTab.offsetHeight;
+            selectedTab.style.opacity = 1; // Set opacity to 1 when displaying
+            evt.currentTarget.className += " active";
         }
     </script>
     <style>
@@ -62,21 +82,13 @@
             background-color: #333333;
             color: white;
         }
-        /*
-        .tab .edit {
-            background-color: #aa0000;
-            float: right;
-            border: none;
-            outline: none;
-            cursor: pointer;
-            padding: 14px 16px;
-            transition: 0.1s;
-            font-size: 16px;
-        }
-        */
         .tab button:hover {
             background-color: #666666;
             color: white;
+        }
+        #searchBar {
+            text-align: right;
+            font-family: Jost, monospace;
         }
         .tabcontent {
             display: none;
@@ -141,26 +153,6 @@
             }
         }
     </style>
-    <script type="text/javascript">
-        function openTab(evt, activityType) {
-            var i, tabcontent, tablinks;
-            tabcontent = document.getElementsByClassName("tabcontent");
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
-                tabcontent[i].style.opacity = 0;    // set opacity to 0 when hiding
-            }
-            tablinks = document.getElementsByClassName("tablinks");
-            for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].className = tablinks[i].className.replace(" active", "");
-            }
-            var selectedTab = document.getElementById(activityType);
-            selectedTab.style.display = "block";
-            // Trigger a reflow before changing the opacity to ensure the transition is applied
-            selectedTab.offsetHeight;
-            selectedTab.style.opacity = 1; // Set opacity to 1 when displaying
-            evt.currentTarget.className += " active";
-        }
-    </script>
 <head>
 
 </head>
@@ -192,6 +184,11 @@
                 <button class="tablinks" onClick="openTab(event, 'Associations')">Associations</button>
                 <button class="tablinks" onClick="openTab(event, 'Competitions')">Competitions</button>
             </div>
+            <br>
+            <form id="searchBar" action="activitieslist_search.php" method="POST">
+                <input type="text" placeholder="Search..." name="search" style="width: 30%;">
+                <input type="submit" value="Search">
+            </form>
             <br>
             <div id="Activities" class="tabcontent">
                 <br>
@@ -254,6 +251,8 @@
                                             <a id='remove' title='Remove' onclick='confirmRemoval($removeID)'><i class='fa fa-trash-o'></i></a>
                                         </td>
                                     ";
+
+                                    $rowIndex++;
                                 }
                             }
                             else {  // if the query returns no rows
@@ -277,10 +276,253 @@
                 <br>
             </div>
             <div id="Clubs" class="tabcontent">
+                <br>
+                <div id="activitiesTable-container">
+                    <table id="activitiesTable">
+                        <?php
+                            $fetchClubsQuery = "SELECT * FROM activity WHERE accountID='".$accountID."' AND activityType='2'";
+                            $clubsResult = mysqli_query($conn, $fetchClubsQuery);
+                            if (mysqli_num_rows($clubsResult) > 0) {
+                                echo "
+                                    <tr>
+                                        <th>No.</th>
+                                        <th>Session</th>
+                                        <th>Level</th>
+                                        <th>Details</th>
+                                        <th>Remarks</th>
+                                        <th>Image</th>
+                                        <th>&nbsp;</th>
+                                    </tr>
+                                ";
+
+                                $rowIndex = 1;
+
+                                while ($row = mysqli_fetch_assoc($clubsResult)) {
+                                    $editID = $removeID = $imageID = $row["activityID"];
+
+                                    // this block is to determine the output for activityLevel
+                                    $levelOutput = '';
+                                    switch($row["activityLevel"]) {
+                                        case "1": $levelOutput = "Faculty"; break;
+                                        case "2": $levelOutput = "University"; break;
+                                        case "3": $levelOutput = "National"; break;
+                                        case "4": $levelOutput = "International"; break;
+                                        default: $levelOutput = "";
+                                    }
+
+                                    echo "
+                                        <tr>
+                                            <td>".$rowIndex."</td>
+                                            <td>Sem ".$row["activitySem"]." Year ".$row["activityYear"]."</td>
+                                            <td>".$levelOutput."</td>
+                                            <td>".$row["activityDetails"]."</td>
+                                            <td>".$row["activityRemarks"]."</td>
+                                    ";
+
+                                    if ($row["activityImagePath"] != '') {
+                                        echo "
+                                            <td style='text-align: center'>
+                                                <a id='image' title='Open image' href='show_activity_image.php?id=".$imageID."' target='blank'><i class='fa fa-image'></i></a>
+                                            </td>
+                                        ";
+                                    }
+                                    else {
+                                        echo "<td>&nbsp;</td>";
+                                    }
+
+                                    echo "
+                                        <td style='text-align: center'>
+                                            <a id='edit' title='Edit' href='activitieslist_edit.php?id=".$editID."'><i class='fa fa-pencil-square-o'></i></a>
+                                            <a id='remove' title='Remove' onclick='confirmRemoval($removeID)'><i class='fa fa-trash-o'></i></a>
+                                        </td>
+                                    ";
+                                }
+                            }
+                            else {  // if the query returns no rows
+                                echo "
+                                    <tr>
+                                        <th>No.</th>
+                                        <th>Session</th>
+                                        <th>Level</th>
+                                        <th>Details</th>
+                                        <th>Remarks</th>
+                                        <th>Image</th>
+                                    </tr>
+                                    <tr>
+                                        <td colspan='6'>No clubs-related activities have been added yet.</td>
+                                    </tr>
+                                ";
+                            }
+                        ?>
+                    </table>
+                </div>
+                <br>
             </div>
             <div id="Associations" class="tabcontent">
+                <br>
+                <div id="activitiesTable-container">
+                    <table id="activitiesTable">
+                        <?php
+                            $fetchAssociationsQuery = "SELECT * FROM activity WHERE accountID='".$accountID."' AND activityType='3'";
+                            $associationsResult = mysqli_query($conn, $fetchAssociationsQuery);
+                            if (mysqli_num_rows($associationsResult) > 0) {
+                                echo "
+                                    <tr>
+                                        <th>No.</th>
+                                        <th>Session</th>
+                                        <th>Level</th>
+                                        <th>Details</th>
+                                        <th>Remarks</th>
+                                        <th>Image</th>
+                                        <th>&nbsp;</th>
+                                    </tr>
+                                ";
+
+                                $rowIndex = 1;
+
+                                while ($row = mysqli_fetch_assoc($associationsResult)) {
+                                    $editID = $removeID = $imageID = $row["activityID"];
+
+                                    // this block is to determine the output for activityLevel
+                                    $levelOutput = '';
+                                    switch($row["activityLevel"]) {
+                                        case "1": $levelOutput = "Faculty"; break;
+                                        case "2": $levelOutput = "University"; break;
+                                        case "3": $levelOutput = "National"; break;
+                                        case "4": $levelOutput = "International"; break;
+                                        default: $levelOutput = "";
+                                    }
+
+                                    echo "
+                                        <tr>
+                                            <td>".$rowIndex."</td>
+                                            <td>Sem ".$row["activitySem"]." Year ".$row["activityYear"]."</td>
+                                            <td>".$levelOutput."</td>
+                                            <td>".$row["activityDetails"]."</td>
+                                            <td>".$row["activityRemarks"]."</td>
+                                    ";
+
+                                    if ($row["activityImagePath"] != '') {
+                                        echo "
+                                            <td style='text-align: center'>
+                                                <a id='image' title='Open image' href='show_activity_image.php?id=".$imageID."' target='blank'><i class='fa fa-image'></i></a>
+                                            </td>
+                                        ";
+                                    }
+                                    else {
+                                        echo "<td>&nbsp;</td>";
+                                    }
+
+                                    echo "
+                                        <td style='text-align: center'>
+                                            <a id='edit' title='Edit' href='activitieslist_edit.php?id=".$editID."'><i class='fa fa-pencil-square-o'></i></a>
+                                            <a id='remove' title='Remove' onclick='confirmRemoval($removeID)'><i class='fa fa-trash-o'></i></a>
+                                        </td>
+                                    ";
+                                }
+                            }
+                            else {  // if the query returns no rows
+                                echo "
+                                    <tr>
+                                        <th>No.</th>
+                                        <th>Session</th>
+                                        <th>Level</th>
+                                        <th>Details</th>
+                                        <th>Remarks</th>
+                                        <th>Image</th>
+                                    </tr>
+                                    <tr>
+                                        <td colspan='6'>No associations-related activities have been added yet.</td>
+                                    </tr>
+                                ";
+                            }
+                        ?>
+                    </table>
+                </div>
+                <br>
             </div>
             <div id="Competitions" class="tabcontent">
+                <br>
+                <div id="activitiesTable-container">
+                    <table id="activitiesTable">
+                        <?php
+                            $fetchCompetitionsQuery = "SELECT * FROM activity WHERE accountID='".$accountID."' AND activityType='4'";
+                            $competitionsResult = mysqli_query($conn, $fetchCompetitionsQuery);
+                            if (mysqli_num_rows($competitionsResult) > 0) {
+                                echo "
+                                    <tr>
+                                        <th>No.</th>
+                                        <th>Session</th>
+                                        <th>Level</th>
+                                        <th>Details</th>
+                                        <th>Remarks</th>
+                                        <th>Image</th>
+                                        <th>&nbsp;</th>
+                                    </tr>
+                                ";
+
+                                $rowIndex = 1;
+
+                                while ($row = mysqli_fetch_assoc($competitionsResult)) {
+                                    $editID = $removeID = $imageID = $row["activityID"];
+
+                                    // this block is to determine the output for activityLevel
+                                    $levelOutput = '';
+                                    switch($row["activityLevel"]) {
+                                        case "1": $levelOutput = "Faculty"; break;
+                                        case "2": $levelOutput = "University"; break;
+                                        case "3": $levelOutput = "National"; break;
+                                        case "4": $levelOutput = "International"; break;
+                                        default: $levelOutput = "";
+                                    }
+
+                                    echo "
+                                        <tr>
+                                            <td>".$rowIndex."</td>
+                                            <td>Sem ".$row["activitySem"]." Year ".$row["activityYear"]."</td>
+                                            <td>".$levelOutput."</td>
+                                            <td>".$row["activityDetails"]."</td>
+                                            <td>".$row["activityRemarks"]."</td>
+                                    ";
+
+                                    if ($row["activityImagePath"] != '') {
+                                        echo "
+                                            <td style='text-align: center'>
+                                                <a id='image' title='Open image' href='show_activity_image.php?id=".$imageID."' target='blank'><i class='fa fa-image'></i></a>
+                                            </td>
+                                        ";
+                                    }
+                                    else {
+                                        echo "<td>&nbsp;</td>";
+                                    }
+
+                                    echo "
+                                        <td style='text-align: center'>
+                                            <a id='edit' title='Edit' href='activitieslist_edit.php?id=".$editID."'><i class='fa fa-pencil-square-o'></i></a>
+                                            <a id='remove' title='Remove' onclick='confirmRemoval($removeID)'><i class='fa fa-trash-o'></i></a>
+                                        </td>
+                                    ";
+                                }
+                            }
+                            else {  // if the query returns no rows
+                                echo "
+                                    <tr>
+                                        <th>No.</th>
+                                        <th>Session</th>
+                                        <th>Level</th>
+                                        <th>Details</th>
+                                        <th>Remarks</th>
+                                        <th>Image</th>
+                                    </tr>
+                                    <tr>
+                                        <td colspan='6'>No associations-related activities have been added yet.</td>
+                                    </tr>
+                                ";
+                            }
+                        ?>
+                    </table>
+                </div>
+                <br>
             </div>
         </div>
         <br>

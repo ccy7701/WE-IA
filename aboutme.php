@@ -80,7 +80,7 @@
         <a href="logout.php" class="tabs">Logout</a>
         <a href="javascript:void(0);" class="icon" onClick="adjustTopnav()"><i class="fa fa-bars"></i></a>
     </nav>
-    <main>
+    <main style="flex: 1;">
         <?php
             if (isset($_SESSION["UID"])) {
                 $accountID = $_SESSION["UID"];
@@ -190,10 +190,10 @@
                 </div>
             </div>
         </div>
-        <footer style="position: fixed; bottom: 0;">
-            <h5>© Chiew Cheng Yi | BI21110236 | KK34703 Individual Project</h5>
-        </footer>
     </main>
+    <footer>
+            <h5>© Chiew Cheng Yi | BI21110236 | KK34703 Individual Project</h5>
+    </footer>
 </body>
 
 </html>

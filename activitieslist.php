@@ -38,6 +38,7 @@
             padding-left: 5%;
             padding-right: 5%;
             box-sizing: border-box;
+            min-height: 100vh;
         }
         .tab {
             overflow: hidden;
@@ -282,8 +283,9 @@
             <div id="Competitions" class="tabcontent">
             </div>
         </div>
+        <br>
     </main>
-    <footer style='position: fixed; bottom: 0;'>
+    <footer>
         <h5>© Chiew Cheng Yi | BI21110236 | KK34703 Individual Project</h5>
     </footer>
 </body>

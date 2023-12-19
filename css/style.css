@@ -97,7 +97,8 @@ footer {
 #loginform #fieldlogin, #regform #fieldreg, 
 #regform #selectreg, #editPersonalInfo #editfield,
 #editPersonalInfo #select, #editChallengeRecord #editfield,
-#editChallengeRecord #select {
+#editChallengeRecord #select, #editActivityRecord #editfield,
+#editActivityRecord #select {
     height: 30px;
     width: 100%;
     display: block;

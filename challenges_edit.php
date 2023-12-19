@@ -26,12 +26,6 @@
             width: 100%;
             border-collapse: collapse;
         }
-        #editChallengeRecord #recorddate {
-            height: 30px;
-            width: 50%;
-            display: block;
-            font-family: Jost, monospace;
-        }
         #btneditchallenge {
             width: 30%;
             height: 30px;
@@ -125,7 +119,7 @@
                 <label for="challengeRemark">Remarks</label>
                 <textarea name="challengeRemark" rows="5" columns="50"><?=$challengeRemark;?></textarea><br>
             
-                <p>Upload new challenge image here:</p>
+                <p>Upload new challenge image here (max. 2MB):</p>
                 <input id="challengeImageToUpload" type="file" name="challengeImageToUpload" accept=".jpg, .jpeg, .png"><br><br>
 
                 <div id="center-content" style="text-align: center">

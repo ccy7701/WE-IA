@@ -98,7 +98,8 @@ footer {
 #regform #selectreg, #editPersonalInfo #editfield,
 #editPersonalInfo #select, #editChallengeRecord #editfield,
 #editChallengeRecord #select, #editActivityRecord #editfield,
-#editActivityRecord #select {
+#editActivityRecord #select, #editIndicatorRecord #editfield,
+#editIndicatorRecord #select {
     height: 30px;
     width: 100%;
     display: block;

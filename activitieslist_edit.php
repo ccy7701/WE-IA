@@ -75,7 +75,7 @@
         <?php
             if (isset($_GET["id"]) && $_GET["id"] != "") {
                 $id = $_GET["id"];
-                $fetchRecordQuery = "SELECT * FROM activity WHERE activityID=".$id;
+                $fetchRecordQuery = "SELECT * FROM activity WHERE activityID=".$id; /* maybe add another check using accountID? */
                 $result = mysqli_query($conn, $fetchRecordQuery);
                 $row = mysqli_fetch_assoc($result);
 

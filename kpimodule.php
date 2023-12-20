@@ -205,7 +205,7 @@
                         <input class="editButton" onclick="redirect('kpimodule_edit.php?id=<?=$indicatorID;?>')" type="button" value="EDIT">
                     </div>
                     <table class="indicatorTable">
-                        <tr><td class="attributeCell"><b>CGPA<b></td><td class="dataCell"><?=$row["indicatorCGPA"];?></td></tr>
+                        <tr><td class="attributeCell"><b>CGPA<b></td><td class="dataCell"><?= number_format($row["indicatorCGPA"], 2);?></td></tr>
                         <tr><td><b>Total Student Activities</b></td><td><?=$activitiesCount;?></td></tr>
                         <tr><td><b>Total Competitions Joined</b></td><td><?=$competitionsCount;?></td></tr>
                         <tr><td><b>Leadership</b><br>As a higher committee member or normal committee member</td><td><?=$row["indicatorLeadership"];?></td></tr>
@@ -248,7 +248,7 @@
                         <input class="editButton" onclick="redirect('kpimodule_edit.php?id=<?=$indicatorID;?>')" type="button" value="EDIT">
                     </div>
                     <table class="indicatorTable">
-                        <tr><td class="attributeCell"><b>CGPA<b></td><td class="dataCell"><?=$row["indicatorCGPA"];?></td></tr>
+                        <tr><td class="attributeCell"><b>CGPA<b></td><td class="dataCell"><?= number_format($row["indicatorCGPA"], 2);?></td></tr>
                         <tr><td><b>Total Student Activities</b></td><td><?=$activitiesCount;?></td></tr>
                         <tr><td><b>Total Competitions Joined</b></td><td><?=$competitionsCount;?></td></tr>
                         <tr><td><b>Leadership</b><br>As a higher committee member or normal committee member</td><td><?=$row["indicatorLeadership"];?></td></tr>
@@ -296,7 +296,7 @@
                         <input class="editButton" onclick="redirect('kpimodule_edit.php?id=<?=$indicatorID;?>')" type="button" value="EDIT">
                     </div>
                     <table class="indicatorTable">
-                        <tr><td class="attributeCell"><b>CGPA<b></td><td class="dataCell"><?=$row["indicatorCGPA"];?></td></tr>
+                        <tr><td class="attributeCell"><b>CGPA<b></td><td class="dataCell"><?= number_format($row["indicatorCGPA"], 2);?></td></tr>
                         <tr><td><b>Total Student Activities</b></td><td><?=$activitiesCount;?></td></tr>
                         <tr><td><b>Total Competitions Joined</b></td><td><?=$competitionsCount;?></td></tr>
                         <tr><td><b>Leadership</b><br>As a higher committee member or normal committee member</td><td><?=$row["indicatorLeadership"];?></td></tr>
@@ -339,7 +339,7 @@
                         <input class="editButton" onclick="redirect('kpimodule_edit.php?id=<?=$indicatorID;?>')" type="button" value="EDIT">
                     </div>
                     <table class="indicatorTable">
-                        <tr><td class="attributeCell"><b>CGPA<b></td><td class="dataCell"><?=$row["indicatorCGPA"];?></td></tr>
+                        <tr><td class="attributeCell"><b>CGPA<b></td><td class="dataCell"><?= number_format($row["indicatorCGPA"], 2);?></td></tr>
                         <tr><td><b>Total Student Activities</b></td><td><?=$activitiesCount;?></td></tr>
                         <tr><td><b>Total Competitions Joined</b></td><td><?=$competitionsCount;?></td></tr>
                         <tr><td><b>Leadership</b><br>As a higher committee member or normal committee member</td><td><?=$row["indicatorLeadership"];?></td></tr>
@@ -387,7 +387,7 @@
                         <input class="editButton" onclick="redirect('kpimodule_edit.php?id=<?=$indicatorID;?>')" type="button" value="EDIT">
                     </div>
                     <table class="indicatorTable">
-                        <tr><td class="attributeCell"><b>CGPA<b></td><td class="dataCell"><?=$row["indicatorCGPA"];?></td></tr>
+                        <tr><td class="attributeCell"><b>CGPA<b></td><td class="dataCell"><?= number_format($row["indicatorCGPA"], 2);?></td></tr>
                         <tr><td><b>Total Student Activities</b></td><td><?=$activitiesCount;?></td></tr>
                         <tr><td><b>Total Competitions Joined</b></td><td><?=$competitionsCount;?></td></tr>
                         <tr><td><b>Leadership</b><br>As a higher committee member or normal committee member</td><td><?=$row["indicatorLeadership"];?></td></tr>
@@ -430,7 +430,7 @@
                         <input class="editButton" onclick="redirect('kpimodule_edit.php?id=<?=$indicatorID;?>')" type="button" value="EDIT">
                     </div>
                     <table class="indicatorTable">
-                        <tr><td class="attributeCell"><b>CGPA<b></td><td class="dataCell"><?=$row["indicatorCGPA"];?></td></tr>
+                        <tr><td class="attributeCell"><b>CGPA<b></td><td class="dataCell"><?= number_format($row["indicatorCGPA"], 2);?></td></tr>
                         <tr><td><b>Total Student Activities</b></td><td><?=$activitiesCount;?></td></tr>
                         <tr><td><b>Total Competitions Joined</b></td><td><?=$competitionsCount;?></td></tr>
                         <tr><td><b>Leadership</b><br>As a higher committee member or normal committee member</td><td><?=$row["indicatorLeadership"];?></td></tr>
@@ -478,7 +478,7 @@
                         <input class="editButton" onclick="redirect('kpimodule_edit.php?id=<?=$indicatorID;?>')" type="button" value="EDIT">
                     </div>
                     <table class="indicatorTable">
-                        <tr><td class="attributeCell"><b>CGPA<b></td><td class="dataCell"><?=$row["indicatorCGPA"];?></td></tr>
+                        <tr><td class="attributeCell"><b>CGPA<b></td><td class="dataCell"><?= number_format($row["indicatorCGPA"], 2);?></td></tr>
                         <tr><td><b>Total Student Activities</b></td><td><?=$activitiesCount;?></td></tr>
                         <tr><td><b>Total Competitions Joined</b></td><td><?=$competitionsCount;?></td></tr>
                         <tr><td><b>Leadership</b><br>As a higher committee member or normal committee member</td><td><?=$row["indicatorLeadership"];?></td></tr>
@@ -521,7 +521,7 @@
                         <input class="editButton" onclick="redirect('kpimodule_edit.php?id=<?=$indicatorID;?>')" type="button" value="EDIT">
                     </div>
                     <table class="indicatorTable">
-                        <tr><td class="attributeCell"><b>CGPA<b></td><td class="dataCell"><?=$row["indicatorCGPA"];?></td></tr>
+                        <tr><td class="attributeCell"><b>CGPA<b></td><td class="dataCell"><?= number_format($row["indicatorCGPA"], 2);?></td></tr>
                         <tr><td><b>Total Student Activities</b></td><td><?=$activitiesCount;?></td></tr>
                         <tr><td><b>Total Competitions Joined</b></td><td><?=$competitionsCount;?></td></tr>
                         <tr><td><b>Leadership</b><br>As a higher committee member or normal committee member</td><td><?=$row["indicatorLeadership"];?></td></tr>

@@ -72,6 +72,7 @@
                 }
                 if ($insertFlag == 1) {
                     $lastInsertedID = mysqli_insert_id($conn);
+
                     $pushToProfileQuery = "INSERT INTO profile (username, program, intakeBatch, phoneNumber, mentor, profileState, profileAddress, motto, profileImagePath, accountID)
                     VALUES ('', '', '', '', '', '', '', '', 'uploads/profile_images/default.png', '$lastInsertedID');";
 
@@ -81,6 +82,21 @@
                     else {
                         echo "ERROR: ".$pushToProfileQuery."<br>".mysqli_error($conn);
                     }
+
+                    // making new rows in 'indicator' table, 2 sems, 4 years, 8 rows total
+                    $combinedQuery = '';
+
+                    for ($year = 1; $year <= 4; $year++) {
+                        for ($semester = 1; $semester <= 2; $semester++) {
+                            $pushToIndicatorQuery = "INSERT INTO indicator (indicatorSem, indicatorYear, indicatorCGPA, indicatorLeadership, indicatorGraduateAim, indicatorProfCert,
+                            indicatorEmployability, indicatorMobProg, accountID)
+                            VALUES ('$semester', '$year', 0.00, 0, 'On Time', 0, 1, 0, '$lastInsertedID');
+                            ";
+                            $combinedQuery .= $pushToIndicatorQuery;
+                        }
+                    }
+
+                    echo $combinedQuery;
                 }
             }
         }

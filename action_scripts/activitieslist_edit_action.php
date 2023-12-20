@@ -37,7 +37,7 @@
                     WHERE activityID = '$target';
                 ";
     
-                if (mysqli_quey($conn, $pushToDBQuery)) {
+                if (mysqli_query($conn, $pushToDBQuery)) {
                     echo "
                         <script>
                             popup(\"Activity info updated successfully\", \"../activitieslist.php\");
@@ -114,11 +114,11 @@
                     ";
     
                     if (mysqli_query($conn, $pushToDBQuery)) {
-                        // then, move a copy of the image to uploads/challenges
+                        // then, move a copy of the image to uploads/activities
                         if (move_uploaded_file($_FILES["activityImageToUpload"]["tmp_name"], $targetFile)) {
                             echo "
                                 <script>
-                                    popup(\"Challenge info updated successfully.\", \"../activitieslist.php\");
+                                    popup(\"Activity info updated successfully.\", \"../activitieslist.php\");
                                 </script>
                             ";
                         }

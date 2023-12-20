@@ -35,7 +35,7 @@
                     challengeRemark = '$newChallengeRemark'
                     WHERE challengeID = '$target';
                 ";
-
+ 
                 if (mysqli_query($conn, $pushToDBQuery)) {
                     echo "
                         <script>

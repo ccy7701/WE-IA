@@ -89,7 +89,7 @@ CREATE TABLE IF NOT EXISTS indicator (
 	indicatorEmployability int, /* as in months after industrial training */
 	indicatorMobProg int,
 	accountID int,
-	FOREIGN KEY (accountID) REFERENCES account(accountID)
+	FOREIGN KEY (accountID) REFERENCES account(accountID) ON DELETE CASCADE
 ) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Data dump for indicator

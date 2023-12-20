@@ -83,20 +83,27 @@
                         echo "ERROR: ".$pushToProfileQuery."<br>".mysqli_error($conn);
                     }
 
-                    // making new rows in 'indicator' table, 2 sems, 4 years, 8 rows total
-                    $combinedQuery = '';
+                    $pushToIndicatorQuery = "INSERT INTO indicator (indicatorSem, indicatorYear, indicatorCGPA, indicatorLeadership, indicatorGraduateAim, indicatorProfCert, indicatorEmployability, indicatorMobProg, accountID) VALUES 
+                        (1, 1, 0.00, 0, 'On Time', 0, 1, 0, $lastInsertedID),
+                        (2, 1, 0.00, 0, 'On Time', 0, 1, 0, $lastInsertedID),
+                        (1, 2, 0.00, 0, 'On Time', 0, 1, 0, $lastInsertedID),
+                        (2, 2, 0.00, 0, 'On Time', 0, 1, 0, $lastInsertedID),
+                        (1, 3, 0.00, 0, 'On Time', 0, 1, 0, $lastInsertedID),
+                        (2, 3, 0.00, 0, 'On Time', 0, 1, 0, $lastInsertedID),
+                        (1, 4, 0.00, 0, 'On Time', 0, 1, 0, $lastInsertedID),
+                        (2, 4, 0.00, 0, 'On Time', 0, 1, 0, $lastInsertedID);
+                    ";
 
-                    for ($year = 1; $year <= 4; $year++) {
-                        for ($semester = 1; $semester <= 2; $semester++) {
-                            $pushToIndicatorQuery = "INSERT INTO indicator (indicatorSem, indicatorYear, indicatorCGPA, indicatorLeadership, indicatorGraduateAim, indicatorProfCert,
-                            indicatorEmployability, indicatorMobProg, accountID)
-                            VALUES ('$semester', '$year', 0.00, 0, 'On Time', 0, 1, 0, '$lastInsertedID');
-                            ";
-                            $combinedQuery .= $pushToIndicatorQuery;
-                        }
+                    if (mysqli_query($conn, $pushToIndicatorQuery)) {
+                        // indicator rows added successfully.
                     }
-
-                    echo $combinedQuery;
+                    else {
+                        echo "
+                            <script>
+                                popup(\"Oops. Something went wrong.\", \"../kpimodule.php\");
+                            </script>
+                        ";
+                    }
                 }
             }
         }

@@ -48,7 +48,7 @@
                 else {
                     echo "
                         <script>
-                            popup(\"Oops. Something went wrong.\", \"../challenges.php\");
+                            popup(\"Oops. Something went wrong: ".mysqli_error($conn)."\", \"../aboutme_edit_personal.php\");
                         </script>
                     ";
                 }
@@ -127,7 +127,7 @@
                 else {
                     echo "
                         <script>
-                            popup(\"Oops. Something went wrong.\", \"../challenges.php\");
+                            popup(\"Oops. Something went wrong: ".mysqli_error($conn)."\", \"../aboutme_edit_personal.php\");
                         </script>
                     ";
                 }

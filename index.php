@@ -79,12 +79,12 @@
             <br>
             <div class="block">
                 <i class="fa fa-line-chart"></i>
-                <p><b>MyKPI Indicator Module:</b> A tool to manage your KPIs, including activities, certifications and competitions.</p>
+                <p><b>MyKPI Indicator Module:</b> A tool to manage your KPIs, such as CGPA, number of activites joined, and other goals.</p>
             </div>
             <br>
             <div class="block">
                 <i class="fa fa-calendar-check-o"></i>
-                <p><b>Activities List:</b> View a compiled list of faculty-recognised activities, and stay informed about past, ongoing and upcoming activities.</p>
+                <p><b>Activities List:</b> View, organize and manage all the activites you joined throughout your study years.</p>
             </div>
             <br>
             <div class="block">
